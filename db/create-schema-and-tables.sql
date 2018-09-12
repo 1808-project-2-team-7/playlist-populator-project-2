@@ -32,7 +32,7 @@ CREATE TABLE category
 CREATE TABLE playlist
 (
     playlist_id SERIAL PRIMARY KEY,
-    name VARCHAR(50) NOT NULL,
+    name VARCHAR(60) NOT NULL,
     playlist_pic_bucket_key VARCHAR(1024),
     category_id INTEGER NOT NULL REFERENCES category(category_id),
     owner_id INTEGER NOT NULL REFERENCES app_user(user_id)
