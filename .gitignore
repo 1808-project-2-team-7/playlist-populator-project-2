@@ -1,3 +1,7 @@
+*/node_modules
+client/src/**/*.css
+client/build/*
+
 # Logs
 logs
 *.log
