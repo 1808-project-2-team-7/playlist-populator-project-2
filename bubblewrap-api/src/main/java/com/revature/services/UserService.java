@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.models.User;
 import com.revature.repos.UserRepo;
@@ -19,7 +18,6 @@ public class UserService {
 		return ur.findAll();
 	}
 
-	@Transactional
 	public User findOne(int id) {
 		return ur.getOne(id);
 	}

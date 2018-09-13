@@ -12,36 +12,29 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.dto.Credential;
-import com.revature.models.User;
-import com.revature.services.UserService;
+import com.revature.models.Song;
+import com.revature.services.SongService;
 
 @RestController
-@RequestMapping("users")
-public class UserController {
+@RequestMapping("songs")
+public class SongController {
 
 	@Autowired
-	private UserService us;
+	private SongService ss;
 
 	@GetMapping
-	public List<User> findAll() {
-		return us.findAll();
+	public List<Song> findAll() {
+		return ss.findAll();
 	}
 
 	@GetMapping("{id}")
-	public User findById(@PathVariable int id) {
-		return us.findOne(id);
+	public Song findById(@PathVariable int id) {
+		return ss.findOne(id);
 	}
 
 	@PostMapping
-	public ResponseEntity<User> save(@RequestBody User u) {
-		return new ResponseEntity<User>(u, HttpStatus.CREATED);
-	}
-
-	@PostMapping("login")
-	public ResponseEntity<User> login(@RequestBody Credential c) {
-		User u = us.login(c.getUsername(), c.getPassword());
-		return new ResponseEntity<User>(u, u == null ? HttpStatus.UNAUTHORIZED : HttpStatus.OK);
+	public ResponseEntity<Song> save(@RequestBody Song s) {
+		return new ResponseEntity<Song>(s, HttpStatus.CREATED);
 	}
 
 }
