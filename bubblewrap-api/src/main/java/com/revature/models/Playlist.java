@@ -30,10 +30,10 @@ public class Playlist {
 	private String name;
 	@Column(name="playlist_pic_bucket_key")
 	private String bucketKey;
-	@OneToMany
+	@ManyToOne
 	@JoinColumn(name="category_id")
 	private Category category;
-	@OneToMany
+	@ManyToOne
 	@JoinColumn(name="owner_id")
 	private User owner;
 	
