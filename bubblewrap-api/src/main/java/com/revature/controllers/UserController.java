@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.dto.Credential;
+import com.revature.models.Playlist;
 import com.revature.models.User;
 import com.revature.services.UserService;
 
@@ -68,6 +69,12 @@ public class UserController {
 	public ResponseEntity<User> login(@RequestBody Credential c) {
 		User u = us.login(c.getUsername(), c.getPassword());
 		return new ResponseEntity<User>(u, u == null ? HttpStatus.UNAUTHORIZED : HttpStatus.OK);
+	}
+
+	@GetMapping("{id}/playlists")
+	public ResponseEntity<List<Playlist>> findPlaylists(@PathVariable int id) {
+		List<Playlist> playlists = us.findPlaylists(id);
+		return new ResponseEntity<>(playlists, playlists == null ? HttpStatus.NOT_FOUND : HttpStatus.OK);
 	}
 
 }

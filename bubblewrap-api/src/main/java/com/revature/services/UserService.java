@@ -13,7 +13,9 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionSystemException;
 
+import com.revature.models.Playlist;
 import com.revature.models.User;
+import com.revature.repos.PlaylistRepo;
 import com.revature.repos.UserRepo;
 
 @Service
@@ -21,6 +23,9 @@ public class UserService {
 
 	@Autowired
 	private UserRepo ur;
+	
+	@Autowired
+	private PlaylistRepo pr;
 
 	public List<User> findAll() {
 		return ur.findAll();
@@ -87,5 +92,9 @@ public class UserService {
 	public User login(String username, String password) {
 		User u = ur.findByUsernameAndPassword(username, password);
 		return u;
+	}
+	
+	public List<Playlist> findPlaylists(int id) {
+		return ur.existsById(id) ? pr.findByOwnerId(id) : null;
 	}
 }
