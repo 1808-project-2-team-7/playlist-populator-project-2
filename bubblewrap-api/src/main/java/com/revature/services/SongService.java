@@ -21,4 +21,9 @@ public class SongService {
 	public Song findOne(int id) {
 		return sr.getOne(id);
 	}
+
+	public List<Song> findTest() {
+		// TODO Auto-generated method stub
+		return sr.findMostPopularCommonSongs();
+	}
 }

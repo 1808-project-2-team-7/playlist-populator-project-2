@@ -36,5 +36,10 @@ public class SongController {
 	public ResponseEntity<Song> save(@RequestBody Song s) {
 		return new ResponseEntity<Song>(s, HttpStatus.CREATED);
 	}
+	
+	@GetMapping("test")
+	public List<Song> findTest() {
+		return ss.findTest();
+	}
 
 }
