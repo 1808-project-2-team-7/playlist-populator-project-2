@@ -23,7 +23,6 @@ public class SongService {
 	}
 
 	public List<Song> findTest() {
-		// TODO Auto-generated method stub
 		return sr.findMostPopularCommonSongs();
 	}
 }

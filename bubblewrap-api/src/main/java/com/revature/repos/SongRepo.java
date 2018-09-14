@@ -10,16 +10,16 @@ import com.revature.models.Song;
 
 @Repository
 public interface SongRepo extends JpaRepository<Song, Integer> {
-	@Query(value = "SELECT song.song_id\r\n" + 
-			"FROM song NATURAL JOIN songs_playlists\r\n" + 
+	@Query(value = "SELECT song.*, COUNT(song_id) AS popularity\r\n" + 
+			"FROM playlist_populator.song NATURAL JOIN playlist_populator.songs_playlists\r\n" + 
 			"WHERE playlist_id IN\r\n" + 
 			"  (\r\n" + 
 			"  SELECT playlist_id\r\n" + 
-			"  FROM playlist NATURAL JOIN songs_playlists\r\n" + 
+			"  FROM playlist_populator.playlist NATURAL JOIN playlist_populator.songs_playlists\r\n" + 
 			"  WHERE song_id = 1\r\n" + 
 			"  ) AND song_id != 1\r\n" + 
 			"GROUP BY song_id\r\n" + 
-			"ORDER BY COUNT(song_id) DESC\r\n" + 
+			"ORDER BY popularity DESC\r\n" + 
 			"LIMIT 10", nativeQuery = true)
 	List<Song> findMostPopularCommonSongs();
 }
