@@ -23,6 +23,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Playlist {
 
 	@Id
+	@Column(name="playlist_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String name;
