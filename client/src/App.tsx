@@ -1,20 +1,35 @@
 import * as React from 'react';
 import './App.css';
+import './include/bootstrap'
 
-import * as logo from './logo.svg';
+import { BrowserRouter, Route, Switch} from 'react-router-dom';
+import HomeComponent from './components/home/home.component';
+import ProfileComponent from './components/user/profile.component';
+import PlaylistComponent from './components/playlist/create-playlist.component'
+import SignInComponent from './components/sign-in/sign-in.component';
+
+import { AppNav} from './components/navigation/app-nav';
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 class App extends React.Component {
   public render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.tsx</code> and save to reload.
-        </p>
-      </div>
+      <Provider store={store}>
+        <BrowserRouter>
+          <div>
+            < AppNav />
+            <div id ="main-content-container" >
+              <Switch>
+                <Route path="/profile" component={ProfileComponent} />
+                <Route path="/signIn" component={SignInComponent} />
+                <Route path="/playlist" component={PlaylistComponent} />
+                <Route path="/home" component={HomeComponent} />
+              </Switch>
+            </div>
+          </div>
+        </BrowserRouter> 
+      </Provider>
     );
   }
 }
