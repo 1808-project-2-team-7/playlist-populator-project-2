@@ -27,10 +27,10 @@ public class UserService {
 	}
 
 	public User findOne(int id) {
-		return ur.getOne(id);
+		return ur.existsById(id) ? ur.getOne(id) : null;
 	}
 
-	public JSONObject create(User u) {
+	public JSONObject save(User u) {
 		try {
 			JSONObject user = new JSONObject();
 			user.put("user", ur.saveAndFlush(u));
@@ -82,10 +82,6 @@ public class UserService {
 			}
 		});
 		return errors;
-	}
-
-	public User update(User u) {
-		return ur.saveAndFlush(u);
 	}
 
 	public User login(String username, String password) {

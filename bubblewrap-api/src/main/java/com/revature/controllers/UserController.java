@@ -31,13 +31,24 @@ public class UserController {
 	}
 
 	@GetMapping("{id}")
-	public User findById(@PathVariable int id) {
-		return us.findOne(id);
+	public ResponseEntity<User> findById(@PathVariable int id) {
+		User u = us.findOne(id);
+		return new ResponseEntity<>(u, u == null ? HttpStatus.NOT_FOUND : HttpStatus.OK);
 	}
 
 	@PostMapping
 	public ResponseEntity<String> create(@RequestBody User u) {
-		JSONObject createdUser = us.create(u);
+		return save(u);
+	}
+
+	@PatchMapping("{id}")
+	public ResponseEntity<String> update(@RequestBody User u, @PathVariable int id) {
+		u.setId(id);
+		return save(u);
+	}
+
+	private ResponseEntity<String> save(User u) {
+		JSONObject createdUser = us.save(u);
 		HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
 		if (createdUser != null) {
 			if (createdUser.has("user")) {
@@ -51,13 +62,6 @@ public class UserController {
 			}
 		}
 		return new ResponseEntity<>(createdUser.toString(), status);
-	}
-
-	@PatchMapping("{id}")
-	public ResponseEntity<User> update(@RequestBody User u) {
-		User updatedUser = us.update(u);
-		return new ResponseEntity<User>(updatedUser,
-				updatedUser == null ? HttpStatus.INTERNAL_SERVER_ERROR : HttpStatus.OK);
 	}
 
 	@PostMapping("login")
