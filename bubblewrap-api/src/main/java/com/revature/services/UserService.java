@@ -35,27 +35,15 @@ public class UserService {
 			JSONObject user = new JSONObject();
 			user.put("user", ur.saveAndFlush(u));
 			return user;
+		} catch (ConstraintViolationException t) {
+			return getConstraintErrors(t);
 		} catch (TransactionSystemException e) {
 			Throwable t = e.getCause();
 			while ((t != null) && !(t instanceof ConstraintViolationException)) {
 				t = t.getCause();
 			}
 			if (t instanceof ConstraintViolationException) {
-				JSONObject errors = new JSONObject();
-				JSONObject specificErrors = new JSONObject();
-				errors.put("errors", specificErrors);
-				((ConstraintViolationException) t).getConstraintViolations().forEach(constraint -> {
-					String errorType = constraint.getMessage();
-					String errorColumn = constraint.getPropertyPath().toString();
-					if (specificErrors.has(errorType)) {
-						specificErrors.getJSONArray(errorType).put(errorColumn);
-					} else {
-						JSONArray newErrorType = new JSONArray();
-						newErrorType.put(errorColumn);
-						specificErrors.put(errorType, newErrorType);
-					}
-				});
-				return errors;
+				return getConstraintErrors((ConstraintViolationException) t);
 			}
 			return null;
 		} catch (DataIntegrityViolationException e) {
@@ -78,8 +66,26 @@ public class UserService {
 		}
 	}
 
+	private JSONObject getConstraintErrors(ConstraintViolationException t) {
+		JSONObject errors = new JSONObject();
+		JSONObject specificErrors = new JSONObject();
+		errors.put("errors", specificErrors);
+		((ConstraintViolationException) t).getConstraintViolations().forEach(constraint -> {
+			String errorType = constraint.getMessage();
+			String errorColumn = constraint.getPropertyPath().toString();
+			if (specificErrors.has(errorType)) {
+				specificErrors.getJSONArray(errorType).put(errorColumn);
+			} else {
+				JSONArray newErrorType = new JSONArray();
+				newErrorType.put(errorColumn);
+				specificErrors.put(errorType, newErrorType);
+			}
+		});
+		return errors;
+	}
+
 	public User update(User u) {
-		return ur.save(u);
+		return ur.saveAndFlush(u);
 	}
 
 	public User login(String username, String password) {
