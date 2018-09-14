@@ -22,7 +22,11 @@ public class SongService {
 		return sr.getOne(id);
 	}
 
-	public List<Song> findTest() {
-		return sr.findMostPopularCommonSongs();
+	public List<Song> findMostPopularCommonSongs(int song_id, int limit) {
+		return sr.findMostPopularCommonSongs(song_id, limit);
+	}
+	
+	public List<Song> findMostPopularCommonSongs(int song_id, int category_id, int limit) {
+		return sr.findMostPopularCommonSongs(song_id, category_id, limit);
 	}
 }

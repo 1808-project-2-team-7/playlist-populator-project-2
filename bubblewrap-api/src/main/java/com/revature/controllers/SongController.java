@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.models.Song;
@@ -37,9 +38,14 @@ public class SongController {
 		return new ResponseEntity<Song>(s, HttpStatus.CREATED);
 	}
 	
-	@GetMapping("test")
-	public List<Song> findTest() {
-		return ss.findTest();
+	@GetMapping("{id}/popular")
+	public List<Song> findTest(@PathVariable int id, @RequestParam("limit") int limit) {
+		return ss.findMostPopularCommonSongs(id, limit);
+	}
+	
+	@GetMapping("{id}/popular/{category_id}")
+	public List<Song> findTest(@PathVariable int id, @PathVariable int category_id, @RequestParam("limit") int limit) {
+		return ss.findMostPopularCommonSongs(id, category_id, limit);
 	}
 
 }
