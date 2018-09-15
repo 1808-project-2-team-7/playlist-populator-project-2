@@ -1,12 +1,19 @@
 package com.revature.models;
 
+import java.util.List;
+
+import javax.persistence.JoinColumn;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
@@ -29,6 +36,10 @@ public class Song {
 	private double valence;
 	private double danceability;
 	private double energy;
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "songs_playlists", inverseJoinColumns = @JoinColumn(name = "playlist_id"), joinColumns = @JoinColumn(name = "song_id"))
+	@JsonIgnore
+	private List<Playlist> playlists;
 
 	public Song() {
 		super();

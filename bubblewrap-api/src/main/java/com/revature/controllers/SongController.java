@@ -3,6 +3,7 @@ package com.revature.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.models.Song;
@@ -39,13 +39,13 @@ public class SongController {
 	}
 	
 	@GetMapping("{id}/popular")
-	public List<Song> findTest(@PathVariable int id, @RequestParam("limit") int limit) {
-		return ss.findMostPopularCommonSongs(id, limit);
+	public List<Song> findTest(@PathVariable int id, Pageable pageable) {
+		return ss.findMostPopularCommonSongs(id, pageable);
 	}
 	
 	@GetMapping("{id}/popular/{category_id}")
-	public List<Song> findTest(@PathVariable int id, @PathVariable int category_id, @RequestParam("limit") int limit) {
-		return ss.findMostPopularCommonSongs(id, category_id, limit);
+	public List<Song> findTest(@PathVariable int id, @PathVariable int category_id, Pageable pageable) {
+		return ss.findMostPopularCommonSongs(id, category_id, pageable);
 	}
 
 }
