@@ -5,12 +5,12 @@ import './include/bootstrap'
 import { BrowserRouter, Route, Switch} from 'react-router-dom';
 import HomeComponent from './components/home/home.component';
 import ProfileComponent from './components/user/profile.component';
-import PlaylistComponent from './components/playlist/create-playlist.component'
 import SignInComponent from './components/sign-in/sign-in.component';
 
 import { AppNav} from './components/navigation/app-nav';
 import { Provider } from 'react-redux';
 import { store } from './store';
+import CreatePlaylistComponent from './components/create-playlist/create-playlist.component';
 
 class App extends React.Component {
   public render() {
@@ -23,7 +23,7 @@ class App extends React.Component {
               <Switch>
                 <Route path="/profile" component={ProfileComponent} />
                 <Route path="/signIn" component={SignInComponent} />
-                <Route path="/playlist" component={PlaylistComponent} />
+                <Route path="/playlists" component={CreatePlaylistComponent} />
                 <Route path="/home" component={HomeComponent} />
               </Switch>
             </div>
