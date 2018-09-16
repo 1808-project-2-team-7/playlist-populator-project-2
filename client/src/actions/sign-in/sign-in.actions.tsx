@@ -20,15 +20,6 @@ export const updateUsername = (username: string) => {
   }
 }
 
-export const updateError = (errorMessage: string) => {
-  return {
-    payload: {
-      errorMessage
-    },
-    type: signInTypes.UPDATE_ERROR
-  }
-}
-
 export const login = (e: React.FormEvent<HTMLFormElement>, credentials: any) => {
   return (dispatch: any) => {
     e.preventDefault();

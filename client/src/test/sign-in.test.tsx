@@ -4,38 +4,26 @@ import { mockResponse } from "./test-helper"
 
 describe('sign-in actions', () => {
     it('should create an action to update username', () => {
-        const username = 'username123'
+        const username = 'username123';
         const expectedAction = {
             payload: {
                 username
             },
             type: signInTypes.UPDATE_USERNAME
         }
-        expect(signInActions.updateUsername(username)).toEqual(expectedAction)
-
-    })
+        expect(signInActions.updateUsername(username)).toEqual(expectedAction);
+    });
 
     it('should create an action to update password', () => {
-        const password = 'pass'
+        const password = 'pass';
         const expectedAction = {
             payload: {
                 password
             },
             type: signInTypes.UPDATE_PASSWORD
         }
-        expect(signInActions.updatePassword(password)).toEqual(expectedAction)
-    })
-
-    it('should create an action to update sign in error message', () => {
-        const errorMessage = 'Invalid username or password'
-        const expectedAction = {
-            payload: {
-                errorMessage
-            },
-            type: signInTypes.UPDATE_ERROR
-        }
-        expect(signInActions.updateError(errorMessage)).toEqual(expectedAction)
-    })
+        expect(signInActions.updatePassword(password)).toEqual(expectedAction);
+    });
 
     it("should create an action to login user successfully", async () => {
         const dispatch = jest.fn();
@@ -58,7 +46,8 @@ describe('sign-in actions', () => {
                     errorMessage: ''
                 },
                 type: signInTypes.LOGIN
-            });
+            }
+        );
     });
 
     it("should create an action to display an error after invalid credentials used for login", async () => {
@@ -76,7 +65,8 @@ describe('sign-in actions', () => {
                     errorMessage: 'Invalid username or password'
                 },
                 type: signInTypes.LOGIN
-            });
+            }
+        );
     });
 
     it("should create an action to display an error after login failed because of server error", async () => {
@@ -94,6 +84,7 @@ describe('sign-in actions', () => {
                     errorMessage: 'Failed to login at this time'
                 },
                 type: signInTypes.LOGIN
-            });
+            }
+        );
     });
-})
+});
