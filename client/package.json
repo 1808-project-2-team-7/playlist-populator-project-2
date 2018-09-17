@@ -10,6 +10,7 @@
     "build-js": "react-scripts-ts build",
     "build": "npm-run-all build-css build-js",
     "test": "react-scripts-ts test --env=jsdom",
+    "test:coverage": "npm test -- --coverage --watchAll",
     "eject": "react-scripts-ts eject"
   },
   "dependencies": {
