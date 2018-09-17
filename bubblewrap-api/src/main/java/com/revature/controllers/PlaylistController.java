@@ -2,12 +2,15 @@ package com.revature.controllers;
 
 import java.util.List;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,10 +34,42 @@ public class PlaylistController {
 	public Playlist findById(@PathVariable int id) {
 		return ps.findOne(id);
 	}
-
+	
+	@GetMapping("user/{id}")
+	public List<Playlist> findByUserId(@PathVariable int id){
+		return ps.findByUserId(id);
+	}
+	
 	@PostMapping
-	public ResponseEntity<Playlist> save(@RequestBody Playlist p) {
-		return new ResponseEntity<>(p, HttpStatus.CREATED);
+	public ResponseEntity<String> save(@RequestBody Playlist p) {
+		
+		JSONObject createdPlaylist = ps.save(p);
+		HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+		if (createdPlaylist != null) {
+			if (createdPlaylist.has("user")) {
+				status = HttpStatus.CREATED;
+			} else if (createdPlaylist.has("errors")) {
+				if (createdPlaylist.getJSONObject("errors").has("duplicate")) {
+					status = HttpStatus.CONFLICT;
+				} else {
+					status = HttpStatus.BAD_REQUEST;
+				}
+			}
+		}
+		return new ResponseEntity<>(createdPlaylist.toString(), status);
+	}
+	//Can return null on failure, check to see if other errors are possiblity
+	@PutMapping("{id}/update")
+	public Playlist update(@PathVariable int id,@RequestBody Playlist p) {
+		
+		return ps.update(id, p);
+		
+	}
+	
+	//Probably should have some security
+	@DeleteMapping("/delete/{id}")
+	public boolean delete(@PathVariable int id) {
+		return ps.delete(id);
 	}
 
 }

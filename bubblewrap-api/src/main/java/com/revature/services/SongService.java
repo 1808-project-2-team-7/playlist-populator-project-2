@@ -30,4 +30,8 @@ public class SongService {
 	public List<Song> findMostPopularCommonSongs(int song_id, int category_id, Pageable pageable) {
 		return sr.findMostPopularCommonSongs(song_id, category_id, pageable);
 	}
+
+	public List<Song> findByNameAndArtist(String trackname, String artistname) {
+		return sr.findByTrackNameAndArtistName(trackname, artistname);
+	}
 }

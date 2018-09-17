@@ -19,7 +19,6 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 public class User {
 
 	@Id
-	@JsonProperty(access = Access.READ_ONLY)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id")
 	private int id;
