@@ -10,22 +10,24 @@ import SignInComponent from './components/sign-in/sign-in.component';
 
 import { AppNav} from './components/navigation/app-nav';
 import { Provider } from 'react-redux';
-import { store } from './store';
+import { store } from './Store';
 
 class App extends React.Component {
   public render() {
     return (
       <Provider store={store}>
         <BrowserRouter>
-          <div>
-            < AppNav />
-            <div id ="main-content-container" >
-              <Switch>
-                <Route path="/profile" component={ProfileComponent} />
-                <Route path="/signIn" component={SignInComponent} />
-                <Route path="/playlist" component={PlaylistComponent} />
-                <Route path="/home" component={HomeComponent} />
-              </Switch>
+          <div className="container mx-0 px-0">
+            <div className="row">
+              < AppNav />
+              <div id ="main-content-container col-md-9" >
+                <Switch>
+                  <Route path="/profile" component={ProfileComponent} />
+                  <Route path="/signIn" component={SignInComponent} />
+                  <Route path="/playlist" component={PlaylistComponent} />
+                  <Route path="/home" component={HomeComponent} />
+                </Switch>
+              </div>
             </div>
           </div>
         </BrowserRouter> 
