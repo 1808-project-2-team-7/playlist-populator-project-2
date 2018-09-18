@@ -1,6 +1,6 @@
-import * as signInActions from '../actions/sign-in/sign-in.actions';
-import { signInTypes } from "../actions/sign-in/sign-in.types";
-import { mockResponse } from "./test-helper"
+import * as signInActions from '../../actions/sign-in/sign-in.actions';
+import { signInTypes } from "../../actions/sign-in/sign-in.types";
+import { mockResponse } from "../test-helper"
 
 describe('sign-in actions', () => {
     it('should create an action to update username', () => {

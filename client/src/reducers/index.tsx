@@ -1,11 +1,12 @@
 import { combineReducers } from "redux";
-import { signInReducer } from "../reducers/signin.reducer"
+import { signInReducer } from "./sign-in.reducer"
 
 export interface ISignInState {
     credentials: {
       password: string,
       username: string
     },
+    currentUser: any,
     errorMessage: string
   }
 

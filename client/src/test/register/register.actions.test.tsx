@@ -1,6 +1,6 @@
-import * as registerActions from '../actions/register/register.actions';
-import { registerTypes } from "../actions/register/register.types";
-import { mockResponse } from "./test-helper"
+import * as registerActions from '../../actions/register/register.actions';
+import { registerTypes } from "../../actions/register/register.types";
+import { mockResponse } from "../test-helper"
 
 describe('register actions', () => {
     it('should create an action to update username', () => {
