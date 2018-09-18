@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 import { signInReducer } from "../reducers/signin.reducer"
+import { playlistReducer} from "./playlist.reducer"
 
 export interface ISignInState {
     credentials: {
@@ -9,12 +10,29 @@ export interface ISignInState {
     errorMessage: string
   }
 
+
+
+  export interface IPlaylistState {
+    playlist: {
+      bucketKey: '',
+      category: {},
+      id: 0,
+      name: '',
+      owner: {},
+      songs: []
+    },
+    publicPlaylist: [],
+    usersPlaylist: []
+  }
+
   export interface IState {
-    signIn: ISignInState
+    signIn: ISignInState,
+    playlist: IPlaylistState
   }
 
 const reducer = combineReducers<IState>({
-    signIn: signInReducer
+    playlist: playlistReducer,
+    signIn: signInReducer,
   })
 
   export const state = (newState: any, action: any) => {
