@@ -11,11 +11,6 @@ const initialState: ISignInState = {
 
 export const signInReducer = (state = initialState, action: any) => {
   switch (action.type) {
-    case signInTypes.UPDATE_ERROR:
-      return {
-        ...state,
-        errorMessage: action.payload.errorMessage
-      }
     case signInTypes.UPDATE_PASSWORD:
       return {
         ...state,

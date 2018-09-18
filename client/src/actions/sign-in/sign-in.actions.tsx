@@ -33,13 +33,24 @@ export const login = (e: React.FormEvent<HTMLFormElement>, credentials: any) => 
     })
       .then(resp => {
         if (resp.status === 200) {
-          return resp.json();
+          return resp.json().then(data => ({ status: resp.status, body: data }));
         } else {
-          return resp;
+          return resp.text().then(data => ({ status: resp.status, body: data }));
         }
       })
       .then(resp => {
         switch (resp.status) {
+          case 200:
+            sessionStorage.setItem('currentUser', JSON.stringify(resp.body));
+            dispatch({
+              payload: {
+                currentUser: resp.body,
+                errorMessage: ''
+              },
+              type: signInTypes.LOGIN
+            });
+            history.push('/home');
+            break;
           case 401:
             dispatch({
               payload: {
@@ -48,17 +59,6 @@ export const login = (e: React.FormEvent<HTMLFormElement>, credentials: any) => 
               },
               type: signInTypes.LOGIN
             });
-            break;
-          case undefined:
-            sessionStorage.setItem('currentUser', JSON.stringify(resp));
-            dispatch({
-              payload: {
-                currentUser: resp,
-                errorMessage: ''
-              },
-              type: signInTypes.LOGIN
-            });
-            history.push('/home');
             break;
           default:
             throw new Error("Failed to login at this time");
