@@ -22,6 +22,10 @@ public class SongService {
 	public Song findOne(int id) {
 		return sr.getOne(id);
 	}
+	
+	public Song save(Song s) {
+		return sr.save(s);
+	}
 
 	public List<Song> findMostPopularCommonSongs(int song_id, Pageable pageable) {
 		return sr.findMostPopularCommonSongs(song_id, pageable);

@@ -41,22 +41,9 @@ public class PlaylistController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<String> save(@RequestBody Playlist p) {
-		
-		JSONObject createdPlaylist = ps.save(p);
-		HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-		if (createdPlaylist != null) {
-			if (createdPlaylist.has("user")) {
-				status = HttpStatus.CREATED;
-			} else if (createdPlaylist.has("errors")) {
-				if (createdPlaylist.getJSONObject("errors").has("duplicate")) {
-					status = HttpStatus.CONFLICT;
-				} else {
-					status = HttpStatus.BAD_REQUEST;
-				}
-			}
-		}
-		return new ResponseEntity<>(createdPlaylist.toString(), status);
+	public ResponseEntity<Playlist> save(@RequestBody Playlist p) {
+		Playlist returnP = ps.save(p);
+		return new ResponseEntity<>(returnP, HttpStatus.CREATED);
 	}
 	//Can return null on failure, check to see if other errors are possiblity
 	@PutMapping("{id}/update")
