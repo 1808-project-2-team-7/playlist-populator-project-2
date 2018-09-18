@@ -100,7 +100,7 @@ describe('register actions', () => {
     it("should create an action to display an error if user registers with an email that is already taken", async () => {
         const dispatch = jest.fn();
         const response = '{"errors":{"duplicate":"email"}}';
-        const email = 'user213@gmail.com';
+        const email = 'user123@gmail.com';
         window.fetch = jest.fn().mockImplementation(() =>
             Promise.resolve(mockResponse(409, "Conflict", response)));
         const event: any = { preventDefault: () => null };
@@ -122,6 +122,25 @@ describe('register actions', () => {
         const response = '{"errors":{"invalid":"email"}}';
         window.fetch = jest.fn().mockImplementation(() =>
             Promise.resolve(mockResponse(400, "Bad Request", response)));
+        const event: any = { preventDefault: () => null };
+        const userInfo: any = { password: 'pass', username: 'user123', firstName: 'John', lastName: 'Smith', email: 'user123gmail.com' }
+        await registerActions.register(event, userInfo)(dispatch);
+        expect(dispatch).toBeCalledWith(
+            {
+                payload: {
+                    currentUser: null,
+                    errorMessage: 'Something went wrong. Please try again later.'
+                },
+                type: registerTypes.REGISTER
+            }
+        );
+    });
+
+    it("should create an action to display an error if there is a field other than username or email that can't be duplicated (should never happen)", async () => {
+        const dispatch = jest.fn();
+        const response = '{"errors":{"duplicate":"password"}}';
+        window.fetch = jest.fn().mockImplementation(() =>
+            Promise.resolve(mockResponse(409, "Conflict", response)));
         const event: any = { preventDefault: () => null };
         const userInfo: any = { password: 'pass', username: 'user123', firstName: 'John', lastName: 'Smith', email: 'user123gmail.com' }
         await registerActions.register(event, userInfo)(dispatch);
