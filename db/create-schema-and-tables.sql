@@ -17,6 +17,8 @@ CREATE TABLE song
     song_id SERIAL PRIMARY KEY,
     track_name VARCHAR(200) NOT NULL,
     artist_name VARCHAR(60) NOT NULL,
+    spotify_track_id VARCHAR(22) NOT NULL UNIQUE,
+    spotify_artist_id VARCHAR(22) NOT NULL,
     valence DECIMAL NOT NULL,
     danceability DECIMAL NOT NULL,
     energy DECIMAL NOT NULL,

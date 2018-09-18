@@ -9,8 +9,9 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @Entity
@@ -18,8 +19,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class User {
 
 	@Id
-	@JsonIgnore
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonProperty(access = Access.READ_ONLY)
 	@Column(name = "user_id")
 	private int id;
 
@@ -29,6 +30,7 @@ public class User {
 
 	@Column(name = "password", nullable = false)
 	@NotEmpty(message = "null")
+	@JsonProperty(access = Access.WRITE_ONLY)
 	private String password;
 
 	@Column(name = "first_name", nullable = false)

@@ -1,14 +1,16 @@
 import { combineReducers } from "redux";
-import { signInReducer } from "../reducers/signin.reducer"
 import { playlistReducer} from "./playlist.reducer"
+import { signInReducer } from "./sign-in.reducer"
+import { registerReducer } from "./register.reducer"
 
 export interface ISignInState {
-    credentials: {
-      password: string,
-      username: string
-    },
-    errorMessage: string
-  }
+  credentials: {
+    password: string,
+    username: string
+  },
+  currentUser: any,
+  errorMessage: string
+}
 
 
 
@@ -25,17 +27,31 @@ export interface ISignInState {
     usersPlaylist: []
   }
 
+
   export interface IState {
-    signIn: ISignInState,
-    playlist: IPlaylistState
+    playlist: IPlaylistState,
+    register: IRegisterState,
+    signIn: ISignInState
   }
+
+export interface IRegisterState {
+  username: string,
+  password: string,
+  firstName: string,
+  lastName: string,
+  email: string,
+  errorMessage: string,
+  currentUser: any
+}
+
 
 const reducer = combineReducers<IState>({
-    playlist: playlistReducer,
-    signIn: signInReducer,
-  })
+  playlist: playlistReducer,
+  register: registerReducer,
+  signIn: signInReducer
+})
 
-  export const state = (newState: any, action: any) => {
+export const state = (newState: any, action: any) => {
 
-    return reducer(newState, action)
-  }
+  return reducer(newState, action)
+}

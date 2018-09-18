@@ -3,6 +3,7 @@ package com.revature.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,6 +36,16 @@ public class SongController {
 	@PostMapping
 	public ResponseEntity<Song> save(@RequestBody Song s) {
 		return new ResponseEntity<Song>(s, HttpStatus.CREATED);
+	}
+	
+	@GetMapping("{id}/popular")
+	public List<Song> findTest(@PathVariable int id, Pageable pageable) {
+		return ss.findMostPopularCommonSongs(id, pageable);
+	}
+	
+	@GetMapping("{id}/popular/{category_id}")
+	public List<Song> findTest(@PathVariable int id, @PathVariable int category_id, Pageable pageable) {
+		return ss.findMostPopularCommonSongs(id, category_id, pageable);
 	}
 
 }
