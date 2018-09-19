@@ -1,19 +1,17 @@
 describe('environment url', () => {
-    beforeAll(() => process.env.EC2_URL = 'http://www.production.com:3000/');
-    beforeEach(() => { 
+    beforeEach(() => {
         jest.resetModules();
     });
     afterEach(() => delete process.env.NODE_ENV);
-    afterAll(() => delete process.env.EC2_URL);
-    it('gives localhost with port 8080 on when NODE_ENV environment variable is not production', () => {
+    it('gives localhost with port 9001 on when NODE_ENV environment variable is not production', () => {
         process.env.NODE_ENV = 'development';
-        const environment = require('../../src/environment').environment; 
-        expect(environment.context).toEqual('http://localhost:8080/');
+        const environment = require('../../src/environment').environment;
+        expect(environment.context).toEqual('http://localhost:9001/');
     });
 
-    it('gives production url and port set in environment variable EC2_URL when NODE_ENV environment variable is production', () => {
+    it('gives production url', () => {
         process.env.NODE_ENV = 'production';
-        const environment = require('../../src/environment').environment; 
-        expect(environment.context).toEqual('http://www.production.com:3000/');
+        const environment = require('../../src/environment').environment;
+        expect(environment.context).toEqual('http://ec2-18-224-39-70.us-east-2.compute.amazonaws.com:3000/');
     });
 });
