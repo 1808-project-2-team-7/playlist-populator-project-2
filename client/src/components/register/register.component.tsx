@@ -4,7 +4,7 @@ import { RouteComponentProps } from 'react-router';
 import { Button, CardBody, CardHeader, Card, Col, Form, FormGroup, Input } from 'reactstrap';
 import * as currentUserActions from '../../actions/current-user/current-user.actions';
 import * as registerActions from '../../actions/register/register.actions';
-import { User } from '../../model/User';
+import { User } from '../../models/User';
 import { IState, IRegisterState } from '../../reducers';
 import Label from 'reactstrap/lib/Label';
 

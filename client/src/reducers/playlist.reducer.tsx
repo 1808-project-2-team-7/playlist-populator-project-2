@@ -1,5 +1,5 @@
 import { IPlaylistState } from ".";
-import { User } from "../model/User";
+import { User } from "../models/User";
 import { playlistTypes } from "../actions/playlist/playlist.types";
 
 export const initialState: IPlaylistState = {

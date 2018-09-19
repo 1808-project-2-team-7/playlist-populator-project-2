@@ -4,7 +4,7 @@ import { RouteComponentProps } from 'react-router';
 import { Button, CardBody, CardHeader, Card, Col, Form, FormGroup, Input } from 'reactstrap';
 import * as currentUserActions from '../../actions/current-user/current-user.actions';
 import * as signInActions from '../../actions/sign-in/sign-in.actions';
-import { User } from '../../model/User';
+import { User } from '../../models/User';
 import { ISignInState, IState } from '../../reducers';
 
 interface IProps extends RouteComponentProps<{}>, ISignInState {

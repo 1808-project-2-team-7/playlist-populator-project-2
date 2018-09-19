@@ -13,7 +13,7 @@ import RegisterComponent from './components/register/register.component';
 import { AppNav } from './components/navigation/app-nav';
 import { Provider } from 'react-redux';
 import { store } from './store';
-import { User } from './model/User';
+import { User } from './models/User';
 
 export const getCurrentUser = () => {
   const currentUser = store.getState().currentUser;

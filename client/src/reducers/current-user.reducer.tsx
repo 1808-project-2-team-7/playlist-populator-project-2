@@ -1,5 +1,5 @@
 import { currentUserTypes } from "../actions/current-user/current-user.types";
-import { User } from "../model/User";
+import { User } from "../models/User";
 
 const initialState: User | null = null
 
