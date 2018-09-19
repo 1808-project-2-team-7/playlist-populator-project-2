@@ -1,36 +1,30 @@
-import { playlistTypes } from "../actions/playlist/playlist.type";
 import { IPlaylistState } from ".";
+import { User } from "../model/User";
+import { playlistTypes } from "../actions/playlist/playlist.types";
 
-const initialState: IPlaylistState = {
+export const initialState: IPlaylistState = {
     playlist: {
         bucketKey: '',
         category: {},
         id: 0,
         name: '',
-        owner: {},
+        owner: new User,
         songs: []
-      },
-      publicPlaylist: [],
-      usersPlaylist: []
+    },
+    publicPlaylist: [],
+    usersPlaylist: []
 }
 
-export const playlistReducer = (state= initialState, action: any) => {
+export const playlistReducer = (state = initialState, action: any) => {
     switch (action.type) {
-        case playlistTypes.GET_PUBLIC_LIST:
-        return {
-            ...state,
-            publicPlaylist: action.payload.publicPlaylist
-        }
-        case playlistTypes.GET_USERS_LISTS:
-        return {
-            ...state,
-            usersPlaylist: action.payload.usersPlaylist
-        }
-        case playlistTypes.LOAD_LIST:
-        return {
-            ...state,
-            playlist: action.payload.playlist
+        case playlistTypes.FETCH_SONGS:
+            return {
+                ...state,
+                playlist: {
+                    ...state.playlist,
+                    songs: action.payload.songs
+                }
             }
-        }
+    }
     return state;
 }

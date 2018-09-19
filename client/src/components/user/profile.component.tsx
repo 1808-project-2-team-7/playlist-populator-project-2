@@ -1,17 +1,14 @@
 import * as React from 'react';
 
 import { connect } from 'react-redux';
-import { ViewPlaylist } from '../playlist/view-playlist.component'
-import {Input, InputGroupAddon, InputGroup } from 'reactstrap';
-import { Playlist } from '../../models/Playlist';
-import { IState } from '../../reducers';
+// import { Playlist } from '../../models/Playlist';
+// import { ListPlaylist } from '../playlist/list-playlists.component'
 
-interface IProps {
-    playlist: Playlist
-    id: number
-}
+// interface IProps {
+//     // playlist: Playlist
+// }
 
-class ProfileComponent extends React.Component<IProps, {}> {
+class ProfileComponent extends React.Component<any, {}> {
     constructor(props: any) {
         super(props);
         
@@ -33,22 +30,18 @@ class ProfileComponent extends React.Component<IProps, {}> {
 
                 </div>
                 <div>
-                <InputGroup>
-                <Input placeholder="Enter the playlist id" value={0} type="number"/>
-                <InputGroupAddon addonType="append"><button type="submit" /*onSubmit={this.updateId}*/>Load Playlist</button></InputGroupAddon>
-                </InputGroup>
-                    { ViewPlaylist }
+                    {/* <ListPlaylist filler= {""}/> */}
                 </div>
             </div>
         )
     }
 }
 
- const mapStateToProps = (state: IState) => (state.playlist);
+// const mapStateToProps = (state: IState) => (state.playlist);
 
 /* const mapDispatchTo Prop = {
         updatePlaylistId: 
 }*/
 
 
-export default connect(mapStateToProps)(ProfileComponent);
+export default connect()(ProfileComponent);

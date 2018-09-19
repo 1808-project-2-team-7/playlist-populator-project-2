@@ -21,4 +21,5 @@ public interface SongRepo extends JpaRepository<Song, Integer> {
 			+ "JOIN pl.songs others WHERE so.id = :song_id AND c.id = :category_id AND others.id != :song_id " + "GROUP BY others.id\r\n"
 			+ "ORDER BY COUNT(others.id) DESC\r\n")
 	List<Song> findMostPopularCommonSongs(@Param("song_id") int song_id, @Param("category_id") int category_id, Pageable p);
+	List<Song> findByTrackNameAndArtistName(String trackname, String artistname);
 }

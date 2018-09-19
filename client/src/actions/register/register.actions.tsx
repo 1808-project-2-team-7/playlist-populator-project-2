@@ -52,7 +52,6 @@ export const register = (e: React.FormEvent<HTMLFormElement>, userInfo: any) => 
     e.preventDefault();
     return fetch(`${environment.context}users`, {
       body: JSON.stringify(userInfo),
-      credentials: 'include',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -64,7 +63,6 @@ export const register = (e: React.FormEvent<HTMLFormElement>, userInfo: any) => 
       .then(resp => {
         switch (resp.status) {
           case 201:
-            sessionStorage.setItem('currentUser', JSON.stringify(resp.body.user));
             dispatch({
               payload: {
                 currentUser: resp.body.user,

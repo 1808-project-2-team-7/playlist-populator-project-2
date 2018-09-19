@@ -14,16 +14,19 @@ export class AppNav extends React.Component {
                             <Link to="/profile" className="unset-anchor nav-link-active">profile</Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/playlist" className="unset-anchor nav-link-active">Create Playlist</Link>
+                            <Link to="/playlists/new" className="unset-anchor nav-link-active">Create Playlist</Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/home" className="unset-anchor nav-link-active">Home</Link>
+                            <Link to="/sign-in" className="unset-anchor nav-link-active">Sign In</Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/home" className="unset-anchor nav-link-active">Home</Link>
+                            <Link to="/register" className="unset-anchor nav-link-active">Register</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/playlists/1" className="unset-anchor nav-link-active">Playlist</Link>
                         </li>
                     </ul>
-                </nav> 
+                </nav>
 
             </div>
         )

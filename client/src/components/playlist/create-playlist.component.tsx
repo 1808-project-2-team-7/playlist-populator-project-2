@@ -5,7 +5,7 @@ interface IProps {
     filler: any;
 }
 
-class PlaylistComponent extends React.Component<IProps, {}> {
+class CreatePlaylistComponent extends React.Component<IProps, {}> {
     constructor(props: any) {
         super(props);
     }
@@ -23,19 +23,19 @@ class PlaylistComponent extends React.Component<IProps, {}> {
                     </div>
                     <div className="form-row">
                         <div className="col">
-                        <input type="text" className="form-control" placeholder="1st song / Artist" />
+                            <input type="text" className="form-control" placeholder="1st song / Artist" />
                         </div>
                         <div className="col">
-                        <input type="text" className="form-control" placeholder="2nd song / Artist" />
+                            <input type="text" className="form-control" placeholder="2nd song / Artist" />
                         </div>
                         <div className="col">
-                        <input type="text" className="form-control" placeholder="3rd song / Artist" />
+                            <input type="text" className="form-control" placeholder="3rd song / Artist" />
                         </div>
                         <div className="col">
-                        <input type="text" className="form-control" placeholder="4th song / Artist" />
+                            <input type="text" className="form-control" placeholder="4th song / Artist" />
                         </div>
                         <div className="col">
-                        <input type="text" className="form-control" placeholder="5th song / Artist" />
+                            <input type="text" className="form-control" placeholder="5th song / Artist" />
                         </div>
                     </div>
                 </form>
@@ -49,4 +49,4 @@ class PlaylistComponent extends React.Component<IProps, {}> {
 // const mapDispatchTo Prop = {}
 
 
-export default connect()(PlaylistComponent);
+export default connect()(CreatePlaylistComponent);
