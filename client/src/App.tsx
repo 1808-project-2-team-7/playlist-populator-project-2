@@ -13,6 +13,12 @@ import RegisterComponent from './components/register/register.component';
 import { AppNav } from './components/navigation/app-nav';
 import { Provider } from 'react-redux';
 import { store } from './store';
+import { User } from './model/User';
+
+export const getCurrentUser = () => {
+  const currentUser = store.getState().currentUser;
+  return currentUser ? new User(currentUser) : null;
+}
 
 class App extends React.Component {
   public render() {

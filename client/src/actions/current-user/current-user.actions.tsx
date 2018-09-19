@@ -12,7 +12,6 @@ export const updateCurrentUser = (currentUser: User) => {
 }
 
 export const logout = () => {
-  sessionStorage.clear();
   history.push('/');
   return {
     payload: {

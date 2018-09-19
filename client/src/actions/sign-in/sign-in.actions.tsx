@@ -40,7 +40,6 @@ export const login = (e: React.FormEvent<HTMLFormElement>, credentials: any) => 
       .then(resp => {
         switch (resp.status) {
           case 200:
-            sessionStorage.setItem('currentUser', JSON.stringify(resp.body));
             dispatch({
               payload: {
                 currentUser: resp.body,

@@ -63,7 +63,6 @@ export const register = (e: React.FormEvent<HTMLFormElement>, userInfo: any) => 
       .then(resp => {
         switch (resp.status) {
           case 201:
-            sessionStorage.setItem('currentUser', JSON.stringify(resp.body.user));
             dispatch({
               payload: {
                 currentUser: resp.body.user,
