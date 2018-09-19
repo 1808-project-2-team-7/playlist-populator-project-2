@@ -17,10 +17,10 @@ export class AppNav extends React.Component {
                             <Link to="/playlist" className="unset-anchor nav-link-active">Create Playlist</Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/home" className="unset-anchor nav-link-active">Home</Link>
+                            <Link to="/sign-in" className="unset-anchor nav-link-active">Sign In</Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/home" className="unset-anchor nav-link-active">Home</Link>
+                            <Link to="/register" className="unset-anchor nav-link-active">Register</Link>
                         </li>
                     </ul>
                 </nav> 
