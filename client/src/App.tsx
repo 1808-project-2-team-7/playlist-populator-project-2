@@ -17,10 +17,10 @@ class App extends React.Component {
     return (
       <Provider store={store}>
         <BrowserRouter>
-          <div className="container mx-0 px-0">
+          <div className="container-fluid mx-0 px-0">
             <div className="row">
               < AppNav />
-              <div id ="main-content-container col-md-9" >
+              <div className=" col-md-9"id ="main-content-container" >
                 <Switch>
                   <Route path="/profile" component={ProfileComponent} />
                   <Route path="/signIn" component={SignInComponent} />

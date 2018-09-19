@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 import { playlistReducer} from "./playlist.reducer"
 import { signInReducer } from "./sign-in.reducer"
 import { registerReducer } from "./register.reducer"
+import { Playlist } from "../models/Playlist";
 
 export interface ISignInState {
   credentials: {
@@ -15,16 +16,9 @@ export interface ISignInState {
 
 
   export interface IPlaylistState {
-    playlist: {
-      bucketKey: '',
-      category: {},
-      id: 0,
-      name: '',
-      owner: {},
-      songs: []
-    },
-    publicPlaylist: [],
-    usersPlaylist: []
+    playlist: Playlist,
+    allPlaylist: Playlist[],
+    displayedPlaylist: Playlist[]
   }
 
 

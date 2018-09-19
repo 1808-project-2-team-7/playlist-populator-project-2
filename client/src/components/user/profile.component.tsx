@@ -1,36 +1,54 @@
 import * as React from 'react';
+
 import { connect } from 'react-redux';
-import { ListPlaylist } from '../playlist/list-playlists.component'
+import { ViewPlaylist } from '../playlist/view-playlist.component'
+import {Input, InputGroupAddon, InputGroup } from 'reactstrap';
+import { Playlist } from '../../models/Playlist';
+import { IState } from '../../reducers';
 
 interface IProps {
-    filler: any;
+    playlist: Playlist
+    id: number
 }
 
 class ProfileComponent extends React.Component<IProps, {}> {
     constructor(props: any) {
         super(props);
+        
     }
 
+    // public updateId = (e:number) => {
+
+    // }
+
     public render() {
+ //       const {playlist} = this.props;
+        console.log(this.props.id);
         return (
             <div>
                 <div >
-                    <img className="img-adjust-position img-responsive rounded-circle mx-auto"
-                         src= "" alt="revature" />
+                    <img className="d-block mx-auto rounded-circle mx-auto"
+                         src= "https://jooinn.com/images/fantasy-6.jpg" alt="revature" />
                          <p className="text-center">Users name</p>
 
                 </div>
                 <div>
-                    <ListPlaylist filler= {""}/>
+                <InputGroup>
+                <Input placeholder="Enter the playlist id" value={0} type="number"/>
+                <InputGroupAddon addonType="append"><button type="submit" /*onSubmit={this.updateId}*/>Load Playlist</button></InputGroupAddon>
+                </InputGroup>
+                    { ViewPlaylist }
                 </div>
             </div>
         )
     }
 }
 
-// const mapStateTo Props = () => ();
+ const mapStateToProps = (state: IState) => (state.playlist);
 
-// const mapDispatchTo Prop = {}
+/* const mapDispatchTo Prop = {
+        updatePlaylistId: 
+}*/
 
 
-export default connect()(ProfileComponent);
+export default connect(mapStateToProps)(ProfileComponent);
