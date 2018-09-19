@@ -25,19 +25,19 @@ class App extends React.Component {
     return (
       <Provider store={store}>
         <BrowserRouter>
-          <div className="container mx-0 px-0 my-100">
-            <div className="row">
+          <div id="wrapper" className="toggled">
+            <div id="sidebar-wrapper">
               < AppNav />
-              <div id="main-content-container col-md-9" >
-                <Switch>
-                  <Route path="/profile" component={ProfileComponent} />
-                  <Route path="/sign-in" component={SignInComponent} />
-                  <Route path="/register" component={RegisterComponent} />
-                  <Route path="/playlists/new" component={CreatePlaylistComponent} />
-                  <Route path="/playlists/:id" component={PlaylistComponent} />
-                  <Route path="/home" component={HomeComponent} />
-                </Switch>
-              </div>
+            </div>
+            <div>
+              <Switch>
+                <Route path="/profile" component={ProfileComponent} />
+                <Route path="/sign-in" component={SignInComponent} />
+                <Route path="/register" component={RegisterComponent} />
+                <Route path="/playlists/new" component={CreatePlaylistComponent} />
+                <Route path="/playlists/:id" component={PlaylistComponent} />
+                <Route path="/home" component={HomeComponent} />
+              </Switch>
             </div>
           </div>
         </BrowserRouter>
