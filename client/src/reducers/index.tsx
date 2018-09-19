@@ -2,9 +2,10 @@ import { combineReducers } from "redux";
 import { signInReducer } from "./sign-in.reducer"
 import { registerReducer } from "./register.reducer"
 import { playlistCardReducer } from "./playlist-card-reducer";
+import { Playlist } from "../models/Playlist";
 
 export interface IPlaylistCardState{
-  playlist:any
+  playlists: Playlist[]
 }
 
 export interface ISignInState {

@@ -2,7 +2,7 @@
 import { IPlaylistCardState } from ".";
 
 export const initialState: IPlaylistCardState = {
-  playlist: null,
+  playlists: [],
 
 }
 export const playlistCardReducer = (state = initialState, action:any)=>{

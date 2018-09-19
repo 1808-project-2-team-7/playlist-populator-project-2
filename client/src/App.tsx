@@ -20,7 +20,9 @@ class App extends React.Component {
         <BrowserRouter>
           <div>
             < AppNav />
-            <PlaylistCard/>
+            <PlaylistCard playlistId={1}/>
+            <PlaylistCard playlistId={2}/>
+            <PlaylistCard playlistId={3}/>
             <div id ="main-content-container" >
               <Switch>
                 <Route path="/profile" component={ProfileComponent} />
