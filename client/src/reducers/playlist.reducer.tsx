@@ -1,5 +1,6 @@
 import { IPlaylistState } from ".";
 import { User } from "../model/User";
+import { playlistTypes } from "../actions/playlist/playlist.types";
 
 export const initialState: IPlaylistState = {
     playlist: {
@@ -15,5 +16,15 @@ export const initialState: IPlaylistState = {
 }
 
 export const playlistReducer = (state = initialState, action: any) => {
+    switch (action.type) {
+        case playlistTypes.FETCH_SONGS:
+            return {
+                ...state,
+                playlist: {
+                    ...state.playlist,
+                    songs: action.payload.songs
+                }
+            }
+    }
     return state;
 }

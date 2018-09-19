@@ -5,6 +5,7 @@ import { registerReducer } from "./register.reducer"
 import { currentUserReducer } from "./current-user.reducer"
 import { currentUserTypes } from "../actions/current-user/current-user.types";
 import { User } from "../model/User";
+import { Song } from "../model/Song";
 
 export interface ISignInState {
   credentials: {
@@ -24,7 +25,7 @@ export interface IPlaylistState {
     id: number,
     name: string,
     owner: User,
-    songs: any[]
+    songs: Song[]
   },
   publicPlaylist: any[],
   usersPlaylist: any[]
