@@ -52,7 +52,6 @@ export const register = (e: React.FormEvent<HTMLFormElement>, userInfo: any) => 
     e.preventDefault();
     return fetch(`${environment.context}users`, {
       body: JSON.stringify(userInfo),
-      credentials: 'include',
       headers: {
         'Content-Type': 'application/json'
       },

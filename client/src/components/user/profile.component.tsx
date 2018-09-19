@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { ListPlaylist } from '../playlist/list-playlists.component'
+// import { ListPlaylist } from '../playlist/list-playlists.component'
 
 interface IProps {
     filler: any;
@@ -21,7 +21,7 @@ class ProfileComponent extends React.Component<IProps, {}> {
 
                 </div>
                 <div>
-                    <ListPlaylist filler= {""}/>
+                    {/* <ListPlaylist filler= {""}/> */}
                 </div>
             </div>
         )

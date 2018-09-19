@@ -25,7 +25,6 @@ export const login = (e: React.FormEvent<HTMLFormElement>, credentials: any) => 
     e.preventDefault();
     return fetch(`${environment.context}users/login`, {
       body: JSON.stringify(credentials),
-      credentials: 'include',
       headers: {
         'Content-Type': 'application/json'
       },
