@@ -32,6 +32,12 @@ public class SongController {
 	public Song findById(@PathVariable int id) {
 		return ss.findOne(id);
 	}
+	
+	@GetMapping("find")
+	public List<Song> findByNameAndArtist(@RequestBody Song s){
+		return ss.findByNameAndArtist(s.getTrackName(),s.getArtistName());
+		
+	}
 
 	@PostMapping
 	public ResponseEntity<Song> save(@RequestBody Song s) {

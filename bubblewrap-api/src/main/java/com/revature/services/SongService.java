@@ -22,6 +22,10 @@ public class SongService {
 	public Song findOne(int id) {
 		return sr.getOne(id);
 	}
+	
+	public Song save(Song s) {
+		return sr.save(s);
+	}
 
 	public List<Song> findMostPopularCommonSongs(int song_id, Pageable pageable) {
 		return sr.findMostPopularCommonSongs(song_id, pageable);
@@ -29,5 +33,9 @@ public class SongService {
 
 	public List<Song> findMostPopularCommonSongs(int song_id, int category_id, Pageable pageable) {
 		return sr.findMostPopularCommonSongs(song_id, category_id, pageable);
+	}
+
+	public List<Song> findByNameAndArtist(String trackname, String artistname) {
+		return sr.findByTrackNameAndArtistName(trackname, artistname);
 	}
 }

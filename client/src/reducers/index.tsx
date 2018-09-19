@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import { playlistReducer } from "./playlist.reducer"
 import { signInReducer } from "./sign-in.reducer"
 import { registerReducer } from "./register.reducer"
 import { currentUserReducer } from "./current-user.reducer"
@@ -12,6 +13,28 @@ export interface ISignInState {
   },
   currentUser: User | null,
   errorMessage: string
+}
+
+
+
+export interface IPlaylistState {
+  playlist: {
+    bucketKey: string,
+    category: any,
+    id: number,
+    name: string,
+    owner: User,
+    songs: any[]
+  },
+  publicPlaylist: any[],
+  usersPlaylist: any[]
+}
+
+
+export interface IState {
+  playlist: IPlaylistState,
+  register: IRegisterState,
+  signIn: ISignInState
 }
 
 export interface IRegisterState {
@@ -32,6 +55,7 @@ export interface IState {
 
 const reducer = combineReducers<IState>({
   currentUser: currentUserReducer,
+  playlist: playlistReducer,
   register: registerReducer,
   signIn: signInReducer
 })
