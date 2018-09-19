@@ -78,7 +78,7 @@ class RegisterComponent extends React.Component<IProps, {}> {
                                             <Label for="inputEmail">Email</Label>
                                             <Input
                                                 onChange={(e: any) => this.props.updateEmail(e.target.value)}
-                                                value={this.props.password}
+                                                value={this.props.email}
                                                 type="email"
                                                 id="inputEmail"
                                                 className="form-control"
@@ -91,7 +91,7 @@ class RegisterComponent extends React.Component<IProps, {}> {
                                             <Label for="inputFirstName">First name</Label>
                                             <Input
                                                 onChange={(e: any) => this.props.updateFirstName(e.target.value)}
-                                                value={this.props.password}
+                                                value={this.props.firstName}
                                                 type="text"
                                                 id="inputFirstName"
                                                 className="form-control"
@@ -104,7 +104,7 @@ class RegisterComponent extends React.Component<IProps, {}> {
                                             <Label for="inputLastName">Last name</Label>
                                             <Input
                                                 onChange={(e: any) => this.props.updateLastName(e.target.value)}
-                                                value={this.props.password}
+                                                value={this.props.lastName}
                                                 type="text"
                                                 id="inputLastName"
                                                 className="form-control"
