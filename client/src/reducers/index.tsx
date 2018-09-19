@@ -1,6 +1,11 @@
 import { combineReducers } from "redux";
 import { signInReducer } from "./sign-in.reducer"
 import { registerReducer } from "./register.reducer"
+import { playlistCardReducer } from "./playlist-card-reducer";
+
+export interface IPlaylistCardState{
+  playlist:any
+}
 
 export interface ISignInState {
   credentials: {
@@ -24,9 +29,11 @@ export interface IRegisterState {
 export interface IState {
   register: IRegisterState,
   signIn: ISignInState
+  playlistCard: IPlaylistCardState
 }
 
 const reducer = combineReducers<IState>({
+  playlistCard: playlistCardReducer,
   register: registerReducer,
   signIn: signInReducer
 })

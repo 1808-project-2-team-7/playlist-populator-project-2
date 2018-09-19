@@ -11,6 +11,7 @@ import SignInComponent from './components/sign-in/sign-in.component';
 import { AppNav} from './components/navigation/app-nav';
 import { Provider } from 'react-redux';
 import { store } from './store';
+import  PlaylistCard  from './components/playlist/playlist-card.component';
 
 class App extends React.Component {
   public render() {
@@ -19,6 +20,7 @@ class App extends React.Component {
         <BrowserRouter>
           <div>
             < AppNav />
+            <PlaylistCard/>
             <div id ="main-content-container" >
               <Switch>
                 <Route path="/profile" component={ProfileComponent} />
