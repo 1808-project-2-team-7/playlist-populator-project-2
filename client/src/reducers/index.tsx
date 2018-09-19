@@ -52,6 +52,7 @@ export interface IState {
   currentUser: User | null,
   register: IRegisterState,
   signIn: ISignInState
+  playlistCard: IPlaylistCardState
 }
 
 const reducer = combineReducers<IState>({
