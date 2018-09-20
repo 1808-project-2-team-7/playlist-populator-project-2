@@ -13,14 +13,16 @@ interface IProps {
 export const PlaylistCard: React.StatelessComponent<IProps> = (props) => {
     const { playlist } = props;
     return (
-        <Card style={{ width: 240, height: 240 }} >
-            <CardImg height="100%" src={require(`../../images/test.png`)} alt="category" />
-            <CardImgOverlay>
-                <CardTitle>{playlist.name}  ({playlist.category.categoryName})</CardTitle>
-                <CardText>{playlist.owner.username}<br />
-                    # of Songs: {playlist.songs.length}
-                </CardText>
-            </CardImgOverlay>
-        </Card>
+        <div className="playlist-card-container">
+            <Card className="playlist-card" >
+                <CardImg height="100%" src={require(`../../images/test.png`)} alt="category" />
+                <CardImgOverlay>
+                    <CardTitle>{playlist.name}  ({playlist.category.categoryName})</CardTitle>
+                    <CardText>{playlist.owner.username}<br />
+                        # of Songs: {playlist.songs.length}
+                    </CardText>
+                </CardImgOverlay>
+            </Card>
+        </div>
     )
 }
