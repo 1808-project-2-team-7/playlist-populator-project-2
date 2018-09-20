@@ -8,8 +8,13 @@ export class Song {
     public danceability=0;
     public energy=0;
 
+<<<<<<< HEAD
     public constructor(id: number, trackName: string, artistName: string, spotifyTrackId: string, 
     spotifyArtistId: string, valence?: number, danceability?: number, energy?: number){
+=======
+    public constructor(id?: number, trackName?: string, artistName?: string, spotifyTrackId?: string, 
+    spotifyArtistId?: string, valence?: number, danceability?: number, energy?: number){
+>>>>>>> aa52a565b75ccbf083d7e01fbda172237b4c281f
         id && (this.id=id);
         trackName && (this.trackName=trackName);
         artistName && (this.artistName=artistName);
