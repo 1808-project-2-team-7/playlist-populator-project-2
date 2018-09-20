@@ -20,9 +20,13 @@ class PlaylistList extends React.Component<IProps, {}> {
     public render() {
         const { playlists } = this.props;
         return (
-            playlists.map((playlist: Playlist) => {
-                return <PlaylistCard playlist={playlist} key={playlist.id} />
-            })
+            <div className="container-fluid">
+                <div className="row justify-content-center">
+                    {playlists.map((playlist: Playlist) => {
+                        return <PlaylistCard playlist={playlist} key={playlist.id} />
+                    })}
+                </div>
+            </div>
         );
     }
 }
