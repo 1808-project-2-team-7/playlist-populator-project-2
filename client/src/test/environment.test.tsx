@@ -12,6 +12,6 @@ describe('environment url', () => {
     it('gives production url', () => {
         process.env.NODE_ENV = 'production';
         const environment = require('../../src/environment').environment;
-        expect(environment.context).toEqual('http://ec2-18-223-164-90.us-east-2.compute.amazonaws.com:9002/');
+        expect(environment.context).toEqual('http://ec2-52-14-119-221.us-east-2.compute.amazonaws.com:9002/');
     });
 });
