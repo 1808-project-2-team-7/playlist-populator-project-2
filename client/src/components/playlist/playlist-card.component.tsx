@@ -10,19 +10,17 @@ interface IProps {
     playlist: Playlist
 }
 
-export class PlaylistCard extends React.Component<IProps, any> {
-    public render() {
-        const { playlist } = this.props;
-        return (
-            <Card style={{ width: 240, height: 240 }} >
-                <CardImg height="100%" src={require(`../../images/test.png`)} alt="category" />
-                <CardImgOverlay>
-                    <CardTitle>{playlist.name}  ({playlist.category.categoryName})</CardTitle>
-                    <CardText>{playlist.owner.username}<br />
-                        # of Songs: {playlist.songs.length}
-                    </CardText>
-                </CardImgOverlay>
-            </Card>
-        )
-    }
+export const PlaylistCard: React.StatelessComponent<IProps> = (props) => {
+    const { playlist } = props;
+    return (
+        <Card style={{ width: 240, height: 240 }} >
+            <CardImg height="100%" src={require(`../../images/test.png`)} alt="category" />
+            <CardImgOverlay>
+                <CardTitle>{playlist.name}  ({playlist.category.categoryName})</CardTitle>
+                <CardText>{playlist.owner.username}<br />
+                    # of Songs: {playlist.songs.length}
+                </CardText>
+            </CardImgOverlay>
+        </Card>
+    )
 }
