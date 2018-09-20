@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import { createPlaylistReducer } from "./create-playlist.reducer";
 import { playlistReducer } from "./playlist.reducer"
 import { signInReducer } from "./sign-in.reducer"
 import { registerReducer } from "./register.reducer"
@@ -8,6 +9,15 @@ import { User } from "../models/User";
 import { Song } from "../models/Song";
 import { Playlist } from "../models/Playlist";
 import { playlistCardReducer } from "./playlist-card-reducer";
+
+export interface ICreatePlaylistState {
+  accessToken: string,
+  errorMessage: string,
+  songInput: string,
+  artistInput: string,
+  playlist: Playlist,
+  suggestedSongs: Song[]
+}
 
 export interface ISignInState {
   credentials: {
@@ -35,13 +45,6 @@ export interface IPlaylistState {
   usersPlaylist: any[]
 }
 
-
-export interface IState {
-  playlist: IPlaylistState,
-  register: IRegisterState,
-  signIn: ISignInState
-}
-
 export interface IRegisterState {
   username: string,
   password: string,
@@ -53,13 +56,16 @@ export interface IRegisterState {
 }
 
 export interface IState {
+  createPlaylist: ICreatePlaylistState,
   currentUser: User | null,
+  playlist: IPlaylistState,
   register: IRegisterState,
   signIn: ISignInState
   playlistCard: IPlaylistCardState
 }
 
 const reducer = combineReducers<IState>({
+  createPlaylist: createPlaylistReducer,
   currentUser: currentUserReducer,
   playlist: playlistReducer,
   playlistCard: playlistCardReducer,

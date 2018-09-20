@@ -5,7 +5,7 @@ import './include/bootstrap'
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import HomeComponent from './components/home/home.component';
 import ProfileComponent from './components/user/profile.component';
-import CreatePlaylistComponent from './components/playlist/create-playlist.component'
+import CreatePlaylistComponent from './components/create-playlist/create-playlist.component'
 import PlaylistComponent from './components/playlist/playlist.component'
 import SignInComponent from './components/sign-in/sign-in.component';
 import RegisterComponent from './components/register/register.component';
