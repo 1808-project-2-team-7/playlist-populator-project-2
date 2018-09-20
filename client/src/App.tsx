@@ -5,7 +5,7 @@ import './include/bootstrap'
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import HomeComponent from './components/home/home.component';
 import ProfileComponent from './components/user/profile.component';
-import CreatePlaylistComponent from './components/create-playlist/create-playlist.component'
+import CreatePlaylistComponent from './components/playlist/create-playlist.component'
 import PlaylistComponent from './components/playlist/playlist.component'
 import SignInComponent from './components/sign-in/sign-in.component';
 import RegisterComponent from './components/register/register.component';
@@ -20,7 +20,11 @@ export const getCurrentUser = () => {
   return currentUser ? new User(currentUser) : null;
 }
 
+
+
+
 class App extends React.Component {
+
   public render() {
     return (
       <Provider store={store}>
@@ -37,6 +41,7 @@ class App extends React.Component {
                 <Route path="/playlists/new" component={CreatePlaylistComponent} />
                 <Route path="/playlists/:id" component={PlaylistComponent} />
                 <Route path="/home" component={HomeComponent} />
+                <Route component={HomeComponent} />
               </Switch>
             </div>
           </div>
