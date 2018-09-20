@@ -35,7 +35,7 @@ public class Application {
 	public FilterRegistrationBean<CorsFilter> corsFilter() {
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		CorsConfiguration config = new CorsConfiguration();
-		config.addAllowedOrigin("production".equals(env.getProperty("BUBBLEWRAP_API_STAGE")) ? env.getProperty("BUBBLEWRAP_APP_URL") : "http://localhost:3000");
+		config.addAllowedOrigin("prod".equals(env.getProperty("BUBBLEWRAP_API_STAGE")) ? env.getProperty("BUBBLEWRAP_APP_URL") : "http://localhost:3000");
 		config.addAllowedHeader("*");
 		config.addAllowedMethod("*");
 		source.registerCorsConfiguration("/**", config);
