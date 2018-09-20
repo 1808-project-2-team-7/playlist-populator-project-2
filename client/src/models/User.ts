@@ -7,13 +7,8 @@ export class User {
     public email='';
     public bucketKey='';
 
-<<<<<<< HEAD
-    public constructor(id: number, username: string, password: string, firstName: string, 
-    lastName: string, email: string, bucketKey: string){
-=======
     public constructor(id?: number, username?: string, password?: string, firstName?: string, 
     lastName?: string, email?: string, bucketKey?: string){
->>>>>>> aa52a565b75ccbf083d7e01fbda172237b4c281f
         id && (this.id=id);
         username && (this.username=username);
         password && (this.password=password);
