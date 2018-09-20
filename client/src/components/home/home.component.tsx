@@ -1,33 +1,34 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { getCurrentUser } from '../../App';
+import { IState, IHomeState } from '../../reducers';
+import * as homeActions from '../../actions/home/home.actions';
+import PlaylistList from '../playlist/playlist-list.component';
+import { RouteComponentProps } from 'react-router';
 
-interface IProps {
-    filler: any;
-    history: any;
+interface IProps extends RouteComponentProps<{}>, IHomeState {
+    fetchPlaylists: () => void,
 }
 
 class HomeComponent extends React.Component<IProps, {}> {
     constructor(props: any) {
         super(props);
     }
-    public componentDidMount(){
-        if (getCurrentUser() === null){
-        this.props.history.push("/sign-in");
-        }
+
+    public componentDidMount = () => {
+        this.props.fetchPlaylists();
     }
+
     public render() {
         return (
-            <div>
-                HomeComponent
-            </div>
+            <PlaylistList playlists={this.props.playlists} />
         )
     }
 }
 
-// const mapStateTo Props = () => ();
+const mapStateToProps = (state: IState) => state.home
 
-// const mapDispatchTo Prop = {}
+const mapDispatchToProps = {
+    fetchPlaylists: homeActions.fetchPlaylists
+}
 
-
-export default connect()(HomeComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(HomeComponent);

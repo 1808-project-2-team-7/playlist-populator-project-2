@@ -1,6 +1,8 @@
 import { combineReducers } from "redux";
 import { createPlaylistReducer } from "./create-playlist.reducer";
 import { playlistReducer } from "./playlist.reducer"
+import { playlistListReducer } from "./playlist-list.reducer"
+import { homeReducer } from "./home.reducer"
 import { signInReducer } from "./sign-in.reducer"
 import { registerReducer } from "./register.reducer"
 import { currentUserReducer } from "./current-user.reducer"
@@ -25,6 +27,14 @@ export interface ISignInState {
   },
   currentUser: User | null,
   errorMessage: string
+}
+
+export interface IHomeState {
+  playlists: Playlist[]
+}
+
+export interface IPlaylistListState {
+  filler: any
 }
 
 export interface IPlaylistState {
@@ -53,7 +63,9 @@ export interface IRegisterState {
 export interface IState {
   createPlaylist: ICreatePlaylistState,
   currentUser: User | null,
+  home: IHomeState,
   playlist: IPlaylistState,
+  playlistList: IPlaylistListState,
   register: IRegisterState,
   signIn: ISignInState
 
@@ -62,7 +74,9 @@ export interface IState {
 const reducer = combineReducers<IState>({
   createPlaylist: createPlaylistReducer,
   currentUser: currentUserReducer,
+  home: homeReducer,
   playlist: playlistReducer,
+  playlistList: playlistListReducer,
   register: registerReducer,
   signIn: signInReducer
 })
