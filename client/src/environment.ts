@@ -1,5 +1,5 @@
 const dev = {
-  context: 'http://localhost:9001/'
+  context: 'http://localhost:9002/'
 }
 
 const prod = {
