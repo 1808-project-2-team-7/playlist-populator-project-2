@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Song } from '../../model/Song';
+import { Song } from '../../models/Song';
 
 interface IProps {
     song: Song

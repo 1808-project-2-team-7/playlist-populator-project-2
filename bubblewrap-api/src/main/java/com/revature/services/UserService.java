@@ -104,7 +104,7 @@ public class UserService {
 
 	public User login(String username, String password) {
 		User u = ur.findByUsername(username);
-		if (!passwordEncoder.matches(password, u.getPassword())) {
+		if (u != null && !passwordEncoder.matches(password, u.getPassword())) {
 			u = null;
 		}
 		return u;

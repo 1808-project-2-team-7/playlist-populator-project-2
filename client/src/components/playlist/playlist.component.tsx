@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import Card from 'reactstrap/lib/Card';
 import CardHeader from 'reactstrap/lib/CardHeader';
-import { Song } from '../../model/Song';
+import { Song } from '../../models/Song';
 import { IState, IPlaylistState } from '../../reducers';
 import { SongComponent } from '../song/song.component';
 import * as playlistActions from '../../actions/playlist/playlist.actions';

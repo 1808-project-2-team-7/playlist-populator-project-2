@@ -1,5 +1,5 @@
 import history from '../../history';
-import { User } from "../../model/User";
+import { User } from "../../models/User";
 import { currentUserTypes } from "./current-user.types";
 
 export const updateCurrentUser = (currentUser: User) => {

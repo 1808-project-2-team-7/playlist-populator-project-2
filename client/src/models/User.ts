@@ -1,20 +1,13 @@
 export class User {
-    public id=0;
-    public username='';
-    public password='';
-    public firstName='';
-    public lastName='';
-    public email='';
-    public bucketKey='';
+    public userId: number
+    public username: string
+    public password: undefined
+    public firstName: string
+    public lastName: string
+    public email: string
+    public bucketKey: string
 
-    public constructor(id?: number, username?: string, password?: string, firstName?: string, 
-    lastName?: string, email?: string, bucketKey?: string){
-        id && (this.id=id);
-        username && (this.username=username);
-        password && (this.password=password);
-        firstName && (this.firstName=firstName);
-        lastName && (this.lastName=lastName);
-        email && (this.email=email);
-        bucketKey && (this.bucketKey=bucketKey);
+    public constructor(init?: Partial<User>) {
+        Object.assign(this, init);
     }
 }

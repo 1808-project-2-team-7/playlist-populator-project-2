@@ -5,8 +5,8 @@ import { registerReducer } from "./register.reducer"
 import { Playlist } from "../models/Playlist";
 import { currentUserReducer } from "./current-user.reducer"
 import { currentUserTypes } from "../actions/current-user/current-user.types";
-import { User } from "../model/User";
-// import { Song } from "../model/Song";
+import { User } from "../models/User";
+// import { Song } from "../models/Song";
 import { Playlist } from "../models/Playlist";
 import { playlistCardReducer } from "./playlist-card-reducer";
 
