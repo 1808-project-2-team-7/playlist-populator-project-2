@@ -21,6 +21,12 @@ class PlaylistList extends React.Component<IProps, {}> {
         super(props);
     }
 
+    public componentDidUpdate(prevProps: IProps) {
+        if(this.props.categoriesFetched && !prevProps.categoriesFetched || this.props.playlists !== prevProps.playlists){
+            this.props.filterPlaylists(this.props.playlists, this.props.categoryFilter, this.props.nameFilter);
+        }
+    }
+
     public render() {
         const { playlists, filteredPlaylists, categoryFilter, nameFilter } = this.props;
         const buttonStyles = ['primary', 'secondary', 'success', 'info', 'warning', 'danger'];
