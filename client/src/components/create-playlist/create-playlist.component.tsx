@@ -89,7 +89,7 @@ export class CreatePlaylistComponent extends React.Component<IProps, ICreatePlay
       return (
         <form onSubmit={this.populate}>
             <div className="form-group container">
-                <Button type="submit"> Populate </Button>
+                <Button className="submitButton" type="submit"> Populate </Button>
             </div>
         </form>
       )
