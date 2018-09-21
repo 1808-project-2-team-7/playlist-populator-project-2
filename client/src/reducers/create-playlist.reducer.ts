@@ -31,6 +31,15 @@ export const createPlaylistReducer= (state= initialState, action: any) => {
                     songs: [...state.playlist.songs, action.payload.song]
                 }
             }
+        case createPlaylistTypes.CLEAR_PLAYLIST:
+            return {
+                ...state,
+                playlist: {
+                    ...state.playlist,
+                    songs: action.payload
+                },
+                suggestedSongs: action.payload
+            }
         case createPlaylistTypes.CLEAR_SONG_FROM_SUGGESTED_SONGS:
             return {
                 ...state,
@@ -66,6 +75,20 @@ export const createPlaylistReducer= (state= initialState, action: any) => {
             return {
                 ...state,
                 suggestedSongs: [...state.suggestedSongs, ...action.payload.suggestedSongs]
+            }
+        case createPlaylistTypes.SAVE_PLAYLIST_TO_DATABASE:
+            return {
+                ...state,
+                playlist: action.payload.savedPlaylist
+            }
+            
+        case createPlaylistTypes.SEND_IMAGE_TO_DATABASE:
+            return {
+                ...state,
+                playlist: {
+                    ...state.playlist,
+                    bucketKey: action.payload.bucketKey
+                }
             }
         case createPlaylistTypes.SET_PLAYLIST_OWNER:
             return {

@@ -47,6 +47,13 @@ export const addSuggestedSongToPlaylist= (song: Song) => {
     }
 }
 
+export const clearPlaylist= () => {
+    return {
+        payload: [],
+        type: createPlaylistTypes.CLEAR_PLAYLIST
+    }
+}
+
 export const clearSongFromSuggestedSongs= (songToRemove: Song, suggestedSongs: Song[]) => {
     const newSuggestedSongs=suggestedSongs.filter((song: Song) => {
         return song.spotifyTrackId!==songToRemove.spotifyTrackId;
@@ -262,6 +269,49 @@ export const removeSongFromPlaylist= (song: Song, songs: Song[]) => {
         },
         type: createPlaylistTypes.REMOVE_SONG_FROM_PLAYLIST
     }
+}
+
+export const savePlaylistToDatabase= (playlist: Playlist) => (dispatch: any) => {
+    fetch(`http://${environment.context}/playlists`, {
+        body: JSON.stringify(playlist),
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        method: 'POST'
+    })
+    .then(resp => resp.json())
+    .then(savedPlaylist => {
+        dispatch({
+            payload: savedPlaylist,
+            type: createPlaylistTypes.SAVE_PLAYLIST_TO_DATABASE
+        })
+    })
+    .catch(error => {
+        console.log(error);
+    })
+
+}
+
+export const sendImageToDatabase= (file: any) => (dispatch: any) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    fetch(`${environment.context}storage/uploadFile`,{
+        body: formData,
+        method: 'POST'
+    })
+    .then(resp => resp.text())
+    .then(bucketKey => {
+        dispatch({
+            payload: {
+                bucketKey
+            },
+            type: createPlaylistTypes.SEND_IMAGE_TO_DATABASE
+        })
+    })
+    .catch(error => {
+        console.log(error);
+    })
 }
 
 export const setPlaylistOwner= (owner: User) => {

@@ -43,7 +43,7 @@ export class InputSongsComponent extends React.Component<IProps, IState> {
                 <input onChange={this.updateSong} type="text" className="form-control" id="formGroupExampleInput" placeholder="Song Title" />
                 <label>Enter Artist: </label>
                 <input onChange={this.updateArtist} type="text" className="form-control" id="formGroupExampleInput" placeholder="Artist Name" />
-                <Button type="submit"> Submit </Button>
+                <Button className="submitButton" type="submit"> Submit </Button>
             </div>
         </form>
       </div>
