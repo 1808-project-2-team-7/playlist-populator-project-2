@@ -5,11 +5,13 @@ import { playlistListReducer } from "./playlist-list.reducer"
 import { homeReducer } from "./home.reducer"
 import { signInReducer } from "./sign-in.reducer"
 import { registerReducer } from "./register.reducer"
+import { categoryReducer } from "./category.reducer"
 import { currentUserReducer } from "./current-user.reducer"
 import { currentUserTypes } from "../actions/current-user/current-user.types";
 import { User } from "../models/User";
 import { Song } from "../models/Song";
 import { Playlist } from "../models/Playlist";
+import { Category } from "../models/Category";
 
 export interface ICreatePlaylistState {
   accessToken: string,
@@ -34,7 +36,9 @@ export interface IHomeState {
 }
 
 export interface IPlaylistListState {
-  filler: any
+  filteredPlaylists: Playlist[],
+  categoryFilter: string[],
+  nameFilter: string
 }
 
 export interface IPlaylistState {
@@ -61,6 +65,7 @@ export interface IRegisterState {
 }
 
 export interface IState {
+  categories: Category[],
   createPlaylist: ICreatePlaylistState,
   currentUser: User | null,
   home: IHomeState,
@@ -72,6 +77,7 @@ export interface IState {
 }
 
 const reducer = combineReducers<IState>({
+  categories: categoryReducer,
   createPlaylist: createPlaylistReducer,
   currentUser: currentUserReducer,
   home: homeReducer,
