@@ -43,14 +43,7 @@ export interface IPlaylistListState {
 }
 
 export interface IPlaylistState {
-  playlist: {
-    bucketKey: string,
-    category: any,
-    id: number,
-    name: string,
-    owner: User,
-    songs: Song[]
-  },
+  playlist:Playlist,
   publicPlaylist: any[],
   usersPlaylist: any[]
 }

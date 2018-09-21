@@ -10,7 +10,7 @@ interface IProps extends RouteComponentProps<{}>, IHomeState {
     fetchPlaylists: () => void,
 }
 
-class HomeComponent extends React.Component<IProps, {}> {
+class HomeComponent extends React.Component<IProps, any> {
     constructor(props: any) {
         super(props);
     }
@@ -21,6 +21,7 @@ class HomeComponent extends React.Component<IProps, {}> {
     }
 
     public render() {
+
         return (
             <PlaylistList playlists={this.props.playlists} />
         )

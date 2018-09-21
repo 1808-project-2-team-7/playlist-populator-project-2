@@ -1,11 +1,12 @@
 import { IPlaylistState } from ".";
 import { User } from "../models/User";
 import { playlistTypes } from "../actions/playlist/playlist.types";
+import { Category } from "../models/Category";
 
 export const initialState: IPlaylistState = {
     playlist: {
         bucketKey: '',
-        category: {},
+        category: new Category,
         id: 0,
         name: '',
         owner: new User,
