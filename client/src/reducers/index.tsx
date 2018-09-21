@@ -34,7 +34,8 @@ export interface IHomeState {
 }
 
 export interface IPlaylistListState {
-  filler: any
+  filteredPlaylists: Playlist[],
+  categoryFilter: string[]
 }
 
 export interface IPlaylistState {
