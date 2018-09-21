@@ -38,6 +38,9 @@
 .playlist-card{ 
   width: 240px;
   height: 240px;
+  :hover{
+    cursor: pointer;
+  }
 }
 
 .playlist-list-buttons{
