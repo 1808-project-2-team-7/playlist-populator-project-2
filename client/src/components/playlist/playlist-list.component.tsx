@@ -7,6 +7,8 @@ import { PlaylistCard } from './playlist-card.component';
 import * as playlistListActions from '../../actions/playlist/playlist-list.actions';
 import { ButtonGroup } from 'reactstrap';
 import Button from 'reactstrap/lib/Button';
+import { getCategories } from '../../App';
+import { Category } from '../../models/Category';
 
 interface IProps extends RouteComponentProps<{}>, IPlaylistListState {
     filterPlaylists: (playlists: Playlist[], categoryFilter: string[], nameFilter: string) => void
@@ -25,9 +27,10 @@ class PlaylistList extends React.Component<IProps, {}> {
             <div className="container-fluid">
                 <div className="row justify-content-center">
                     <ButtonGroup className="playlist-list-buttons">
-                        <Button outline color="warning" onClick={() => this.props.filterPlaylists(playlists, this.toggleFilter(categoryFilter, "Punk"), nameFilter)} active={categoryFilter.indexOf("Punk") >= 0}>Punk</Button>
-                        <Button outline color="success" onClick={() => this.props.filterPlaylists(playlists, this.toggleFilter(categoryFilter, "Dance"), nameFilter)} active={categoryFilter.indexOf("Dance") >= 0}>Dance</Button>
-                        <Button outline color="danger" onClick={() => this.props.filterPlaylists(playlists, this.toggleFilter(categoryFilter, "Rock Hard"), nameFilter)} active={categoryFilter.indexOf("Rock Hard") >= 0}>Rock Hard</Button>
+                        {getCategories().map((category: Category) => {
+                            return <Button outline color="warning" key={category.id} onClick={() => this.props.filterPlaylists(playlists, this.toggleFilter(categoryFilter, category.categoryName), nameFilter)} active={categoryFilter.indexOf(category.categoryName) >= 0}>{category.categoryName}</Button>
+                        })
+                        }
                     </ButtonGroup>
                     <input
                         id="inputUsernameFilter"

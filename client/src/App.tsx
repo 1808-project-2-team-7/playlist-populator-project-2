@@ -22,6 +22,10 @@ export const getCurrentUser = () => {
   return currentUser ? new User(currentUser) : null;
 }
 
+export const getCategories = () => {
+  return store.getState().categories;
+}
+
 class App extends React.Component {
   public componentDidMount() {
     fetchCategories(store.dispatch);
