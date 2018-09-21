@@ -15,16 +15,17 @@ import { Provider } from 'react-redux';
 import { store } from './store';
 import { User } from './models/User';
 import createPlaylistComponent from './components/create-playlist/create-playlist.component';
+import { fetchCategories } from './actions/category/category.actions';
 
 export const getCurrentUser = () => {
   const currentUser = store.getState().currentUser;
   return currentUser ? new User(currentUser) : null;
 }
 
-
-
-
 class App extends React.Component {
+  public componentDidMount() {
+    fetchCategories(store.dispatch);
+  }
 
   public render() {
     return (
