@@ -2,6 +2,9 @@
 client/src/**/*.css
 client/build/*
 
+#idea
+.idea
+
 # Logs
 logs
 *.log

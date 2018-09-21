@@ -5,6 +5,7 @@ import * as homeActions from '../../actions/home/home.actions';
 import PlaylistList from '../playlist/playlist-list.component';
 import { RouteComponentProps } from 'react-router';
 
+
 interface IProps extends RouteComponentProps<{}>, IHomeState {
     fetchPlaylists: () => void,
 }
@@ -16,6 +17,7 @@ class HomeComponent extends React.Component<IProps, any> {
 
     public componentDidMount = () => {
         this.props.fetchPlaylists();
+
     }
 
     public render() {
