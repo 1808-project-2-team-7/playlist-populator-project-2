@@ -1,15 +1,26 @@
 import { combineReducers } from "redux";
+import { createPlaylistReducer } from "./create-playlist.reducer";
 import { playlistReducer } from "./playlist.reducer"
+import { playlistListReducer } from "./playlist-list.reducer"
+import { homeReducer } from "./home.reducer"
 import { signInReducer } from "./sign-in.reducer"
 import { registerReducer } from "./register.reducer"
-import { Playlist } from "../models/Playlist";
+import { categoryReducer } from "./category.reducer"
 import { currentUserReducer } from "./current-user.reducer"
 import { currentUserTypes } from "../actions/current-user/current-user.types";
 import { User } from "../models/User";
-// import { Song } from "../models/Song";
-import { playlistCardReducer } from "./playlist-card-reducer";
+import { Song } from "../models/Song";
+import { Playlist } from "../models/Playlist";
 import { Category } from "../models/Category";
-import { categoryReducer } from "./category.reducer";
+
+export interface ICreatePlaylistState {
+  accessToken: string,
+  errorMessage: string,
+  songInput: string,
+  artistInput: string,
+  playlist: Playlist,
+  suggestedSongs: Song[]
+}
 
 export interface ISignInState {
   credentials: {
@@ -20,12 +31,15 @@ export interface ISignInState {
   errorMessage: string
 }
 
-export interface ICategoryState{
-  categories: Category[]
+export interface IHomeState {
+  playlists: Playlist[]
 }
 
-export interface IPlaylistCardState {
-  playlists: Playlist[]
+export interface IPlaylistListState {
+  filteredPlaylists: Playlist[],
+  categoryFilter: Category[],
+  categoriesFetched: boolean,
+  nameFilter: string
 }
 
 export interface IPlaylistState {
@@ -33,7 +47,6 @@ export interface IPlaylistState {
   publicPlaylist: any[],
   usersPlaylist: any[]
 }
-
 
 export interface IRegisterState {
   username: string,
@@ -46,19 +59,24 @@ export interface IRegisterState {
 }
 
 export interface IState {
-  categories: ICategoryState,
+  categories: Category[],
+  createPlaylist: ICreatePlaylistState,
   currentUser: User | null,
+  home: IHomeState,
   playlist: IPlaylistState,
+  playlistList: IPlaylistListState,
   register: IRegisterState,
   signIn: ISignInState
-  playlistCard: IPlaylistCardState
+
 }
 
 const reducer = combineReducers<IState>({
   categories: categoryReducer,
+  createPlaylist: createPlaylistReducer,
   currentUser: currentUserReducer,
+  home: homeReducer,
   playlist: playlistReducer,
-  playlistCard: playlistCardReducer,
+  playlistList: playlistListReducer,
   register: registerReducer,
   signIn: signInReducer
 })

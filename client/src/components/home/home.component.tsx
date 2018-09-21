@@ -1,13 +1,12 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-// import { Filter } from './category-filter';
-import { IState, ICategoryState } from '../../reducers';
-import * as FilterCategories from '../../actions/category/category.action'
+import { IState, IHomeState } from '../../reducers';
+import * as homeActions from '../../actions/home/home.actions';
+import PlaylistList from '../playlist/playlist-list.component';
+import { RouteComponentProps } from 'react-router';
 
-
-interface IProps extends ICategoryState {
-    loadCategories: () => any
-    check: () => any
+interface IProps extends RouteComponentProps<{}>, IHomeState {
+    fetchPlaylists: () => void,
 }
 
 class HomeComponent extends React.Component<IProps, any> {
@@ -15,35 +14,22 @@ class HomeComponent extends React.Component<IProps, any> {
         super(props);
     }
 
-    public check= () => {
-        this.props.loadCategories();
-        this.props.check();
-        console.log(this.props.categories)
+    public componentDidMount = () => {
+        this.props.fetchPlaylists();
     }
 
     public render() {
 
-        {
-            if (this.props.categories === null) {
-                this.props.loadCategories();
-            }
-        }
-
         return (
-            <div>
-                HomeComponent
-                <button onClick={this.check} >Check State</button>
-            </div>
+            <PlaylistList playlists={this.props.playlists} />
         )
     }
 }
 
- const mapStateToProps = (state: IState) => (state.categories);
+const mapStateToProps = (state: IState) => state.home
 
-const mapDispatchToProp = {
-    check: FilterCategories.stateCheck,
-    loadCategories: FilterCategories.loadCategories,
+const mapDispatchToProps = {
+    fetchPlaylists: homeActions.fetchPlaylists
 }
 
-
-export default connect(mapStateToProps, mapDispatchToProp)(HomeComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(HomeComponent);

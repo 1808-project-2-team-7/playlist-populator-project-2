@@ -32,3 +32,30 @@
   #no-songs-msg{
     display: inline-block;
 }
+
+.playlist-card-container{
+  margin: 15px;
+}
+
+.playlist-card{ 
+  width: 240px;
+  height: 240px;
+  :hover{
+    cursor: pointer;
+  }
+}
+
+.playlist-list-buttons{
+  flex-wrap: wrap;
+  .btn:hover{
+      background-color: inherit;
+      color: inherit;
+  }
+}
+
+#playlist-list-filters{
+  .row{
+    margin: 10px;
+    margin-bottom: 0px;
+  }
+}
