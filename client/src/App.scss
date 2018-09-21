@@ -39,3 +39,10 @@
   width: 240px;
   height: 240px;
 }
+
+.playlist-list-buttons{
+  .btn:hover{
+      background-color: inherit;
+      color: inherit;
+  }
+}

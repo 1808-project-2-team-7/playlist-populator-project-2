@@ -3,7 +3,8 @@ import { playlistListTypes } from "../actions/playlist/playlist-list.types";
 
 export const initialState: IPlaylistListState = {
     categoryFilter: [],
-    filteredPlaylists: []
+    filteredPlaylists: [],
+    nameFilter: ''
 }
 
 export const playlistListReducer = (state = initialState, action: any) => {
@@ -12,7 +13,8 @@ export const playlistListReducer = (state = initialState, action: any) => {
             return {
                 ...state,
                 categoryFilter: action.payload.categoryFilter,
-                filteredPlaylists: action.payload.filteredPlaylists
+                filteredPlaylists: action.payload.filteredPlaylists,
+                nameFilter: action.payload.nameFilter
             }
     }
     return state;

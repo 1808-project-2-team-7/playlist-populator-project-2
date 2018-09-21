@@ -35,7 +35,8 @@ export interface IHomeState {
 
 export interface IPlaylistListState {
   filteredPlaylists: Playlist[],
-  categoryFilter: string[]
+  categoryFilter: string[],
+  nameFilter: string
 }
 
 export interface IPlaylistState {

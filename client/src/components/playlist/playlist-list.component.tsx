@@ -9,7 +9,7 @@ import { ButtonGroup } from 'reactstrap';
 import Button from 'reactstrap/lib/Button';
 
 interface IProps extends RouteComponentProps<{}>, IPlaylistListState {
-    filterPlaylists: (playlists: Playlist[], filter: string[]) => void
+    filterPlaylists: (playlists: Playlist[], categoryFilter: string[], nameFilter: string) => void
     playlists: Playlist[]
 }
 
@@ -19,20 +19,22 @@ class PlaylistList extends React.Component<IProps, {}> {
         super(props);
     }
 
-    public toggleFilter = (oldStatusFilter: string[], status: string) => {
-        return oldStatusFilter.some(filter => filter === status) ? oldStatusFilter.filter(filter => filter !== status) : oldStatusFilter.slice().concat(status);
-    }
-
     public render() {
-        const { playlists, filteredPlaylists, categoryFilter } = this.props;
+        const { playlists, filteredPlaylists, categoryFilter, nameFilter } = this.props;
         return (
             <div className="container-fluid">
                 <div className="row justify-content-center">
-                    <ButtonGroup>
-                        <Button outline color="warning" onClick={() => this.props.filterPlaylists(playlists, this.toggleFilter(categoryFilter, "Punk"))} active={categoryFilter.indexOf("Punk") >= 0}>Punk</Button>
-                        <Button outline color="success" onClick={() => this.props.filterPlaylists(playlists, this.toggleFilter(categoryFilter, "Dance"))} active={categoryFilter.indexOf("Dance") >= 0}>Dance</Button>
-                        <Button outline color="danger" onClick={() => this.props.filterPlaylists(playlists, this.toggleFilter(categoryFilter, "Rock Hard"))} active={categoryFilter.indexOf("Rock Hard") >= 0}>Rock Hard</Button>
+                    <ButtonGroup className="playlist-list-buttons">
+                        <Button outline color="warning" onClick={() => this.props.filterPlaylists(playlists, this.toggleFilter(categoryFilter, "Punk"), nameFilter)} active={categoryFilter.indexOf("Punk") >= 0}>Punk</Button>
+                        <Button outline color="success" onClick={() => this.props.filterPlaylists(playlists, this.toggleFilter(categoryFilter, "Dance"), nameFilter)} active={categoryFilter.indexOf("Dance") >= 0}>Dance</Button>
+                        <Button outline color="danger" onClick={() => this.props.filterPlaylists(playlists, this.toggleFilter(categoryFilter, "Rock Hard"), nameFilter)} active={categoryFilter.indexOf("Rock Hard") >= 0}>Rock Hard</Button>
                     </ButtonGroup>
+                    <input
+                        id="inputUsernameFilter"
+                        placeholder="Filter by name"
+                        type="text"
+                        onChange={(e: any) => this.props.filterPlaylists(playlists, categoryFilter, e.target.value)}
+                        value={nameFilter} />
                 </div>
                 <div className="row justify-content-center">
                     {filteredPlaylists.map((playlist: Playlist) => {
@@ -41,6 +43,10 @@ class PlaylistList extends React.Component<IProps, {}> {
                 </div>
             </div>
         );
+    }
+
+    private toggleFilter = (oldStatusFilter: string[], status: string) => {
+        return oldStatusFilter.some(filter => filter === status) ? oldStatusFilter.filter(filter => filter !== status) : oldStatusFilter.slice().concat(status);
     }
 }
 
