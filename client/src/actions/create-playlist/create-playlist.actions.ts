@@ -67,7 +67,7 @@ export const clearSuggestedSongs= () => {
 }
 
 export const getAccessToken= () => (dispatch: any) => {
-    fetch('http://localhost:8888/login')
+    fetch('http://ec2-18-223-235-230.us-east-2.compute.amazonaws.com:8888/login')
     .then(resp => resp.json())
     .then(accessToken => {
         dispatch({
