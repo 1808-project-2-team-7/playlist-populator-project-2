@@ -6,7 +6,6 @@ export const initialState: ISignInState = {
     password: '',
     username: ''
   },
-  currentUser: null,
   errorMessage: ''
 }
 
@@ -32,7 +31,6 @@ export const signInReducer = (state = initialState, action: any) => {
       const errorMessage = action.payload.errorMessage
       const newState = {
         ...state,
-        currentUser: action.payload.currentUser,
         errorMessage
       }
       if (!errorMessage) {

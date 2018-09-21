@@ -1,17 +1,17 @@
 import { combineReducers } from "redux";
-import { createPlaylistReducer } from "./create-playlist.reducer";
-import { playlistReducer } from "./playlist.reducer"
-import { playlistListReducer } from "./playlist-list.reducer"
-import { homeReducer } from "./home.reducer"
-import { signInReducer } from "./sign-in.reducer"
-import { registerReducer } from "./register.reducer"
-import { categoryReducer } from "./category.reducer"
-import { currentUserReducer } from "./current-user.reducer"
 import { currentUserTypes } from "../actions/current-user/current-user.types";
-import { User } from "../models/User";
-import { Song } from "../models/Song";
-import { Playlist } from "../models/Playlist";
 import { Category } from "../models/Category";
+import { Playlist } from "../models/Playlist";
+import { Song } from "../models/Song";
+import { User } from "../models/User";
+import { categoryReducer } from "./category.reducer";
+import { createPlaylistReducer } from "./create-playlist.reducer";
+import { currentUserReducer } from "./current-user.reducer";
+import { homeReducer } from "./home.reducer";
+import { playlistListReducer } from "./playlist-list.reducer";
+import { playlistReducer } from "./playlist.reducer";
+import { registerReducer } from "./register.reducer";
+import { signInReducer } from "./sign-in.reducer";
 
 export interface ICreatePlaylistState {
   accessToken: string,
@@ -27,7 +27,6 @@ export interface ISignInState {
     password: string,
     username: string
   },
-  currentUser: User | null,
   errorMessage: string
 }
 
@@ -43,7 +42,7 @@ export interface IPlaylistListState {
 }
 
 export interface IPlaylistState {
-  playlist:Playlist,
+  playlist: Playlist,
   publicPlaylist: any[],
   usersPlaylist: any[]
 }
@@ -54,8 +53,7 @@ export interface IRegisterState {
   firstName: string,
   lastName: string,
   email: string,
-  errorMessage: string,
-  currentUser: User | null
+  errorMessage: string
 }
 
 export interface IState {

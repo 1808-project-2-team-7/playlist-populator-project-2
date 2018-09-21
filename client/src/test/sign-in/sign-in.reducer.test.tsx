@@ -13,8 +13,8 @@ describe('sign-in reducer', () => {
             },
             type: signInTypes.UPDATE_USERNAME
         };
-        expect(signInReducer({ credentials: { username: 'user12', password: '' }, currentUser: null, errorMessage: '' }, startAction))
-            .toEqual({ credentials: { username: 'user123', password: '' }, currentUser: null, errorMessage: '' });
+        expect(signInReducer({ credentials: { username: 'user12', password: '' }, errorMessage: '' }, startAction))
+            .toEqual({ credentials: { username: 'user123', password: '' }, errorMessage: '' });
     });
 
     it('should handle UPDATE_PASSWORD', () => {
@@ -24,8 +24,8 @@ describe('sign-in reducer', () => {
             },
             type: signInTypes.UPDATE_PASSWORD
         };
-        expect(signInReducer({ credentials: { username: 'user123', password: 'pas' }, currentUser: null, errorMessage: '' }, startAction))
-            .toEqual({ credentials: { username: 'user123', password: 'pass' }, currentUser: null, errorMessage: '' });
+        expect(signInReducer({ credentials: { username: 'user123', password: 'pas' }, errorMessage: '' }, startAction))
+            .toEqual({ credentials: { username: 'user123', password: 'pass' }, errorMessage: '' });
     });
 
     it('should handle LOGIN with no error message (successful sign in)', () => {
@@ -44,19 +44,18 @@ describe('sign-in reducer', () => {
             },
             type: signInTypes.LOGIN
         };
-        expect(signInReducer({ credentials: { username: 'user123', password: 'pass' }, currentUser: null, errorMessage: '' }, startAction))
-            .toEqual({ credentials: { username: '', password: '' }, currentUser, errorMessage: '' });
+        expect(signInReducer({ credentials: { username: 'user123', password: 'pass' }, errorMessage: '' }, startAction))
+            .toEqual({ credentials: { username: '', password: '' }, errorMessage: '' });
     });
 
     it('should handle LOGIN with error message', () => {
         const startAction = {
             payload: {
-                currentUser: null,
                 errorMessage: 'Invalid username or password'
             },
             type: signInTypes.LOGIN
         };
-        expect(signInReducer({ credentials: { username: 'user123', password: 'pass' }, currentUser: null, errorMessage: '' }, startAction))
-            .toEqual({ credentials: { username: 'user123', password: 'pass' }, currentUser: null, errorMessage: 'Invalid username or password' });
+        expect(signInReducer({ credentials: { username: 'user123', password: 'pass' }, errorMessage: '' }, startAction))
+            .toEqual({ credentials: { username: 'user123', password: 'pass' }, errorMessage: 'Invalid username or password' });
     });
 });

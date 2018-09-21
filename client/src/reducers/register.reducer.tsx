@@ -2,7 +2,6 @@ import { registerTypes } from "../actions/register/register.types";
 import { IRegisterState } from ".";
 
 export const initialState: IRegisterState = {
-  currentUser: null,
   email: '',
   errorMessage: '',
   firstName: '',
@@ -42,7 +41,6 @@ export const registerReducer = (state = initialState, action: any) => {
       const errorMessage = action.payload.errorMessage
       const newState = {
         ...state,
-        currentUser: action.payload.currentUser,
         errorMessage
       }
       if (!errorMessage) {
