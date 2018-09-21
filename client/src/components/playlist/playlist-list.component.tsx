@@ -9,9 +9,11 @@ import { ButtonGroup } from 'reactstrap';
 import Button from 'reactstrap/lib/Button';
 import { getCategories } from '../../App';
 import { Category } from '../../models/Category';
+import Waypoint from 'react-waypoint';
 
 interface IProps extends RouteComponentProps<{}>, IPlaylistListState {
     filterPlaylists: (playlists: Playlist[], categoryFilter: Category[], nameFilter: string) => void
+    loadMorePlaylists: (userId?: number) => void
     playlists: Playlist[]
 }
 
@@ -22,7 +24,7 @@ class PlaylistList extends React.Component<IProps, {}> {
     }
 
     public componentDidUpdate(prevProps: IProps) {
-        if(this.props.categoriesFetched && !prevProps.categoriesFetched || this.props.playlists !== prevProps.playlists){
+        if (this.props.categoriesFetched && !prevProps.categoriesFetched || this.props.playlists !== prevProps.playlists) {
             this.props.filterPlaylists(this.props.playlists, this.props.categoryFilter, this.props.nameFilter);
         }
     }
@@ -54,6 +56,12 @@ class PlaylistList extends React.Component<IProps, {}> {
                     {filteredPlaylists.map((playlist: Playlist) => {
                         return <PlaylistCard playlist={playlist} key={playlist.id} />
                     })}
+                    <div style={{ marginTop: "1000px" }}>
+                        <Waypoint
+                            onEnter={() => this.props.loadMorePlaylists()}
+                        />
+                        Loading more playlists...
+                    </div>
                 </div>
             </div>
         );

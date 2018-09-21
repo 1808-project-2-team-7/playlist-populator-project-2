@@ -10,7 +10,7 @@ export const homeReducer = (state = initialState, action: any) => {
         case homeTypes.FETCH_PLAYLISTS:
             return {
                 ...state,
-                playlists: action.payload.playlists
+                playlists: [...state.playlists, ...action.payload.playlists]
             }
     }
     return state;

@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { IState, IHomeState } from '../../reducers';
-import * as homeActions from '../../actions/home/home.actions';
-import PlaylistList from '../playlist/playlist-list.component';
 import { RouteComponentProps } from 'react-router';
+import * as homeActions from '../../actions/home/home.actions';
+import { IHomeState, IState } from '../../reducers';
+import PlaylistList from '../playlist/playlist-list.component';
 
 
 interface IProps extends RouteComponentProps<{}>, IHomeState {
@@ -23,7 +23,7 @@ class HomeComponent extends React.Component<IProps, any> {
     public render() {
 
         return (
-            <PlaylistList playlists={this.props.playlists} />
+            <PlaylistList playlists={this.props.playlists} loadMorePlaylists={this.props.fetchPlaylists} />
         )
     }
 }
