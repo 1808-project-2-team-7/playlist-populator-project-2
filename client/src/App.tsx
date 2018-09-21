@@ -21,6 +21,7 @@ export const getCurrentUser = () => {
 }
 
 class App extends React.Component {
+
   public render() {
     return (
       <Provider store={store}>

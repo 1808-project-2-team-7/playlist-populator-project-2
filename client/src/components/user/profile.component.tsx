@@ -20,7 +20,6 @@ class ProfileComponent extends React.Component<any, {}> {
 
     public render() {
  //       const {playlist} = this.props;
-        console.log(this.props.id);
         return (
             <div>
                 <div >

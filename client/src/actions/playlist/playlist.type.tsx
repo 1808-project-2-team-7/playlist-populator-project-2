@@ -1,6 +1,0 @@
-export const playlistTypes = {
-    GET_PUBLIC_LIST: 'GET_PUBLIC_LIST',
-    GET_USERS_LISTS: 'GET_USERS_LIST',
-    LOAD_LIST: 'LOAD_LIST',
-    UPDATE_PLAYLIST_ID: 'UPDATE_PLAYLIST_ID',
-}

@@ -7,8 +7,9 @@ import { currentUserReducer } from "./current-user.reducer"
 import { currentUserTypes } from "../actions/current-user/current-user.types";
 import { User } from "../models/User";
 // import { Song } from "../models/Song";
-import { Playlist } from "../models/Playlist";
 import { playlistCardReducer } from "./playlist-card-reducer";
+import { Category } from "../models/Category";
+import { categoryReducer } from "./category.reducer";
 
 export interface ISignInState {
   credentials: {
@@ -17,6 +18,10 @@ export interface ISignInState {
   },
   currentUser: User | null,
   errorMessage: string
+}
+
+export interface ICategoryState{
+  categories: Category[]
 }
 
 export interface IPlaylistCardState {
@@ -30,12 +35,6 @@ export interface IPlaylistState {
 }
 
 
-export interface IState {
-  playlist: IPlaylistState,
-  register: IRegisterState,
-  signIn: ISignInState
-}
-
 export interface IRegisterState {
   username: string,
   password: string,
@@ -47,13 +46,16 @@ export interface IRegisterState {
 }
 
 export interface IState {
+  categories: ICategoryState,
   currentUser: User | null,
+  playlist: IPlaylistState,
   register: IRegisterState,
   signIn: ISignInState
   playlistCard: IPlaylistCardState
 }
 
 const reducer = combineReducers<IState>({
+  categories: categoryReducer,
   currentUser: currentUserReducer,
   playlist: playlistReducer,
   playlistCard: playlistCardReducer,
