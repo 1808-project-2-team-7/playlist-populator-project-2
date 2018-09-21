@@ -4,7 +4,7 @@ import { IState, IHomeState } from '../../reducers';
 import * as homeActions from '../../actions/home/home.actions';
 import PlaylistList from '../playlist/playlist-list.component';
 import { RouteComponentProps } from 'react-router';
-import { getCurrentUser } from '../../App';
+
 
 interface IProps extends RouteComponentProps<{}>, IHomeState {
     fetchPlaylists: () => void,
