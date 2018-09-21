@@ -1,15 +1,12 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
-import { Button, CardBody, CardHeader, Card, Col, Form, FormGroup, Input } from 'reactstrap';
-import * as currentUserActions from '../../actions/current-user/current-user.actions';
-import * as registerActions from '../../actions/register/register.actions';
-import { User } from '../../models/User';
-import { IState, IRegisterState } from '../../reducers';
+import { Button, Card, CardBody, CardHeader, Col, Form, FormGroup, Input } from 'reactstrap';
 import Label from 'reactstrap/lib/Label';
+import * as registerActions from '../../actions/register/register.actions';
+import { IRegisterState, IState } from '../../reducers';
 
 interface IProps extends RouteComponentProps<{}>, IRegisterState {
-    updateCurrentUser: (currentUser: User | null) => void
     updateEmail: (email: string) => void
     updateError: (message: string) => void
     updateFirstName: (firstName: string) => void
@@ -24,13 +21,6 @@ class RegisterComponent extends React.Component<IProps, {}> {
     constructor(props: any) {
         super(props);
     }
-
-    public componentDidUpdate = (prevProps: any) => {
-        if (this.props.currentUser !== prevProps.currentUser) {
-            this.props.updateCurrentUser(this.props.currentUser);
-        }
-    }
-
     public render() {
         const { errorMessage } = this.props;
         return (
@@ -126,7 +116,6 @@ class RegisterComponent extends React.Component<IProps, {}> {
 const mapStateToProps = (state: IState) => (state.register);
 const mapDispatchToProps = {
     register: registerActions.register,
-    updateCurrentUser: currentUserActions.updateCurrentUser,
     updateEmail: registerActions.updateEmail,
     updateFirstName: registerActions.updateFirstName,
     updateLastName: registerActions.updateLastName,

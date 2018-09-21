@@ -7,7 +7,6 @@ const initialState: User | null = null
 
 export const currentUserReducer = (state = initialState, action: any) => {
     switch (action.type) {
-        case currentUserTypes.UPDATE_CURRENT_USER:
         case currentUserTypes.LOGOUT:
         case signInTypes.LOGIN:
         case registerTypes.REGISTER:
