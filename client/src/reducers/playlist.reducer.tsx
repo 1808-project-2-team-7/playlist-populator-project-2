@@ -26,6 +26,11 @@ export const playlistReducer = (state = initialState, action: any) => {
                     songs: action.payload.songs
                 }
             }
+        case playlistTypes.USERS_PLAYLIST:
+        return{
+            ...state,
+            usersPlaylist: action.payload
+        }
     }
     return state;
 }
