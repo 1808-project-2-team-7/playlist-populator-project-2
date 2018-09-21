@@ -11,7 +11,7 @@ import { getCategories } from '../../App';
 import { Category } from '../../models/Category';
 
 interface IProps extends RouteComponentProps<{}>, IPlaylistListState {
-    filterPlaylists: (playlists: Playlist[], categoryFilter: string[], nameFilter: string) => void
+    filterPlaylists: (playlists: Playlist[], categoryFilter: Category[], nameFilter: string) => void
     playlists: Playlist[]
 }
 
@@ -25,14 +25,18 @@ class PlaylistList extends React.Component<IProps, {}> {
         const { playlists, filteredPlaylists, categoryFilter, nameFilter } = this.props;
         const buttonStyles = ['primary', 'secondary', 'success', 'info', 'warning', 'danger'];
         return (
-            <div className="container-fluid">
+            <div className="container-fluid" id="playlist-list-filters">
                 <ButtonGroup className="playlist-list-buttons row justify-content-center">
                     {getCategories().map((category: Category, index: number) => {
-                        return <Button outline color={buttonStyles[index % buttonStyles.length]} key={category.id} onClick={() => this.props.filterPlaylists(playlists, this.toggleFilter(categoryFilter, category.categoryName), nameFilter)} active={categoryFilter.indexOf(category.categoryName) >= 0}>{category.categoryName}</Button>
+                        return <Button outline color={buttonStyles[index % buttonStyles.length]} key={category.id} onClick={() => this.props.filterPlaylists(playlists, this.toggleFilter(categoryFilter, category), nameFilter)} active={categoryFilter.indexOf(category) >= 0}>{category.categoryName}</Button>
                     })
                     }
                 </ButtonGroup>
-                <div className="row justify-content-center" id="input-name-filter">
+                <div className="playlist-list-buttons row justify-content-center">
+                    <Button color={"primary"} onClick={() => this.props.filterPlaylists(playlists, getCategories(), nameFilter)}>Select all categories</Button>
+                    <Button color={"primary"} onClick={() => this.props.filterPlaylists(playlists, [], nameFilter)}>Deselect all categories</Button>
+                </div>
+                <div className="row justify-content-center">
                     <input
                         id="inputUsernameFilter"
                         placeholder="Filter by name"
@@ -49,7 +53,7 @@ class PlaylistList extends React.Component<IProps, {}> {
         );
     }
 
-    private toggleFilter = (oldStatusFilter: string[], status: string) => {
+    private toggleFilter = (oldStatusFilter: Category[], status: Category) => {
         return oldStatusFilter.some(filter => filter === status) ? oldStatusFilter.filter(filter => filter !== status) : oldStatusFilter.slice().concat(status);
     }
 }
