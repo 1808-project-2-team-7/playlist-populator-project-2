@@ -23,12 +23,13 @@ class PlaylistList extends React.Component<IProps, {}> {
 
     public render() {
         const { playlists, filteredPlaylists, categoryFilter, nameFilter } = this.props;
+        const buttonStyles = ['primary', 'secondary', 'success', 'info', 'warning', 'danger'];
         return (
             <div className="container-fluid">
                 <div className="row justify-content-center">
                     <ButtonGroup className="playlist-list-buttons">
-                        {getCategories().map((category: Category) => {
-                            return <Button outline color="warning" key={category.id} onClick={() => this.props.filterPlaylists(playlists, this.toggleFilter(categoryFilter, category.categoryName), nameFilter)} active={categoryFilter.indexOf(category.categoryName) >= 0}>{category.categoryName}</Button>
+                        {getCategories().map((category: Category, index: number) => {
+                            return <Button outline color={buttonStyles[index % buttonStyles.length]} key={category.id} onClick={() => this.props.filterPlaylists(playlists, this.toggleFilter(categoryFilter, category.categoryName), nameFilter)} active={categoryFilter.indexOf(category.categoryName) >= 0}>{category.categoryName}</Button>
                         })
                         }
                     </ButtonGroup>
