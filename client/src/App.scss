@@ -44,8 +44,13 @@
 }
 
 .playlist-list-buttons{
+  flex-wrap: wrap;
   .btn:hover{
       background-color: inherit;
       color: inherit;
   }
+}
+
+#input-name-filter{
+  margin-top: 10px;
 }
