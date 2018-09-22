@@ -39,15 +39,17 @@ class App extends React.Component {
             <div id="sidebar-wrapper">
               < AppNav />
             </div>
-            <Switch>
-              <Route path="/profile" component={ProfileComponent} />
-              <Route path="/sign-in" component={SignInComponent} />
-              <Route path="/register" component={RegisterComponent} />
-              <Route path="/playlists/new" component={createPlaylistComponent} />
-              <Route path="/playlists/:id" component={PlaylistComponent} />
-              <Route path="/home" component={HomeComponent} />
-              <Route component={HomeComponent} />
-            </Switch>
+            <div id="main-content-wrapper">
+              <Switch>
+                <Route path="/profile" component={ProfileComponent} />
+                <Route path="/sign-in" component={SignInComponent} />
+                <Route path="/register" component={RegisterComponent} />
+                <Route path="/playlists/new" component={createPlaylistComponent} />
+                <Route path="/playlists/:id" component={PlaylistComponent} />
+                <Route path="/home" component={HomeComponent} />
+                <Route component={HomeComponent} />
+              </Switch>
+            </div>
           </div>
         </Router>
       </Provider>
