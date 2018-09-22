@@ -12,6 +12,7 @@ import { Category } from '../../models/Category';
 import Waypoint from 'react-waypoint';
 
 interface IProps extends RouteComponentProps<{}>, IPlaylistListState {
+    doneLoading: boolean
     filterPlaylists: (playlists: Playlist[], categoryFilter: Category[], nameFilter: string) => void
     loadMorePlaylists: (page: number, userId?: number) => void
     playlists: Playlist[]
@@ -37,7 +38,7 @@ class PlaylistList extends React.Component<IProps, {}> {
     }
 
     public render() {
-        const { playlists, filteredPlaylists, categoryFilter, nameFilter } = this.props;
+        const { playlists, filteredPlaylists, categoryFilter, nameFilter, doneLoading } = this.props;
         const buttonStyles = ['primary', 'secondary', 'success', 'info', 'warning', 'danger'];
         return (
             <div className="container-fluid" id="playlist-list-filters">
@@ -64,15 +65,17 @@ class PlaylistList extends React.Component<IProps, {}> {
                         return <PlaylistCard playlist={playlist} key={playlist.id} />
                     })}
                 </div>
-                <div className="row justify-content-center">
-                    {this.props.isLoading ? null :
-                        <Waypoint
-                            onEnter={() => this.props.updateLoading(true)}
-                        />}
-                    <div className="alert alert-danger" role="alert">
-                        Loading more playlists...
+                {!doneLoading &&
+                    <div className="row justify-content-center">
+                        {this.props.isLoading ? null :
+                            <Waypoint
+                                onEnter={() => this.props.updateLoading(true)}
+                            />}
+                        <div className="alert alert-info" role="alert">
+                            Loading more playlists...
+                        </div>
                     </div>
-                </div>
+                }
             </div>
         );
     }

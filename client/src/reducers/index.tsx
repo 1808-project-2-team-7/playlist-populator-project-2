@@ -31,7 +31,8 @@ export interface ISignInState {
 }
 
 export interface IHomeState {
-  playlists: Playlist[]
+  playlists: Playlist[],
+  doneLoading: boolean
 }
 
 export interface IPlaylistListState {
