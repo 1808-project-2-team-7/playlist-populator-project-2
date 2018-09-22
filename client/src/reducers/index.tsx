@@ -45,13 +45,7 @@ export interface IPlaylistListState {
 }
 
 export interface IPlaylistState {
-<<<<<<< HEAD
-  playlist:Playlist
-=======
-  playlist: Playlist,
-  publicPlaylist: any[],
-  usersPlaylist: any[]
->>>>>>> fdb516946ba0b2c5e84cb9aed69bede3e4b894ba
+  playlist: Playlist
 }
 
 export interface IRegisterState {
