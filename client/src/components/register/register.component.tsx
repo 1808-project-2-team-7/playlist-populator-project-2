@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import * as createPlaylistActions from "../../actions/create-playlist/create-playlist.actions";
 import { RouteComponentProps } from 'react-router';
 import { Button, Card, CardBody, CardHeader, Col, Form, FormGroup, Input } from 'reactstrap';
 import Label from 'reactstrap/lib/Label';
@@ -15,6 +16,7 @@ interface IProps extends RouteComponentProps<{}>, IRegisterState {
     updatePassword: (password: string) => void
     updateUsername: (username: string) => void
     register: (e: React.FormEvent<HTMLFormElement>, credentials: any) => void
+    sendImageToDatabase: (file: any) => void
 }
 
 class RegisterComponent extends React.Component<IProps, {}> {
@@ -22,6 +24,23 @@ class RegisterComponent extends React.Component<IProps, {}> {
     constructor(props: any) {
         super(props);
     }
+
+    public uploadImage = (e: any) => {
+        const file = e.target && e.target.files[0];
+        this.props.sendImageToDatabase(file);
+        const fReader = new FileReader();
+        fReader.readAsDataURL(file);
+        fReader.onload = (loadedFile: any) => {
+            const readFile = loadedFile && loadedFile.target.result;
+            if (readFile) {
+                this.setState({
+                    ...this.state,
+                    playlistImageSrc: readFile
+                });
+            }
+        }
+    }
+
     public render() {
         const { errorMessage } = this.props;
         return (
@@ -103,26 +122,40 @@ class RegisterComponent extends React.Component<IProps, {}> {
                                             />
                                         </FormGroup>
                                     </Col>
-                                    <Button color="primary" className="btn btn-lg btn-block" type="submit">Register</Button>
+
+                                    <div className="container">
+                                        <label> Upload Profile Image: </label>
+                                        <input
+                                            onChange={this.uploadImage}
+                                            type="file"
+                                            id="inputPlaylistImage"
+                                            className="form-control"
+                                            placeholder="Upload Profile Image" />
+                                        <div className="container">
+                                            <img id="imagePreview" src={this.props.bucketKey} />
+                                        </div>
+                                    </div>
+                                        <Button color="primary" className="btn btn-lg btn-block" type="submit">Register</Button>
                                 </Form>
                             </CardBody>
                         </Card>
                     </div>
+                    </div>
                 </div>
-            </div>
-        );
-    }
-}
+                );
+            }
+        }
 
-const mapStateToProps = (state: IState) => (state.register);
+        const mapStateToProps = (state: IState) => (state.register);
 const mapDispatchToProps = {
-    register: registerActions.register,
-    updateEmail: registerActions.updateEmail,
-    updateFirstName: registerActions.updateFirstName,
-    updateLastName: registerActions.updateLastName,
-    updatePassword: registerActions.updatePassword,
-    updateUsername: registerActions.updateUsername,
-    updateBucketKey: registerActions.updateBucketKey
-}
-
+            register: registerActions.register,
+            sendImageToDatabase: createPlaylistActions.sendImageToDatabase,
+            updateBucketKey: registerActions.updateBucketKey,
+            updateEmail: registerActions.updateEmail,
+            updateFirstName: registerActions.updateFirstName,
+            updateLastName: registerActions.updateLastName,
+            updatePassword: registerActions.updatePassword,
+            updateUsername: registerActions.updateUsername,
+        }
+        
 export default connect(mapStateToProps, mapDispatchToProps)(RegisterComponent);
