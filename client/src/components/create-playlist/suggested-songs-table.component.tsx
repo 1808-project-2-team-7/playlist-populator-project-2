@@ -22,7 +22,7 @@ export class SuggestedSongsTableComponent extends React.Component<IProps, IState
   
   public render() {
     return (
-      <div className="container">
+      <div id="create-playlist" className="container">
         <label> Suggested Songs to Add: </label>
         <Table className="table table-striped table-dark col table-main" id="songs-table">
             <thead>

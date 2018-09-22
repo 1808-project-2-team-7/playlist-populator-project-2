@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import InputSongsComponent from "./input-songs.component";
 import PlaylistTableComponent from "./playlist-table.component";
 import SuggestedSongsTableComponent from "./suggested-songs-table.component";
-import { Song } from "../../models/Song";
 import { Playlist } from "../../models/Playlist";
 import { User } from "../../models/User";
 import { Button, Col, Row, Container } from "reactstrap";
@@ -14,8 +13,6 @@ import { getCurrentUser } from "../../App";
 interface IProps extends ICreatePlaylistState {
   clearPlaylist: () => any;
   getAccessToken: () => any;
-  getSongsFromDatabase: (playlist: Playlist, spotifyApiSongs: Song[]) => any;
-  getSongsFromSpotifyApi: (songs: Song[], accessToken: string) => any;
   savePlaylistToDatabase: (playlist: Playlist) => any;
   sendImageToDatabase: (file: any) => any;
   setPlaylistOwner: (owner: User | null) => any;
@@ -35,17 +32,6 @@ export class CreatePlaylistComponent extends React.Component<IProps, ICreatePlay
     }
   }
 
-  public populate= async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if(this.props.playlist.songs.length < 5){
-      const spotifyApiSongs=await this.props.getSongsFromSpotifyApi(this.props.playlist.songs, this.props.accessToken);
-      this.props.getSongsFromDatabase(this.props.playlist, spotifyApiSongs);
-    }
-    else{
-      this.props.updateErrorMessage('Please enter no more than 5 songs');
-    }
-  }
-
   public savePlaylist= () => {
     this.props.savePlaylistToDatabase(this.props.playlist);
   }
@@ -60,7 +46,7 @@ export class CreatePlaylistComponent extends React.Component<IProps, ICreatePlay
         <div className="container">
           <form onSubmit={this.savePlaylist}>
             <div className="form-group container">
-                <Button className="submitButton" type="submit"> Save Playlist </Button>
+                <Button className="save-discard-button" type="submit"> Save Playlist </Button>
             </div>
           </form>
         </div>
@@ -75,23 +61,10 @@ export class CreatePlaylistComponent extends React.Component<IProps, ICreatePlay
         <div className="container">
           <form onSubmit={this.discardPlaylist}>
             <div className="form-group container">
-                <Button className="submitButton" type="submit"> Discard Playlist </Button>
+                <Button className="save-discard-button" type="submit"> Discard Playlist </Button>
             </div>
           </form>
         </div>
-      )
-    }
-    return;
-  }
-
-  public showPopulateButton= () => {
-    if(this.props.playlist.songs.length >= 3){
-      return (
-        <form onSubmit={this.populate}>
-            <div className="form-group container">
-                <Button className="submitButton" type="submit"> Populate </Button>
-            </div>
-        </form>
       )
     }
     return;
@@ -138,7 +111,7 @@ export class CreatePlaylistComponent extends React.Component<IProps, ICreatePlay
 
   public render() {
     return (
-      <div className="container">
+      <div id="create-playlist" className="container">
         <Container>
         <Row>
           <Col><InputSongsComponent /></Col>
@@ -158,19 +131,16 @@ export class CreatePlaylistComponent extends React.Component<IProps, ICreatePlay
           </Col>
         </Row>
         <Row>
-          <Col>{this.showPopulateButton()}</Col>
-          <Col></Col>
-        </Row>
-        <Row>
           <Col>{this.playlistTable()}</Col>
           <Col>{this.suggestedSongsTable()}</Col>
         </Row>
         <Row>
-          <Col>{this.showSave()}</Col>
-          <Col></Col>
-        </Row>
-        <Row>
-          <Col>{this.showDiscard()}</Col>
+          <Col>
+            <Row>
+              <Col>{this.showSave()}</Col>
+              <Col>{this.showDiscard()}</Col>
+            </Row>
+          </Col>
           <Col></Col>
         </Row>
         </Container>
@@ -184,8 +154,6 @@ const mapStateToProps = (state: IState) => (state.createPlaylist);
 const mapDispatchToProps = {
   clearPlaylist: createPlaylistActions.clearPlaylist,
   getAccessToken: createPlaylistActions.getAccessToken,
-  getSongsFromDatabase: createPlaylistActions.getSongsFromDatabase,
-  getSongsFromSpotifyApi: createPlaylistActions.getSongsFromSpotifyApi,
   savePlaylistToDatabase: createPlaylistActions.savePlaylistToDatabase,
   sendImageToDatabase: createPlaylistActions.sendImageToDatabase,
   setPlaylistOwner: createPlaylistActions.setPlaylistOwner,

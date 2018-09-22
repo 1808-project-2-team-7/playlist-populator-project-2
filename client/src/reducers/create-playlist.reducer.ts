@@ -90,6 +90,14 @@ export const createPlaylistReducer= (state= initialState, action: any) => {
                     bucketKey: action.payload.bucketKey
                 }
             }
+        case createPlaylistTypes.SET_CATEGORY_INFORMATION:
+            return {
+                ...state,
+                playlist: {
+                    ...state.playlist,
+                    category: action.payload.category
+                }
+            }
         case createPlaylistTypes.SET_PLAYLIST_OWNER:
             return {
                 ...state,

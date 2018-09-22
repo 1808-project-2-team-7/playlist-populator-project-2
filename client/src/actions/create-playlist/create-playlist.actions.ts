@@ -3,6 +3,7 @@ import { Song } from "../../models/Song";
 import { Playlist } from "../../models/Playlist";
 import { environment } from "../../environment";
 import { User } from "../../models/User";
+import { Category } from "../../models/Category";
 
 export const addInputToPlaylist= (songInput: string, artistInput: string, accessToken: string) => (dispatch: any) => {
     const query=encodeURIComponent(`${songInput} ${artistInput}`);
@@ -272,7 +273,7 @@ export const removeSongFromPlaylist= (song: Song, songs: Song[]) => {
 }
 
 export const savePlaylistToDatabase= (playlist: Playlist) => (dispatch: any) => {
-    fetch(`http://${environment.context}/playlists`, {
+    fetch(`${environment.context}playlists`, {
         body: JSON.stringify(playlist),
         headers: {
             'Accept': 'application/json',
@@ -312,6 +313,15 @@ export const sendImageToDatabase= (file: any) => (dispatch: any) => {
     .catch(error => {
         console.log(error);
     })
+}
+
+export const setCategoryInformation= (category: Category) => {
+    return {
+        payload: {
+            category
+        },
+        type: createPlaylistTypes.SET_CATEGORY_INFORMATION
+    }
 }
 
 export const setPlaylistOwner= (owner: User) => {
