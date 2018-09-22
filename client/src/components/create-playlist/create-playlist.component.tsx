@@ -16,7 +16,7 @@ interface IProps extends ICreatePlaylistState {
   savePlaylistToDatabase: (playlist: Playlist) => any;
   sendImageToDatabase: (file: any) => any;
   setPlaylistOwner: (owner: User | null) => any;
-  updateErrorMessage: (message: string) => any;
+  updateMessage: (message: string) => any;
 }
 
 interface ICreatePlaylistComponentState {
@@ -79,6 +79,17 @@ export class CreatePlaylistComponent extends React.Component<IProps, ICreatePlay
     return;
   }
 
+  public showMessage= () => {
+    if(this.props.playlist.songs.length > 5 && !this.props.populated){
+      return (
+        <div id="create-playlist" className="alert alert-danger container message" role="alert">
+            <span id="message">{this.props.message}</span>
+        </div>
+      )
+    }
+    return;
+  }
+
   public suggestedSongsTable= () => {
     if(this.props.suggestedSongs.length){
       return (
@@ -101,6 +112,12 @@ export class CreatePlaylistComponent extends React.Component<IProps, ICreatePlay
           playlistImageSrc: readFile
         });
       }
+    }
+  }
+
+  public componentDidUpdate(){
+    if(this.props.playlist.songs.length > 5 && !this.props.populated){
+      this.props.updateMessage('Enter no more than 5 songs');
     }
   }
 
@@ -131,6 +148,9 @@ export class CreatePlaylistComponent extends React.Component<IProps, ICreatePlay
           </Col>
         </Row>
         <Row>
+          {this.showMessage()}
+        </Row>
+        <Row>
           <Col>{this.playlistTable()}</Col>
           <Col>{this.suggestedSongsTable()}</Col>
         </Row>
@@ -144,7 +164,6 @@ export class CreatePlaylistComponent extends React.Component<IProps, ICreatePlay
           <Col></Col>
         </Row>
         </Container>
-        {this.props.errorMessage}
       </div>
     );
   }
@@ -157,6 +176,6 @@ const mapDispatchToProps = {
   savePlaylistToDatabase: createPlaylistActions.savePlaylistToDatabase,
   sendImageToDatabase: createPlaylistActions.sendImageToDatabase,
   setPlaylistOwner: createPlaylistActions.setPlaylistOwner,
-  updateErrorMessage: createPlaylistActions.updateErrorMessage
+  updateMessage: createPlaylistActions.updateMessage
 }
 export default connect(mapStateToProps, mapDispatchToProps)(CreatePlaylistComponent);

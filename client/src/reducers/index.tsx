@@ -15,10 +15,11 @@ import { signInReducer } from "./sign-in.reducer";
 
 export interface ICreatePlaylistState {
   accessToken: string,
-  errorMessage: string,
+  message: string,
   songInput: string,
   artistInput: string,
   playlist: Playlist,
+  populated: boolean,
   suggestedSongs: Song[]
 }
 

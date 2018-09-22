@@ -13,6 +13,8 @@ interface IProps extends ICreatePlaylistState {
     getSongsFromSpotifyApi: (songs: Song[], accessToken: string) => any;
     getSuggestedSongs: (song: Song, accessToken: string) => any;
     updateArtistInput: (artistInput: string) => any;
+    updateMessage: (message: string) => any;
+    updatePopulated: (populated: boolean) => any;
     updateSongInput: (songInput: string) => any;
 }
 
@@ -39,12 +41,10 @@ export class InputSongsComponent extends React.Component<IProps, IState> {
 
   public populate= async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if(this.props.playlist.songs.length < 5){
+    if(this.props.playlist.songs.length <= 5){
       const spotifyApiSongs=await this.props.getSongsFromSpotifyApi(this.props.playlist.songs, this.props.accessToken);
       this.props.getSongsFromDatabase(this.props.playlist, spotifyApiSongs);
-    }
-    else{
-      // update message
+      this.props.updatePopulated(true);
     }
   }
 
@@ -87,6 +87,8 @@ const mapDispatchToProps = {
     getSongsFromSpotifyApi: createPlaylistActions.getSongsFromSpotifyApi,
     getSuggestedSongs: createPlaylistActions.getSuggestedSongs,
     updateArtistInput: createPlaylistActions.updateArtistInput,
+    updateMessage: createPlaylistActions.updateMessage,
+    updatePopulated: createPlaylistActions.updatePopulated,
     updateSongInput: createPlaylistActions.updateSongInput
 }
 export default connect(mapStateToProps, mapDispatchToProps)(InputSongsComponent);

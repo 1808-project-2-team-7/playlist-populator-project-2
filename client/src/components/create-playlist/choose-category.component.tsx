@@ -44,7 +44,8 @@ export class ChooseCategoryComponent extends React.Component<ICreatePlaylistStat
 
   public render() {
     return (
-      <div className="container">
+      <div id="category-cards" className="container">
+      <h1 id="choose-category-header"> Please Choose a Category </h1>
       {
         this.state.categories.map((category : Category, index: number) => {
           const categories=this.state.categories;

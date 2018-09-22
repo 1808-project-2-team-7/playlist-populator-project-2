@@ -7,7 +7,7 @@ import { User } from "../models/User";
 const initialState: ICreatePlaylistState= {
     accessToken: '',
     artistInput: '',
-    errorMessage: '',
+    message: '',
     playlist: {
         bucketKey: '',
         category: new Category(),
@@ -16,6 +16,7 @@ const initialState: ICreatePlaylistState= {
         owner: new User(),
         songs: []
     },
+    populated: false,
     songInput: '',
     suggestedSongs: []
 }
@@ -119,10 +120,15 @@ export const createPlaylistReducer= (state= initialState, action: any) => {
                 ...state,
                 artistInput: action.payload.artistInput
             }
-        case createPlaylistTypes.UPDATE_ERROR_MESSAGE:
+        case createPlaylistTypes.UPDATE_MESSAGE:
             return {
                 ...state,
-                errorMessage: action.payload.message
+                message: action.payload.message
+            }
+        case createPlaylistTypes.UPDATE_POPULATED:
+            return {
+                ...state,
+                populated: action.payload.populated
             }
         case createPlaylistTypes.UPDATE_SONG_INPUT:
             return {

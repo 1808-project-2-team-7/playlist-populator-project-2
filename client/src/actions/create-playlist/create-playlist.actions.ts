@@ -342,12 +342,21 @@ export const updateArtistInput= (artistInput: string) => {
     }
 }
 
-export const updateErrorMessage= (message: string) => {
+export const updateMessage= (message: string) => {
     return {
         payload: {
             message
         },
-        type: createPlaylistTypes.UPDATE_ERROR_MESSAGE
+        type: createPlaylistTypes.UPDATE_MESSAGE
+    }
+}
+
+export const updatePopulated= (populated: boolean) => {
+    return {
+        payload: {
+            populated
+        },
+        type: createPlaylistTypes.UPDATE_POPULATED
     }
 }
 
