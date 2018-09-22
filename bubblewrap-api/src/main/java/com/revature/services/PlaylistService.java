@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.revature.models.Playlist;
@@ -20,8 +22,8 @@ public class PlaylistService {
 	@Autowired
 	private UserService us;
 
-	public List<Playlist> findAll() {
-		return pr.findAll();
+	public Page<Playlist> findAll(Pageable pageable) {
+		return pr.findAll(pageable);
 	}
 
 	public Playlist findOne(int id) {
@@ -50,14 +52,13 @@ public class PlaylistService {
 	public Playlist update(int id, Playlist p) {
 		if (pr.existsById(id)) {
 			p.setOwner(us.findOne(p.getOwner().getId()));
-			
+
 			return save(p);
 		} else {
 			return null;
 		}
 	}
 
-	
 	public boolean delete(int id) {
 		if (pr.existsById(id)) {
 			pr.deleteById(id);
@@ -68,7 +69,7 @@ public class PlaylistService {
 
 	}
 
-	public List<Playlist> findByUserId(int id) {
-		return pr.findByOwnerId(id);
+	public List<Playlist> findByUserId(int id, Pageable pageable) {
+		return pr.findByOwnerId(id, pageable);
 	}
 }

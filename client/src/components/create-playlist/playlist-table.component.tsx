@@ -21,7 +21,7 @@ export class PlaylistTableComponent extends React.Component<IProps, {}> {
   
   public render() {
     return (
-      <div className="container">
+      <div id="create-playlist" className="container">
         <label> Your Playlist: </label>
         <Table className="table table-striped table-dark col table-main" id="songs-table">
             <thead>

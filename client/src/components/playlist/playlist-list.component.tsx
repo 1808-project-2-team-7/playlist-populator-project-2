@@ -9,10 +9,14 @@ import { ButtonGroup } from 'reactstrap';
 import Button from 'reactstrap/lib/Button';
 import { getCategories } from '../../App';
 import { Category } from '../../models/Category';
+import Waypoint from 'react-waypoint';
 
 interface IProps extends RouteComponentProps<{}>, IPlaylistListState {
+    doneLoading: boolean
     filterPlaylists: (playlists: Playlist[], categoryFilter: Category[], nameFilter: string) => void
+    loadMorePlaylists: (page: number, userId?: number) => void
     playlists: Playlist[]
+    updateLoading: (isLoading: boolean) => void
 }
 
 class PlaylistList extends React.Component<IProps, {}> {
@@ -22,13 +26,19 @@ class PlaylistList extends React.Component<IProps, {}> {
     }
 
     public componentDidUpdate(prevProps: IProps) {
-        if(this.props.categoriesFetched && !prevProps.categoriesFetched || this.props.playlists !== prevProps.playlists){
+        if (this.props.playlists.length > prevProps.playlists.length) {
+            this.props.updateLoading(false);
+        }
+        if (this.props.isLoading && !prevProps.isLoading) {
+            this.props.loadMorePlaylists(this.props.page);
+        }
+        if (this.props.categoriesFetched && !prevProps.categoriesFetched || this.props.playlists !== prevProps.playlists) {
             this.props.filterPlaylists(this.props.playlists, this.props.categoryFilter, this.props.nameFilter);
         }
     }
 
     public render() {
-        const { playlists, filteredPlaylists, categoryFilter, nameFilter } = this.props;
+        const { playlists, filteredPlaylists, categoryFilter, nameFilter, doneLoading } = this.props;
         const buttonStyles = ['primary', 'secondary', 'success', 'info', 'warning', 'danger'];
         return (
             <div className="container-fluid" id="playlist-list-filters">
@@ -55,6 +65,17 @@ class PlaylistList extends React.Component<IProps, {}> {
                         return <PlaylistCard playlist={playlist} key={playlist.id} />
                     })}
                 </div>
+                {!doneLoading &&
+                    <div className="row justify-content-center">
+                        {this.props.isLoading ? null :
+                            <Waypoint
+                                onEnter={() => this.props.updateLoading(true)}
+                            />}
+                        <div className="alert alert-info" role="alert">
+                            Loading more playlists...
+                        </div>
+                    </div>
+                }
             </div>
         );
     }
@@ -67,7 +88,8 @@ class PlaylistList extends React.Component<IProps, {}> {
 const mapStateToProps = (state: IState) => state.playlistList
 
 const mapDispatchToProps = {
-    filterPlaylists: playlistListActions.filterPlaylists
+    filterPlaylists: playlistListActions.filterPlaylists,
+    updateLoading: playlistListActions.updateLoading
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlaylistList);

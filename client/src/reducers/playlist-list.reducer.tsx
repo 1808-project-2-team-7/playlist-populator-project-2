@@ -6,7 +6,9 @@ export const initialState: IPlaylistListState = {
     categoriesFetched: false,
     categoryFilter: [],
     filteredPlaylists: [],
-    nameFilter: ''
+    isLoading: false,
+    nameFilter: '',
+    page: 0
 }
 
 export const playlistListReducer = (state = initialState, action: any) => {
@@ -17,6 +19,13 @@ export const playlistListReducer = (state = initialState, action: any) => {
                 categoryFilter: action.payload.categoryFilter,
                 filteredPlaylists: action.payload.filteredPlaylists,
                 nameFilter: action.payload.nameFilter
+            }
+        case playlistListTypes.UPDATE_LOADING:
+            const isLoading = action.payload.isLoading;
+            return {
+                ...state,
+                isLoading,
+                page: isLoading ? state.page : state.page + 1
             }
         case categoryTypes.FETCH_CATEGORIES:
             return {

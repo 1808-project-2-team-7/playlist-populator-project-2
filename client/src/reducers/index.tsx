@@ -28,12 +28,12 @@ export interface ISignInState {
     password: string,
     username: string
   },
-  currentUser: User | null,
   errorMessage: string
 }
 
 export interface IHomeState {
-  playlists: Playlist[]
+  playlists: Playlist[],
+  doneLoading: boolean
 }
 export interface IUserState {
   userPlaylists: Playlist[]
@@ -43,6 +43,8 @@ export interface IPlaylistListState {
   filteredPlaylists: Playlist[],
   categoryFilter: Category[],
   categoriesFetched: boolean,
+  isLoading: boolean,
+  page: number,
   nameFilter: string
 }
 
@@ -56,8 +58,7 @@ export interface IRegisterState {
   firstName: string,
   lastName: string,
   email: string,
-  errorMessage: string,
-  currentUser: User | null
+  errorMessage: string
 }
 
 export interface IState {

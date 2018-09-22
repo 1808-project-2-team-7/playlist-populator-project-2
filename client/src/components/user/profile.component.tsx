@@ -7,7 +7,7 @@ import * as userActions from '../../actions/user/user.actions'
 
 
 interface IProps extends IUserState, RouteComponentProps<{}> {
-    fetchUserPlaylist: () => void,
+    fetchUserPlaylists: () => void,
 }
 
 class ProfileComponent extends React.Component<IProps, any> {
@@ -17,7 +17,7 @@ class ProfileComponent extends React.Component<IProps, any> {
     }
 
     public componentDidMount = () => {
-        this.props.fetchUserPlaylist();
+        this.props.fetchUserPlaylists();
     }
 
     public render() {

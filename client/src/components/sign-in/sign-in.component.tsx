@@ -1,14 +1,11 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
-import { Button, CardBody, CardHeader, Card, Col, Form, FormGroup, Input } from 'reactstrap';
-import * as currentUserActions from '../../actions/current-user/current-user.actions';
+import { Button, Card, CardBody, CardHeader, Col, Form, FormGroup, Input } from 'reactstrap';
 import * as signInActions from '../../actions/sign-in/sign-in.actions';
-import { User } from '../../models/User';
 import { ISignInState, IState } from '../../reducers';
 
 interface IProps extends RouteComponentProps<{}>, ISignInState {
-    updateCurrentUser: (currentUser: User | null) => void
     updateError: (message: string) => void
     updatePassword: (password: string) => void
     updateUsername: (username: string) => void
@@ -19,12 +16,6 @@ class SignInComponent extends React.Component<IProps, {}> {
 
     constructor(props: any) {
         super(props);
-    }
-
-    public componentDidUpdate = (prevProps: any) => {
-        if (this.props.currentUser !== prevProps.currentUser) {
-            this.props.updateCurrentUser(this.props.currentUser);
-        }
     }
 
     public render() {
@@ -83,7 +74,6 @@ class SignInComponent extends React.Component<IProps, {}> {
 const mapStateToProps = (state: IState) => (state.signIn);
 const mapDispatchToProps = {
     login: signInActions.login,
-    updateCurrentUser: currentUserActions.updateCurrentUser,
     updatePassword: signInActions.updatePassword,
     updateUsername: signInActions.updateUsername
 }
