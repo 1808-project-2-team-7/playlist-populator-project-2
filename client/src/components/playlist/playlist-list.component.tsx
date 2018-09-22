@@ -13,8 +13,9 @@ import Waypoint from 'react-waypoint';
 
 interface IProps extends RouteComponentProps<{}>, IPlaylistListState {
     filterPlaylists: (playlists: Playlist[], categoryFilter: Category[], nameFilter: string) => void
-    loadMorePlaylists: (userId?: number) => void
+    loadMorePlaylists: (page: number, userId?: number) => void
     playlists: Playlist[]
+    updateLoading: (isLoading: boolean) => void
 }
 
 class PlaylistList extends React.Component<IProps, {}> {
@@ -24,6 +25,12 @@ class PlaylistList extends React.Component<IProps, {}> {
     }
 
     public componentDidUpdate(prevProps: IProps) {
+        if (this.props.playlists.length > prevProps.playlists.length) {
+            this.props.updateLoading(false);
+        }
+        if (!this.props.isLoading && prevProps.isLoading) {
+            this.props.loadMorePlaylists(this.props.page);
+        }
         if (this.props.categoriesFetched && !prevProps.categoriesFetched || this.props.playlists !== prevProps.playlists) {
             this.props.filterPlaylists(this.props.playlists, this.props.categoryFilter, this.props.nameFilter);
         }
@@ -56,10 +63,13 @@ class PlaylistList extends React.Component<IProps, {}> {
                     {filteredPlaylists.map((playlist: Playlist) => {
                         return <PlaylistCard playlist={playlist} key={playlist.id} />
                     })}
-                    <div style={{ marginTop: "1000px" }}>
+                </div>
+                <div className="row justify-content-center">
+                    {this.props.isLoading ? null :
                         <Waypoint
-                            onEnter={() => this.props.loadMorePlaylists()}
-                        />
+                            onEnter={() => this.props.updateLoading(true)}
+                        />}
+                    <div className="alert alert-danger" role="alert">
                         Loading more playlists...
                     </div>
                 </div>
@@ -75,7 +85,8 @@ class PlaylistList extends React.Component<IProps, {}> {
 const mapStateToProps = (state: IState) => state.playlistList
 
 const mapDispatchToProps = {
-    filterPlaylists: playlistListActions.filterPlaylists
+    filterPlaylists: playlistListActions.filterPlaylists,
+    updateLoading: playlistListActions.updateLoading
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlaylistList);

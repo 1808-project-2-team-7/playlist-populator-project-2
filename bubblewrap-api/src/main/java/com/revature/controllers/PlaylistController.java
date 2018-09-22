@@ -3,6 +3,7 @@ package com.revature.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,8 +26,8 @@ public class PlaylistController {
 	private PlaylistService ps;
 
 	@GetMapping
-	public List<Playlist> findAll() {
-		return ps.findAll();
+	public List<Playlist> findAll(Pageable pageable) {
+		return ps.findAll(pageable).getContent();
 	}
 
 	@GetMapping("{id}")
@@ -35,8 +36,8 @@ public class PlaylistController {
 	}
 	
 	@GetMapping("user/{id}")
-	public List<Playlist> findByUserId(@PathVariable int id){
-		return ps.findByUserId(id);
+	public List<Playlist> findByUserId(@PathVariable int id, Pageable pageable){
+		return ps.findByUserId(id, pageable);
 	}
 	
 	@PostMapping

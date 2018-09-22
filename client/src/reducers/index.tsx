@@ -38,6 +38,8 @@ export interface IPlaylistListState {
   filteredPlaylists: Playlist[],
   categoryFilter: Category[],
   categoriesFetched: boolean,
+  isLoading: boolean,
+  page: number,
   nameFilter: string
 }
 

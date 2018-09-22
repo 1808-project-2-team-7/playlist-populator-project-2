@@ -1,7 +1,7 @@
 import { homeTypes } from "./home.types";
 import { environment } from '../../environment';
-export const fetchPlaylists = () => (dispatch: any) => {
-    fetch(`${environment.context}playlists`)
+export const fetchPlaylists = (page: number) => (dispatch: any) => {
+    fetch(`${environment.context}playlists?page=${page}&size=10`)
         .then(resp => {
             if (resp.status === 200) {
                 return resp.json();
