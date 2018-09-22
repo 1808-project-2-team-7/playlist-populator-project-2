@@ -46,12 +46,11 @@ export interface IPlaylistListState {
 }
 
 export interface IPlaylistState {
-  playlist: Playlist,
-  publicPlaylist: any[],
-  usersPlaylist: any[]
+  playlist: Playlist
 }
 
 export interface IRegisterState {
+  bucketKey: string,
   username: string,
   password: string,
   firstName: string,

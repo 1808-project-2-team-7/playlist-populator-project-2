@@ -14,6 +14,7 @@ describe('register reducer', () => {
             type: registerTypes.UPDATE_USERNAME
         };
         expect(registerReducer({
+            bucketKey:'',
             email: '',
             errorMessage: '',
             firstName: '',
@@ -39,6 +40,7 @@ describe('register reducer', () => {
             type: registerTypes.UPDATE_PASSWORD
         };
         expect(registerReducer({
+            bucketKey:'',
             email: '',
             errorMessage: '',
             firstName: '',
@@ -64,6 +66,7 @@ describe('register reducer', () => {
             type: registerTypes.UPDATE_FIRST_NAME
         };
         expect(registerReducer({
+            bucketKey:'',
             email: '',
             errorMessage: '',
             firstName: 'Joh',
@@ -89,6 +92,7 @@ describe('register reducer', () => {
             type: registerTypes.UPDATE_LAST_NAME
         };
         expect(registerReducer({
+            bucketKey:'',
             email: '',
             errorMessage: '',
             firstName: 'John',
@@ -114,6 +118,7 @@ describe('register reducer', () => {
             type: registerTypes.UPDATE_EMAIL
         };
         expect(registerReducer({
+            bucketKey:'',
             email: 'user123@gmail.co',
             errorMessage: '',
             firstName: 'John',
@@ -153,6 +158,7 @@ describe('register reducer', () => {
             type: registerTypes.REGISTER
         }
         expect(registerReducer({
+            bucketKey:'',
             email: 'user123@gmail.com',
             errorMessage: '',
             firstName: 'John',
@@ -184,6 +190,7 @@ describe('register reducer', () => {
             type: registerTypes.REGISTER
         }
         expect(registerReducer({
+            bucketKey:'',
             email: 'user123@gmail.com',
             errorMessage: '',
             firstName: 'John',
