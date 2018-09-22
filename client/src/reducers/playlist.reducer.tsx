@@ -1,19 +1,9 @@
 import { IPlaylistState } from ".";
-import { User } from "../models/User";
 import { playlistTypes } from "../actions/playlist/playlist.types";
-import { Category } from "../models/Category";
+import { Playlist } from "../models/Playlist";
 
 export const initialState: IPlaylistState = {
-    playlist: {
-        bucketKey: '',
-        category: new Category,
-        id: 0,
-        name: '',
-        owner: new User,
-        songs: []
-    },
-    publicPlaylist: [],
-    usersPlaylist: []
+    playlist: new Playlist()
 }
 
 export const playlistReducer = (state = initialState, action: any) => {
