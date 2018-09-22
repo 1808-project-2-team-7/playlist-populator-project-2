@@ -90,7 +90,7 @@ export const getAccessToken= () => (dispatch: any) => {
 }
 
 export const getSongsFromDatabase= (playlist: Playlist, spotifyApiSongs: Song[]) => async (dispatch: any) => {
-    const songsFromDatabase=await fetch(`http://${environment.context}/playlists`, {
+    const songsFromDatabase=await fetch(`${environment.context}playlists`, {
         body: JSON.stringify(playlist),
         headers: {
             'Accept': 'application/json',
@@ -102,7 +102,7 @@ export const getSongsFromDatabase= (playlist: Playlist, spotifyApiSongs: Song[])
     .then(songsWithIds => {
         console.log(songsWithIds);
         return Promise.all(songsWithIds.songs.map((song: Song) => {
-            return fetch(`http://${environment.context}/songs/${song.id}/popular`)
+            return fetch(`${environment.context}songs/${song.id}/popular`)
             .then(databaseSuggestions => databaseSuggestions.json())
             .then(databaseSuggestions => {
                 return databaseSuggestions;
