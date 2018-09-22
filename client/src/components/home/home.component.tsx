@@ -15,10 +15,6 @@ class HomeComponent extends React.Component<IProps, any> {
         super(props);
     }
 
-    public componentDidMount = () => {
-        this.props.fetchPlaylists();
-    }
-
     public render() {
         return (
             <PlaylistList playlists={this.props.playlists} loadMorePlaylists={this.props.fetchPlaylists} />

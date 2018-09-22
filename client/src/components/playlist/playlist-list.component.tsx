@@ -28,7 +28,7 @@ class PlaylistList extends React.Component<IProps, {}> {
         if (this.props.playlists.length > prevProps.playlists.length) {
             this.props.updateLoading(false);
         }
-        if (!this.props.isLoading && prevProps.isLoading) {
+        if (this.props.isLoading && !prevProps.isLoading) {
             this.props.loadMorePlaylists(this.props.page);
         }
         if (this.props.categoriesFetched && !prevProps.categoriesFetched || this.props.playlists !== prevProps.playlists) {
