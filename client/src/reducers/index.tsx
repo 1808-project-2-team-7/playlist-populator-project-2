@@ -1,17 +1,18 @@
 import { combineReducers } from "redux";
-import { createPlaylistReducer } from "./create-playlist.reducer";
-import { playlistReducer } from "./playlist.reducer"
-import { playlistListReducer } from "./playlist-list.reducer"
-import { homeReducer } from "./home.reducer"
-import { signInReducer } from "./sign-in.reducer"
-import { registerReducer } from "./register.reducer"
-import { categoryReducer } from "./category.reducer"
-import { currentUserReducer } from "./current-user.reducer"
 import { currentUserTypes } from "../actions/current-user/current-user.types";
-import { User } from "../models/User";
-import { Song } from "../models/Song";
-import { Playlist } from "../models/Playlist";
 import { Category } from "../models/Category";
+import { Playlist } from "../models/Playlist";
+import { Song } from "../models/Song";
+import { User } from "../models/User";
+import { categoryReducer } from "./category.reducer";
+import { createPlaylistReducer } from "./create-playlist.reducer";
+import { currentUserReducer } from "./current-user.reducer";
+import { homeReducer } from "./home.reducer";
+import { playlistListReducer } from "./playlist-list.reducer";
+import { playlistReducer } from "./playlist.reducer";
+import { registerReducer } from "./register.reducer";
+import { signInReducer } from "./sign-in.reducer";
+import { userReducer } from './user.reducer'
 
 export interface ICreatePlaylistState {
   accessToken: string,
@@ -34,6 +35,9 @@ export interface ISignInState {
 export interface IHomeState {
   playlists: Playlist[]
 }
+export interface IUserState {
+  userPlaylists: Playlist[]
+}
 
 export interface IPlaylistListState {
   filteredPlaylists: Playlist[],
@@ -44,8 +48,6 @@ export interface IPlaylistListState {
 
 export interface IPlaylistState {
   playlist:Playlist,
-  publicPlaylist: any[],
-  usersPlaylist: any[]
 }
 
 export interface IRegisterState {
@@ -66,7 +68,8 @@ export interface IState {
   playlist: IPlaylistState,
   playlistList: IPlaylistListState,
   register: IRegisterState,
-  signIn: ISignInState
+  signIn: ISignInState,
+  user: IUserState
 
 }
 
@@ -78,7 +81,8 @@ const reducer = combineReducers<IState>({
   playlist: playlistReducer,
   playlistList: playlistListReducer,
   register: registerReducer,
-  signIn: signInReducer
+  signIn: signInReducer,
+  user: userReducer
 })
 
 export const state = (newState: any, action: any) => {
