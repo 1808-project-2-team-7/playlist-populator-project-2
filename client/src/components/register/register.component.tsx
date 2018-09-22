@@ -7,6 +7,7 @@ import * as registerActions from '../../actions/register/register.actions';
 import { IRegisterState, IState } from '../../reducers';
 
 interface IProps extends RouteComponentProps<{}>, IRegisterState {
+    updateBucketKey: (url: string) => void
     updateEmail: (email: string) => void
     updateError: (message: string) => void
     updateFirstName: (firstName: string) => void
@@ -120,7 +121,8 @@ const mapDispatchToProps = {
     updateFirstName: registerActions.updateFirstName,
     updateLastName: registerActions.updateLastName,
     updatePassword: registerActions.updatePassword,
-    updateUsername: registerActions.updateUsername
+    updateUsername: registerActions.updateUsername,
+    updateBucketKey: registerActions.updateBucketKey
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RegisterComponent);

@@ -49,6 +49,7 @@ export interface IPlaylistState {
 }
 
 export interface IRegisterState {
+  bucketKey: string,
   username: string,
   password: string,
   firstName: string,

@@ -2,6 +2,15 @@ import history from '../../history';
 import { registerTypes } from "./register.types";
 import { environment } from '../../environment';
 
+export const updateBucketKey = (url: string)=>{
+  return {
+    payload: {
+      bucketKey: url
+    },
+    type: registerTypes.UPDATE_BUCKETKEY
+  }
+}
+
 export const updatePassword = (password: string) => {
   return {
     payload: {
