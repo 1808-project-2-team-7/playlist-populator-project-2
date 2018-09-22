@@ -3,6 +3,7 @@ import { Song } from "../../models/Song";
 import { Playlist } from "../../models/Playlist";
 import { environment } from "../../environment";
 import { User } from "../../models/User";
+import { Category } from "../../models/Category";
 
 export const addInputToPlaylist= (songInput: string, artistInput: string, accessToken: string) => (dispatch: any) => {
     const query=encodeURIComponent(`${songInput} ${artistInput}`);
@@ -47,6 +48,13 @@ export const addSuggestedSongToPlaylist= (song: Song) => {
     }
 }
 
+export const clearPlaylist= () => {
+    return {
+        payload: [],
+        type: createPlaylistTypes.CLEAR_PLAYLIST
+    }
+}
+
 export const clearSongFromSuggestedSongs= (songToRemove: Song, suggestedSongs: Song[]) => {
     const newSuggestedSongs=suggestedSongs.filter((song: Song) => {
         return song.spotifyTrackId!==songToRemove.spotifyTrackId;
@@ -83,7 +91,7 @@ export const getAccessToken= () => (dispatch: any) => {
 }
 
 export const getSongsFromDatabase= (playlist: Playlist, spotifyApiSongs: Song[]) => async (dispatch: any) => {
-    const songsFromDatabase=await fetch(`http://${environment.context}/playlists`, {
+    const songsFromDatabase=await fetch(`${environment.context}playlists`, {
         body: JSON.stringify(playlist),
         headers: {
             'Accept': 'application/json',
@@ -95,7 +103,7 @@ export const getSongsFromDatabase= (playlist: Playlist, spotifyApiSongs: Song[])
     .then(songsWithIds => {
         console.log(songsWithIds);
         return Promise.all(songsWithIds.songs.map((song: Song) => {
-            return fetch(`http://${environment.context}/songs/${song.id}/popular`)
+            return fetch(`${environment.context}songs/${song.id}/popular`)
             .then(databaseSuggestions => databaseSuggestions.json())
             .then(databaseSuggestions => {
                 return databaseSuggestions;
@@ -261,6 +269,58 @@ export const removeSongFromPlaylist= (song: Song, songs: Song[]) => {
             playlistWithSongRemoved
         },
         type: createPlaylistTypes.REMOVE_SONG_FROM_PLAYLIST
+    }
+}
+
+export const savePlaylistToDatabase= (playlist: Playlist) => (dispatch: any) => {
+    fetch(`${environment.context}playlists`, {
+        body: JSON.stringify(playlist),
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        method: 'POST'
+    })
+    .then(resp => resp.json())
+    .then(savedPlaylist => {
+        dispatch({
+            payload: savedPlaylist,
+            type: createPlaylistTypes.SAVE_PLAYLIST_TO_DATABASE
+        })
+    })
+    .catch(error => {
+        console.log(error);
+    })
+
+}
+
+export const sendImageToDatabase= (file: any) => (dispatch: any) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    fetch(`${environment.context}storage/uploadFile`,{
+        body: formData,
+        method: 'POST'
+    })
+    .then(resp => resp.text())
+    .then(bucketKey => {
+        dispatch({
+            payload: {
+                bucketKey
+            },
+            type: createPlaylistTypes.SEND_IMAGE_TO_DATABASE
+        })
+    })
+    .catch(error => {
+        console.log(error);
+    })
+}
+
+export const setCategoryInformation= (category: Category) => {
+    return {
+        payload: {
+            category
+        },
+        type: createPlaylistTypes.SET_CATEGORY_INFORMATION
     }
 }
 

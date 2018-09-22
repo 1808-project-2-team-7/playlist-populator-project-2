@@ -18,3 +18,12 @@ export const filterPlaylists = (playlists: Playlist[], categoryFilter: Category[
         type: playlistListTypes.FILTER_PLAYLISTS
     }
 }
+
+export const updateLoading = (isLoading: boolean) => {
+    return {
+        payload: {
+            isLoading
+        },
+        type: playlistListTypes.UPDATE_LOADING
+    }
+}

@@ -1,17 +1,17 @@
 import { combineReducers } from "redux";
-import { createPlaylistReducer } from "./create-playlist.reducer";
-import { playlistReducer } from "./playlist.reducer"
-import { playlistListReducer } from "./playlist-list.reducer"
-import { homeReducer } from "./home.reducer"
-import { signInReducer } from "./sign-in.reducer"
-import { registerReducer } from "./register.reducer"
-import { categoryReducer } from "./category.reducer"
-import { currentUserReducer } from "./current-user.reducer"
 import { currentUserTypes } from "../actions/current-user/current-user.types";
-import { User } from "../models/User";
-import { Song } from "../models/Song";
-import { Playlist } from "../models/Playlist";
 import { Category } from "../models/Category";
+import { Playlist } from "../models/Playlist";
+import { Song } from "../models/Song";
+import { User } from "../models/User";
+import { categoryReducer } from "./category.reducer";
+import { createPlaylistReducer } from "./create-playlist.reducer";
+import { currentUserReducer } from "./current-user.reducer";
+import { homeReducer } from "./home.reducer";
+import { playlistListReducer } from "./playlist-list.reducer";
+import { playlistReducer } from "./playlist.reducer";
+import { registerReducer } from "./register.reducer";
+import { signInReducer } from "./sign-in.reducer";
 
 export interface ICreatePlaylistState {
   accessToken: string,
@@ -27,23 +27,31 @@ export interface ISignInState {
     password: string,
     username: string
   },
-  currentUser: User | null,
   errorMessage: string
 }
 
 export interface IHomeState {
-  playlists: Playlist[]
+  playlists: Playlist[],
+  doneLoading: boolean
 }
 
 export interface IPlaylistListState {
   filteredPlaylists: Playlist[],
   categoryFilter: Category[],
   categoriesFetched: boolean,
+  isLoading: boolean,
+  page: number,
   nameFilter: string
 }
 
 export interface IPlaylistState {
+<<<<<<< HEAD
   playlist:Playlist
+=======
+  playlist: Playlist,
+  publicPlaylist: any[],
+  usersPlaylist: any[]
+>>>>>>> fdb516946ba0b2c5e84cb9aed69bede3e4b894ba
 }
 
 export interface IRegisterState {
@@ -52,8 +60,7 @@ export interface IRegisterState {
   firstName: string,
   lastName: string,
   email: string,
-  errorMessage: string,
-  currentUser: User | null
+  errorMessage: string
 }
 
 export interface IState {

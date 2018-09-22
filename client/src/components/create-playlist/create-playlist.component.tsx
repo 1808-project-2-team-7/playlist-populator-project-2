@@ -5,45 +5,66 @@ import { connect } from "react-redux";
 import InputSongsComponent from "./input-songs.component";
 import PlaylistTableComponent from "./playlist-table.component";
 import SuggestedSongsTableComponent from "./suggested-songs-table.component";
-import { Song } from "../../models/Song";
 import { Playlist } from "../../models/Playlist";
 import { User } from "../../models/User";
-import { Button } from "reactstrap";
+import { Button, Col, Row, Container } from "reactstrap";
 import { getCurrentUser } from "../../App";
 
 interface IProps extends ICreatePlaylistState {
+  clearPlaylist: () => any;
   getAccessToken: () => any;
-  getSongsFromDatabase: (playlist: Playlist, spotifyApiSongs: Song[]) => any;
-  getSongsFromSpotifyApi: (songs: Song[], accessToken: string) => any;
+  savePlaylistToDatabase: (playlist: Playlist) => any;
+  sendImageToDatabase: (file: any) => any;
   setPlaylistOwner: (owner: User | null) => any;
   updateErrorMessage: (message: string) => any;
 }
 
-export class CreatePlaylistComponent extends React.Component<IProps, {}> {
+interface ICreatePlaylistComponentState {
+  playlistImageSrc: string
+}
+
+export class CreatePlaylistComponent extends React.Component<IProps, ICreatePlaylistComponentState> {
 
   public constructor(props: any){
     super(props);
-  }
-
-  public populate= async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if(this.props.playlist.songs.length < 5){
-      const spotifyApiSongs=await this.props.getSongsFromSpotifyApi(this.props.playlist.songs, this.props.accessToken);
-      this.props.getSongsFromDatabase(this.props.playlist, spotifyApiSongs);
-    }
-    else{
-      this.props.updateErrorMessage('Please enter no more than 5 songs');
+    this.state={
+      playlistImageSrc: ''
     }
   }
 
-  public showPopulateButton= () => {
-    if(this.props.playlist.songs.length >= 3){
+  public savePlaylist= () => {
+    this.props.savePlaylistToDatabase(this.props.playlist);
+  }
+
+  public discardPlaylist= () => {
+    this.props.clearPlaylist();
+  }
+
+  public showSave= () => {
+    if(this.props.playlist.songs.length >= 1){
       return (
-        <form onSubmit={this.populate}>
+        <div className="container">
+          <form onSubmit={this.savePlaylist}>
             <div className="form-group container">
-                <Button type="submit"> Populate </Button>
+                <Button className="save-discard-button" type="submit"> Save Playlist </Button>
             </div>
-        </form>
+          </form>
+        </div>
+      )
+    }
+    return;
+  }
+
+  public showDiscard= () => {
+    if(this.props.playlist.songs.length >= 1){
+      return (
+        <div className="container">
+          <form onSubmit={this.discardPlaylist}>
+            <div className="form-group container">
+                <Button className="save-discard-button" type="submit"> Discard Playlist </Button>
+            </div>
+          </form>
+        </div>
       )
     }
     return;
@@ -67,6 +88,22 @@ export class CreatePlaylistComponent extends React.Component<IProps, {}> {
     return;
   }
 
+  public uploadImage= (e: any) => {
+    const file=e.target && e.target.files[0];
+    this.props.sendImageToDatabase(file);
+    const fReader  = new FileReader();
+    fReader.readAsDataURL(file);
+    fReader.onload= (loadedFile: any) => {
+      const readFile=loadedFile && loadedFile.target.result;
+      if(readFile){
+        this.setState({
+          ...this.state,
+          playlistImageSrc: readFile
+        });
+      }
+    }
+  }
+
   public componentDidMount(){
     this.props.getAccessToken();
     this.props.setPlaylistOwner(getCurrentUser());
@@ -74,12 +111,40 @@ export class CreatePlaylistComponent extends React.Component<IProps, {}> {
 
   public render() {
     return (
-      <div className="container">
-        <InputSongsComponent />
+      <div id="create-playlist" className="container">
+        <Container>
+        <Row>
+          <Col><InputSongsComponent /></Col>
+          <Col>
+            <div className="container">
+              <label> Upload Playlist Image: </label>
+              <input
+                onChange={this.uploadImage}
+                type="file"
+                id="inputPlaylistImage"
+                className="form-control"
+                placeholder="Upload Playlist Image" />
+                <div className="container">
+                  <img id="imagePreview" src={this.state.playlistImageSrc}/>
+                </div>
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col>{this.playlistTable()}</Col>
+          <Col>{this.suggestedSongsTable()}</Col>
+        </Row>
+        <Row>
+          <Col>
+            <Row>
+              <Col>{this.showSave()}</Col>
+              <Col>{this.showDiscard()}</Col>
+            </Row>
+          </Col>
+          <Col></Col>
+        </Row>
+        </Container>
         {this.props.errorMessage}
-        {this.showPopulateButton()}
-        {this.suggestedSongsTable()}
-        {this.playlistTable()}
       </div>
     );
   }
@@ -87,9 +152,10 @@ export class CreatePlaylistComponent extends React.Component<IProps, {}> {
 
 const mapStateToProps = (state: IState) => (state.createPlaylist);
 const mapDispatchToProps = {
+  clearPlaylist: createPlaylistActions.clearPlaylist,
   getAccessToken: createPlaylistActions.getAccessToken,
-  getSongsFromDatabase: createPlaylistActions.getSongsFromDatabase,
-  getSongsFromSpotifyApi: createPlaylistActions.getSongsFromSpotifyApi,
+  savePlaylistToDatabase: createPlaylistActions.savePlaylistToDatabase,
+  sendImageToDatabase: createPlaylistActions.sendImageToDatabase,
   setPlaylistOwner: createPlaylistActions.setPlaylistOwner,
   updateErrorMessage: createPlaylistActions.updateErrorMessage
 }
