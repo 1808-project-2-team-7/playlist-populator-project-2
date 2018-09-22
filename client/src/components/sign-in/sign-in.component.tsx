@@ -23,7 +23,7 @@ class SignInComponent extends React.Component<IProps, {}> {
         return (
             <div className="container h-100">
                 <div className="row h-75">
-                    <div className="mx-auto my-auto">
+                    <div className="mx-auto">
                         <Card>
                             <CardHeader className="text-white bg-dark">Sign In to ...</CardHeader>
                             <CardBody className="bg-light">

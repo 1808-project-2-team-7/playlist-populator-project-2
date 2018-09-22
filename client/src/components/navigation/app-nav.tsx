@@ -14,30 +14,29 @@ export class AppNav extends React.Component {
                 <li className="nav-item">
                     <Link to="/home">Home</Link>
                 </li>
-                {getCurrentUser()&&(
-                <div>
-                <li className="nav-item">
-                    <Link to="/profile">Profile</Link>
-                </li>
-                <li className="nav-item">
-                    <Link to="/playlists/new">Create Playlist</Link>
-                </li>
-                </div>
+                {getCurrentUser() && (
+                    <>
+                        <li className="nav-item">
+                            <Link to="/profile">Profile</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/playlists/new">Create Playlist</Link>
+                        </li>
+                    </>
                 )}
 
 
-                {!getCurrentUser()&&(
-                <div>
+                {!getCurrentUser() && (
+                    <>
+                        <li className="nav-item">
+                            <Link to="/sign-in">Sign In</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/register">Register</Link>
+                        </li>
+                    </>)}
                 <li className="nav-item">
-                    <Link to="/sign-in">Sign In</Link>
-                </li>
-                <li className="nav-item">
-                    <Link to="/register">Register</Link>
-                </li>
-                </div>)}
-
-                <li className="nav-item">
-                    <Link to="/playlists/1">Playlist</Link>
+                    <Link to="/logout">Logout</Link>
                 </li>
             </ul>
         )

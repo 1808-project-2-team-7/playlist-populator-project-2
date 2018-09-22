@@ -16,6 +16,7 @@ import { store } from './store';
 import { User } from './models/User';
 import { fetchCategories } from './actions/category/category.actions';
 import MainCreatePlaylistComponent from './components/create-playlist/main-create-playlist.component';
+import LogoutComponent from './components/logout/logout.component';
 
 export const getCurrentUser = () => {
   const currentUser = store.getState().currentUser;
@@ -47,6 +48,7 @@ class App extends React.Component {
                 <Route path="/playlists/new" component={MainCreatePlaylistComponent} />
                 <Route path="/playlists/:id" component={PlaylistComponent} />
                 <Route path="/home" component={HomeComponent} />
+                <Route path="/logout" component={LogoutComponent} />
                 <Route component={HomeComponent} />
               </Switch>
             </div>
