@@ -11,6 +11,8 @@ import com.revature.models.Playlist;
 
 @Repository
 public interface PlaylistRepo extends JpaRepository<Playlist, Integer> {
+	List<Playlist> findByOwnerId(int id);
+
 	List<Playlist> findByOwnerId(int id, Pageable pageabble);
 
 	Page<Playlist> findAll(Pageable pageable);
