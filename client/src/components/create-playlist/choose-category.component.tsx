@@ -38,7 +38,7 @@ export class ChooseCategoryComponent extends React.Component<IProps, ICategorySt
             if (index % 3 === 0) {
               for (let i = 0; i < 3; i++) {
                 categoryCards.push(
-                  <div key={index + i} className="col-sm" onClick={() => this.props.setCategoryInformation(category)}>
+                  <div key={index + i} className="col-sm" onClick={() => this.props.setCategoryInformation(categories[index + i])}>
                     <div className="card choose-category-cards">
                       <CategoryCardComponent imagePath={images[index + i]} category={categories[index + i]} />
                     </div>

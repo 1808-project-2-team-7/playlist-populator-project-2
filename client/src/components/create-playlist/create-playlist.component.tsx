@@ -7,12 +7,15 @@ import PlaylistTableComponent from "./playlist-table.component";
 import SuggestedSongsTableComponent from "./suggested-songs-table.component";
 import { Playlist } from "../../models/Playlist";
 import { Button, Col, Row, Container } from "reactstrap";
+import { getCurrentUser } from "../../App";
+import { User } from "../../models/User";
 
 interface IProps extends ICreatePlaylistState {
   clearPlaylist: () => any;
   getAccessToken: () => any;
   savePlaylistToDatabase: (playlist: Playlist) => any;
   sendImageToDatabase: (file: any) => any;
+  setPlaylistOwner: (owner: User | null) => any;
   updateMessage: (message: string) => any;
 }
 
@@ -122,6 +125,7 @@ export class CreatePlaylistComponent extends React.Component<IProps, ICreatePlay
 
   public componentDidMount(){
     this.props.getAccessToken();
+    this.props.setPlaylistOwner(getCurrentUser());
   }
 
   public componentWillUnmount(){
@@ -177,6 +181,7 @@ const mapDispatchToProps = {
   getAccessToken: createPlaylistActions.getAccessToken,
   savePlaylistToDatabase: createPlaylistActions.savePlaylistToDatabase,
   sendImageToDatabase: createPlaylistActions.sendImageToDatabase,
+  setPlaylistOwner: createPlaylistActions.setPlaylistOwner,
   updateMessage: createPlaylistActions.updateMessage
 }
 export default connect(mapStateToProps, mapDispatchToProps)(CreatePlaylistComponent);
