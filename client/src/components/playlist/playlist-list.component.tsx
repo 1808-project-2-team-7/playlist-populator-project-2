@@ -9,6 +9,7 @@ import { Category } from '../../models/Category';
 import { Playlist } from '../../models/Playlist';
 import { IPlaylistListState, IState } from '../../reducers';
 import { PlaylistCard } from './playlist-card.component';
+// import { CategoryCardComponent } from '../create-playlist/category-card.component';
 
 interface IProps extends RouteComponentProps<{}>, IPlaylistListState {
     doneLoading: boolean
@@ -46,6 +47,10 @@ class PlaylistList extends React.Component<IProps, {}> {
                         return <Button outline color={buttonStyles[index % buttonStyles.length]} key={category.id} onClick={() => this.props.filterPlaylists(playlists, this.toggleFilter(categoryFilter, category), nameFilter)} active={categoryFilter.indexOf(category) >= 0}>{category.categoryName}</Button>
                     })
                     }
+                    {/* {getCategories().map((category: Category) => {
+                        return <CategoryCardComponent key={category.id} imagePath={category.imagePath} category={category} />
+                    })
+                    } */}
                 </div>
                 <div className="playlist-list-buttons row justify-content-center">
                     <Button color={"primary"} onClick={() => this.props.filterPlaylists(playlists, getCategories(), nameFilter)}>Select all categories</Button>

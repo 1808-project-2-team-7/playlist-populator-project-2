@@ -3,13 +3,18 @@ import { connect } from "react-redux";
 import { getCategories } from "../../App";
 import { Category } from "../../models/Category";
 import { ICreatePlaylistState, IState } from "../../reducers";
-import CategoryCardComponent from "./category-card.component";
+import { CategoryCardComponent } from "./category-card.component";
+import * as createPlaylistActions from "../../actions/create-playlist/create-playlist.actions";
 
 interface ICategoryState {
   categories: Category[]
 }
 
-export class ChooseCategoryComponent extends React.Component<ICreatePlaylistState, ICategoryState> {
+interface IProps extends ICreatePlaylistState {
+  setCategoryInformation: (category: Category) => any;
+}
+
+export class ChooseCategoryComponent extends React.Component<IProps, ICategoryState> {
 
   public constructor(props: any) {
     super(props);
@@ -32,13 +37,13 @@ export class ChooseCategoryComponent extends React.Component<ICreatePlaylistStat
             if (index % 3 === 0 && index - 2 < this.state.categories.length) {
               return (
                 <div key={category.id} className="row">
-                  <div className="col-sm">
+                  <div className="col-sm" onClick={() => this.props.setCategoryInformation(category)}>
                     <CategoryCardComponent imagePath={images[index]} category={categories[index]} />
                   </div>
-                  <div className="col-sm">
+                  <div className="col-sm" onClick={() => this.props.setCategoryInformation(category)}>
                     <CategoryCardComponent imagePath={images[index + 1]} category={categories[index + 1]} />
                   </div>
-                  <div className="col-sm">
+                  <div className="col-sm" onClick={() => this.props.setCategoryInformation(category)}>
                     <CategoryCardComponent imagePath={images[index + 2]} category={categories[index + 2]} />
                   </div>
                 </div>
@@ -53,5 +58,5 @@ export class ChooseCategoryComponent extends React.Component<ICreatePlaylistStat
 }
 
 const mapStateToProps = (state: IState) => (state.createPlaylist);
-const mapDispatchToProps = {}
+const mapDispatchToProps = { setCategoryInformation: createPlaylistActions.setCategoryInformation }
 export default connect(mapStateToProps, mapDispatchToProps)(ChooseCategoryComponent);
