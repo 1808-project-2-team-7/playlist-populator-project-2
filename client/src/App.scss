@@ -114,6 +114,8 @@ html, body, #root{
 #playlist-list-filters .categories{
   .category-col{
     flex-grow: inherit;
+    padding-right: 7px;
+    padding-left: 7px;
   }
   .cardBody, .btn {
     padding: 0;
