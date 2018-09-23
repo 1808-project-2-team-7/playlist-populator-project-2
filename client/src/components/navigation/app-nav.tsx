@@ -22,6 +22,9 @@ export class AppNav extends React.Component {
                         <li className="nav-item">
                             <Link to="/playlists/new">Create Playlist</Link>
                         </li>
+                        <li className="nav-item">
+                            <Link to="/logout">Logout</Link>
+                        </li>
                     </>
                 )}
 
@@ -35,9 +38,6 @@ export class AppNav extends React.Component {
                             <Link to="/register">Register</Link>
                         </li>
                     </>)}
-                <li className="nav-item">
-                    <Link to="/logout">Logout</Link>
-                </li>
             </ul>
         )
     }
