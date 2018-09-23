@@ -83,7 +83,7 @@ const reducer = combineReducers<IState>({
 
 export const state = (newState: any, action: any) => {
   if (action.type === currentUserTypes.LOGOUT) {
-    newState = undefined
+    newState = { categories: newState.categories }
   }
 
   return reducer(newState, action)
