@@ -43,10 +43,7 @@ export const createPlaylistReducer= (state= initialState, action: any) => {
         case createPlaylistTypes.CLEAR_PLAYLIST:
             return {
                 ...state,
-                playlist: {
-                    ...state.playlist,
-                    songs: action.payload
-                },
+                playlist: action.payload,
                 suggestedSongs: action.payload
             }
         case createPlaylistTypes.CLEAR_SONG_FROM_SUGGESTED_SONGS:
@@ -132,6 +129,14 @@ export const createPlaylistReducer= (state= initialState, action: any) => {
             return {
                 ...state,
                 message: action.payload.message
+            }
+        case createPlaylistTypes.UPDATE_PLAYLIST_ID:
+            return {
+                ...state,
+                playlist: {
+                    ...state.playlist,
+                    id: action.payload.playlistId
+                }
             }
         case createPlaylistTypes.UPDATE_POPULATED:
             return {

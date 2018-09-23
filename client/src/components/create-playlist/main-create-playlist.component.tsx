@@ -19,7 +19,6 @@ export class MainCreatePlaylistComponent extends React.Component<IProps, {}> {
   }
 
   public display= () => {
-      console.log(this.props.playlist);
       if(!this.props.playlist.category.id){
           return (
             <ChooseCategoryComponent />

@@ -54,7 +54,7 @@ export class InputSongsComponent extends React.Component<IProps, IState> {
       return (
         <form onSubmit={this.populate}>
           <div>
-            <Button className="submit-button" type="submit"> Populate </Button>
+            <Button className="submit-button" type="submit"> POPulate </Button>
           </div>
         </form>
       )
