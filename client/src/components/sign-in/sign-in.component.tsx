@@ -22,10 +22,10 @@ class SignInComponent extends React.Component<IProps, {}> {
         const { errorMessage, credentials } = this.props;
         return (
             <div className="container h-100">
-                <div className="row h-75">
-                    <div className="mx-auto">
+                <div className="row h-100">
+                    <div className="mx-auto my-auto">
                         <Card>
-                            <CardHeader className="text-white bg-dark">Sign In to ...</CardHeader>
+                            <CardHeader className="text-white bg-dark">Sign in</CardHeader>
                             <CardBody className="bg-light">
                                 {errorMessage &&
                                     <div className="alert alert-danger" role="alert">

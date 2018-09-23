@@ -12,6 +12,7 @@ import { playlistListReducer } from "./playlist-list.reducer";
 import { playlistReducer } from "./playlist.reducer";
 import { registerReducer } from "./register.reducer";
 import { signInReducer } from "./sign-in.reducer";
+import { userReducer } from './user.reducer'
 
 export interface ICreatePlaylistState {
   accessToken: string,
@@ -33,6 +34,10 @@ export interface ISignInState {
 
 export interface IHomeState {
   playlists: Playlist[],
+  doneLoading: boolean
+}
+export interface IUserState {
+  userPlaylists: Playlist[],
   doneLoading: boolean
 }
 
@@ -67,7 +72,8 @@ export interface IState {
   playlist: IPlaylistState,
   playlistList: IPlaylistListState,
   register: IRegisterState,
-  signIn: ISignInState
+  signIn: ISignInState,
+  user: IUserState
 
 }
 
@@ -79,12 +85,13 @@ const reducer = combineReducers<IState>({
   playlist: playlistReducer,
   playlistList: playlistListReducer,
   register: registerReducer,
-  signIn: signInReducer
+  signIn: signInReducer,
+  user: userReducer
 })
 
 export const state = (newState: any, action: any) => {
   if (action.type === currentUserTypes.LOGOUT) {
-    newState = undefined
+    newState = { categories: newState.categories }
   }
 
   return reducer(newState, action)
