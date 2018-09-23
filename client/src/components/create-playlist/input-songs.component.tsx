@@ -8,6 +8,7 @@ import { Button } from "reactstrap";
 
 interface IProps extends ICreatePlaylistState {
     addInputToPlaylist: (songInput: string, artistInput: string, accessToken: string) => any;
+    clearCategory: () => any;
     clearSuggestedSongs: () => any;
     getSongsFromDatabase: (playlist: Playlist, spotifyApiSongs: Song[]) => any;
     getSongsFromSpotifyApi: (songs: Song[], accessToken: string) => any;
@@ -60,6 +61,11 @@ export class InputSongsComponent extends React.Component<IProps, IState> {
     }
     return;
   }
+
+  public changeCategory= (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    this.props.clearCategory();
+  }
   
   public render() {
     return (
@@ -75,6 +81,12 @@ export class InputSongsComponent extends React.Component<IProps, IState> {
             </div>
         </form>
         {this.showPopulateButton()}
+        <br />
+        <form onSubmit={this.changeCategory}>
+            <div>
+                <Button className="submit-button" type="submit"> Change Category </Button>
+            </div>
+        </form>
       </div>
     );
   }
@@ -82,6 +94,7 @@ export class InputSongsComponent extends React.Component<IProps, IState> {
 const mapStateToProps = (state: IState) => (state.createPlaylist);
 const mapDispatchToProps = {
     addInputToPlaylist: createPlaylistActions.addInputToPlaylist,
+    clearCategory: createPlaylistActions.clearCategory,
     clearSuggestedSongs: createPlaylistActions.clearSuggestedSongs,
     getSongsFromDatabase: createPlaylistActions.getSongsFromDatabase,
     getSongsFromSpotifyApi: createPlaylistActions.getSongsFromSpotifyApi,

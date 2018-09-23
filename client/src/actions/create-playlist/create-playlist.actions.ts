@@ -48,6 +48,16 @@ export const addSuggestedSongToPlaylist= (song: Song) => {
     }
 }
 
+export const clearCategory= () => {
+    const category=new Category();
+    return {
+        payload: {
+            category
+        },
+        type: createPlaylistTypes.CLEAR_CATEGORY
+    }
+}
+
 export const clearPlaylist= () => {
     return {
         payload: [],
@@ -284,7 +294,7 @@ export const savePlaylistToDatabase= (playlist: Playlist) => (dispatch: any) => 
     .then(resp => resp.json())
     .then(savedPlaylist => {
         dispatch({
-            payload: savedPlaylist,
+            payload: { savedPlaylist },
             type: createPlaylistTypes.SAVE_PLAYLIST_TO_DATABASE
         })
     })

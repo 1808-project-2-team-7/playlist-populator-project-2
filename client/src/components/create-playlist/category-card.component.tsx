@@ -27,7 +27,7 @@ export class CategoryCardComponent extends React.Component<IProps, any> {
         <Card>
           <CardImg id="cardImage" className="card-img-top" src={images.assetsObject[this.props.imagePath]} alt="Card image cap" />
           <CardBody className="cardBody">
-              <CardText id="cardText" className="card-text">{this.props.category.categoryName}</CardText>
+              <CardText id="cardText" className="card-text">{this.props.category && this.props.category.categoryName}</CardText>
           </CardBody>
         </Card>
       </div>
