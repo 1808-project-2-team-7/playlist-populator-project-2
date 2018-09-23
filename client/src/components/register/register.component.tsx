@@ -33,10 +33,10 @@ class RegisterComponent extends React.Component<IProps, {}> {
         const { errorMessage } = this.props;
         return (
             <div className="container h-100">
-                <div className="row h-75">
+                <div className="row h-100">
                     <div className="mx-auto my-auto">
                         <Card>
-                            <CardHeader className="text-white bg-dark">Create an Account</CardHeader>
+                            <CardHeader className="text-white bg-dark">Register to create a playlist</CardHeader>
                             <CardBody className="bg-light">
                                 {errorMessage &&
                                     <div className="alert alert-danger" role="alert">
@@ -110,7 +110,7 @@ class RegisterComponent extends React.Component<IProps, {}> {
                                             />
                                         </FormGroup>
                                     </Col>
-
+                                    <Col>
                                     <div className="container">
                                         <label> Upload Profile Image: </label>
                                         <input
@@ -120,9 +120,10 @@ class RegisterComponent extends React.Component<IProps, {}> {
                                             className="form-control"
                                             placeholder="Upload Profile Image" />
                                         <div className="container">
-                                            <img id="imagePreview" src={this.props.bucketKey} />
+                                            <img id="imagePreview2" src={this.props.bucketKey} />
                                         </div>
                                     </div>
+                                    </Col>
                                         <Button color="primary" className="btn btn-lg btn-block" type="submit">Register</Button>
                                 </Form>
                             </CardBody>

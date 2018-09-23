@@ -9,7 +9,7 @@ export class ProtectedRoute extends React.Component<any, {}> {
         return (
             <Route
                 {...props}
-                render={prop => (
+                render={(prop: any) => (
                     !getCurrentUser() && createPlaylistsRoute ?
                         <Redirect to='/sign-in' /> : <Component {...prop} />)
                 }
