@@ -16,10 +16,11 @@ import { userReducer } from './user.reducer'
 
 export interface ICreatePlaylistState {
   accessToken: string,
-  errorMessage: string,
+  message: string,
   songInput: string,
   artistInput: string,
   playlist: Playlist,
+  populated: boolean,
   suggestedSongs: Song[]
 }
 
@@ -76,7 +77,7 @@ export interface IState {
 
 }
 
-const reducer = combineReducers<IState>({
+const reducers = {
   categories: categoryReducer,
   createPlaylist: createPlaylistReducer,
   currentUser: currentUserReducer,
@@ -86,7 +87,9 @@ const reducer = combineReducers<IState>({
   register: registerReducer,
   signIn: signInReducer,
   user: userReducer
-})
+}
+
+const reducer = combineReducers<IState>(reducers);
 
 export const state = (newState: any, action: any) => {
   if (action.type === currentUserTypes.LOGOUT) {

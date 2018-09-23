@@ -6,9 +6,9 @@ import InputSongsComponent from "./input-songs.component";
 import PlaylistTableComponent from "./playlist-table.component";
 import SuggestedSongsTableComponent from "./suggested-songs-table.component";
 import { Playlist } from "../../models/Playlist";
-import { User } from "../../models/User";
 import { Button, Col, Row, Container } from "reactstrap";
 import { getCurrentUser } from "../../App";
+import { User } from "../../models/User";
 
 interface IProps extends ICreatePlaylistState {
   clearPlaylist: () => any;
@@ -16,7 +16,7 @@ interface IProps extends ICreatePlaylistState {
   savePlaylistToDatabase: (playlist: Playlist) => any;
   sendImageToDatabase: (file: any) => any;
   setPlaylistOwner: (owner: User | null) => any;
-  updateErrorMessage: (message: string) => any;
+  updateMessage: (message: string) => any;
 }
 
 interface ICreatePlaylistComponentState {
@@ -32,11 +32,13 @@ export class CreatePlaylistComponent extends React.Component<IProps, ICreatePlay
     }
   }
 
-  public savePlaylist= () => {
+  public savePlaylist= (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     this.props.savePlaylistToDatabase(this.props.playlist);
   }
 
-  public discardPlaylist= () => {
+  public discardPlaylist= (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     this.props.clearPlaylist();
   }
 
@@ -46,7 +48,7 @@ export class CreatePlaylistComponent extends React.Component<IProps, ICreatePlay
         <div className="container">
           <form onSubmit={this.savePlaylist}>
             <div className="form-group container">
-                <Button className="save-discard-button" type="submit"> Save Playlist </Button>
+                <Button color="success" className="save-discard-button" type="submit"> Save Playlist </Button>
             </div>
           </form>
         </div>
@@ -61,7 +63,7 @@ export class CreatePlaylistComponent extends React.Component<IProps, ICreatePlay
         <div className="container">
           <form onSubmit={this.discardPlaylist}>
             <div className="form-group container">
-                <Button className="save-discard-button" type="submit"> Discard Playlist </Button>
+                <Button color="danger" className="save-discard-button" type="submit"> Discard Playlist </Button>
             </div>
           </form>
         </div>
@@ -74,6 +76,17 @@ export class CreatePlaylistComponent extends React.Component<IProps, ICreatePlay
     if(this.props.playlist.songs.length){
       return (
         <PlaylistTableComponent />
+      )
+    }
+    return;
+  }
+
+  public showMessage= () => {
+    if(this.props.playlist.songs.length > 5 && !this.props.populated){
+      return (
+        <div id="create-playlist" className="alert alert-danger container message" role="alert">
+            <span id="message">{this.props.message}</span>
+        </div>
       )
     }
     return;
@@ -104,9 +117,19 @@ export class CreatePlaylistComponent extends React.Component<IProps, ICreatePlay
     }
   }
 
+  public componentDidUpdate(){
+    if(this.props.playlist.songs.length > 5 && !this.props.populated){
+      this.props.updateMessage('Enter no more than 5 songs');
+    }
+  }
+
   public componentDidMount(){
     this.props.getAccessToken();
     this.props.setPlaylistOwner(getCurrentUser());
+  }
+
+  public componentWillUnmount(){
+    this.props.clearPlaylist();
   }
 
   public render() {
@@ -131,6 +154,9 @@ export class CreatePlaylistComponent extends React.Component<IProps, ICreatePlay
           </Col>
         </Row>
         <Row>
+          {this.showMessage()}
+        </Row>
+        <Row>
           <Col>{this.playlistTable()}</Col>
           <Col>{this.suggestedSongsTable()}</Col>
         </Row>
@@ -144,7 +170,6 @@ export class CreatePlaylistComponent extends React.Component<IProps, ICreatePlay
           <Col></Col>
         </Row>
         </Container>
-        {this.props.errorMessage}
       </div>
     );
   }
@@ -157,6 +182,6 @@ const mapDispatchToProps = {
   savePlaylistToDatabase: createPlaylistActions.savePlaylistToDatabase,
   sendImageToDatabase: createPlaylistActions.sendImageToDatabase,
   setPlaylistOwner: createPlaylistActions.setPlaylistOwner,
-  updateErrorMessage: createPlaylistActions.updateErrorMessage
+  updateMessage: createPlaylistActions.updateMessage
 }
 export default connect(mapStateToProps, mapDispatchToProps)(CreatePlaylistComponent);
