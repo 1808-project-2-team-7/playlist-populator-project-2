@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import * as createPlaylistActions from "../../actions/create-playlist/create-playlist.actions";
 import { RouteComponentProps } from 'react-router';
 import { Button, Card, CardBody, CardHeader, Col, Form, FormGroup, Input } from 'reactstrap';
 import Label from 'reactstrap/lib/Label';
@@ -27,18 +26,7 @@ class RegisterComponent extends React.Component<IProps, {}> {
 
     public uploadImage = (e: any) => {
         const file = e.target && e.target.files[0];
-        this.props.sendImageToDatabase(file);
-        const fReader = new FileReader();
-        fReader.readAsDataURL(file);
-        fReader.onload = (loadedFile: any) => {
-            const readFile = loadedFile && loadedFile.target.result;
-            if (readFile) {
-                this.setState({
-                    ...this.state,
-                    playlistImageSrc: readFile
-                });
-            }
-        }
+        this.props.sendImageToDatabase(file);     
     }
 
     public render() {
@@ -149,7 +137,7 @@ class RegisterComponent extends React.Component<IProps, {}> {
         const mapStateToProps = (state: IState) => (state.register);
 const mapDispatchToProps = {
             register: registerActions.register,
-            sendImageToDatabase: createPlaylistActions.sendImageToDatabase,
+            sendImageToDatabase: registerActions.sendImageToDatabase,
             updateBucketKey: registerActions.updateBucketKey,
             updateEmail: registerActions.updateEmail,
             updateFirstName: registerActions.updateFirstName,

@@ -2,7 +2,28 @@ import history from '../../history';
 import { registerTypes } from "./register.types";
 import { environment } from '../../environment';
 
-export const updateBucketKey = (url: string)=>{
+export const sendImageToDatabase = (file: any) => (dispatch: any) => {
+  const formData = new FormData();
+  formData.append('file', file);
+  fetch(`${environment.context}storage/uploadFile`, {
+    body: formData,
+    method: 'POST'
+  })
+    .then(resp => resp.text())
+    .then(bucketKey => {
+      dispatch({
+        payload: {
+          bucketKey
+        },
+        type: registerTypes.UPDATE_BUCKETKEY
+      })
+    })
+    .catch(error => {
+      console.log(error);
+    })
+}
+
+export const updateBucketKey = (url: string) => {
   return {
     payload: {
       bucketKey: url
