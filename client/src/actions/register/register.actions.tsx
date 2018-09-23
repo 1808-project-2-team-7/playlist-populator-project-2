@@ -80,6 +80,14 @@ export const updateLastName = (lastName: string) => {
 export const register = (e: React.FormEvent<HTMLFormElement>, userInfo: any) => {
   return (dispatch: any) => {
     e.preventDefault();
+    const defaultBucketKey = 'https://s3.us-east-2.amazonaws.com/***REMOVED***/1537665488116-default-user1.png';
+    if( userInfo.bucketKey === ""){
+      userInfo = {
+        ...userInfo,
+        bucketKey: defaultBucketKey
+      }
+
+    }
     return fetch(`${environment.context}users`, {
       body: JSON.stringify(userInfo),
       headers: {
