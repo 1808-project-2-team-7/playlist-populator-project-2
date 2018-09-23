@@ -44,7 +44,7 @@ class PlaylistList extends React.Component<IProps, {}> {
                 <div className="playlist-list-buttons row justify-content-center categories">
                     {getCategories().map((category: Category) => {
                         return (
-                            <div key={category.id} className="col-sm">
+                            <div key={category.id} className="col-sm category-col">
                                 <Button key={category.id} onClick={() => this.props.filterPlaylists(playlists, this.toggleFilter(categoryFilter, category), nameFilter)} active={categoryFilter.indexOf(category) >= 0}>
                                     <CategoryCardComponent key={category.id} imagePath={category.imagePath} category={category} />
                                 </Button>
