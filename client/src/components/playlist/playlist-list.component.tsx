@@ -1,15 +1,14 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
-import { Playlist } from '../../models/Playlist';
-import { IState, IPlaylistListState } from '../../reducers';
-import { PlaylistCard } from './playlist-card.component';
-import * as playlistListActions from '../../actions/playlist/playlist-list.actions';
-import { ButtonGroup } from 'reactstrap';
+import Waypoint from 'react-waypoint';
 import Button from 'reactstrap/lib/Button';
+import * as playlistListActions from '../../actions/playlist/playlist-list.actions';
 import { getCategories } from '../../App';
 import { Category } from '../../models/Category';
-import Waypoint from 'react-waypoint';
+import { Playlist } from '../../models/Playlist';
+import { IPlaylistListState, IState } from '../../reducers';
+import { PlaylistCard } from './playlist-card.component';
 
 interface IProps extends RouteComponentProps<{}>, IPlaylistListState {
     doneLoading: boolean
@@ -43,12 +42,10 @@ class PlaylistList extends React.Component<IProps, {}> {
         return (
             <div className="container-fluid" id="playlist-list-filters">
                 <div className="playlist-list-buttons row justify-content-center">
-                    <ButtonGroup>
-                        {getCategories().map((category: Category, index: number) => {
-                            return <Button outline color={buttonStyles[index % buttonStyles.length]} key={category.id} onClick={() => this.props.filterPlaylists(playlists, this.toggleFilter(categoryFilter, category), nameFilter)} active={categoryFilter.indexOf(category) >= 0}>{category.categoryName}</Button>
-                        })
-                        }
-                    </ButtonGroup>
+                    {getCategories().map((category: Category, index: number) => {
+                        return <Button outline color={buttonStyles[index % buttonStyles.length]} key={category.id} onClick={() => this.props.filterPlaylists(playlists, this.toggleFilter(categoryFilter, category), nameFilter)} active={categoryFilter.indexOf(category) >= 0}>{category.categoryName}</Button>
+                    })
+                    }
                 </div>
                 <div className="playlist-list-buttons row justify-content-center">
                     <Button color={"primary"} onClick={() => this.props.filterPlaylists(playlists, getCategories(), nameFilter)}>Select all categories</Button>
