@@ -42,12 +42,14 @@ class PlaylistList extends React.Component<IProps, {}> {
         const buttonStyles = ['primary', 'secondary', 'success', 'info', 'warning', 'danger'];
         return (
             <div className="container-fluid" id="playlist-list-filters">
-                <ButtonGroup className="playlist-list-buttons row justify-content-center">
-                    {getCategories().map((category: Category, index: number) => {
-                        return <Button outline color={buttonStyles[index % buttonStyles.length]} key={category.id} onClick={() => this.props.filterPlaylists(playlists, this.toggleFilter(categoryFilter, category), nameFilter)} active={categoryFilter.indexOf(category) >= 0}>{category.categoryName}</Button>
-                    })
-                    }
-                </ButtonGroup>
+                <div className="playlist-list-buttons row justify-content-center">
+                    <ButtonGroup>
+                        {getCategories().map((category: Category, index: number) => {
+                            return <Button outline color={buttonStyles[index % buttonStyles.length]} key={category.id} onClick={() => this.props.filterPlaylists(playlists, this.toggleFilter(categoryFilter, category), nameFilter)} active={categoryFilter.indexOf(category) >= 0}>{category.categoryName}</Button>
+                        })
+                        }
+                    </ButtonGroup>
+                </div>
                 <div className="playlist-list-buttons row justify-content-center">
                     <Button color={"primary"} onClick={() => this.props.filterPlaylists(playlists, getCategories(), nameFilter)}>Select all categories</Button>
                     <Button color={"primary"} onClick={() => this.props.filterPlaylists(playlists, [], nameFilter)}>Deselect all categories</Button>
