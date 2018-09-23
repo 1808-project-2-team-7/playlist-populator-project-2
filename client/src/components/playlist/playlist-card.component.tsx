@@ -17,7 +17,7 @@ export const PlaylistCard: React.StatelessComponent<IProps> = (props) => {
     return (
         <div className="playlist-card-container">
             <Link to={"/playlists/" + playlist.id}>
-                <Card className="playlist-card" >
+                <Card inverse className="playlist-card" >
                     <CardImg height="100%" src={playlist.bucketKey || images.assetsObject[playlist.category.imagePath]} alt="category" />
                     <CardImgOverlay>
                         <CardTitle>{playlist.name}  ({playlist.category.categoryName})</CardTitle>
