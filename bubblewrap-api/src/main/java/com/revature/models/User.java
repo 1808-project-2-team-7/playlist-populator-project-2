@@ -20,7 +20,6 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@JsonProperty(access = Access.READ_ONLY)
 	@Column(name = "user_id")
 	private int id;
 
