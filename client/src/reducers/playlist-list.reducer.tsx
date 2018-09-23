@@ -1,6 +1,7 @@
 import { IPlaylistListState } from ".";
 import { playlistListTypes } from "../actions/playlist/playlist-list.types";
 import { categoryTypes } from "../actions/category/category.types";
+import { currentUserTypes } from "../actions/current-user/current-user.types";
 
 export const initialState: IPlaylistListState = {
     categoriesFetched: false,
@@ -28,6 +29,7 @@ export const playlistListReducer = (state = initialState, action: any) => {
                 page: isLoading ? state.page : state.page + 1
             }
         case categoryTypes.FETCH_CATEGORIES:
+        case currentUserTypes.LOGOUT:
             return {
                 ...state,
                 categoriesFetched: true,
