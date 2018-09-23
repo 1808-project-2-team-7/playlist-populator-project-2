@@ -36,7 +36,7 @@ class RegisterComponent extends React.Component<IProps, {}> {
                 <div className="row h-75">
                     <div className="mx-auto my-auto">
                         <Card>
-                            <CardHeader className="text-white bg-dark">Create an Account</CardHeader>
+                            <CardHeader className="text-white bg-dark">Register to create a playlist</CardHeader>
                             <CardBody className="bg-light">
                                 {errorMessage &&
                                     <div className="alert alert-danger" role="alert">
