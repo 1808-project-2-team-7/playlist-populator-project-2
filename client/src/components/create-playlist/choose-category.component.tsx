@@ -34,18 +34,19 @@ export class ChooseCategoryComponent extends React.Component<IProps, ICategorySt
       <div className="container">
         {
           categories.map((category: Category, index: number) => {
-            if (index % 3 === 0 && index - 2 < this.state.categories.length) {
+            const categoryCards = [];
+            if (index % 3 === 0) {
+              for (let i = 0; i < 3; i++) {
+                categoryCards.push(
+                  <div className="col-sm" onClick={() => this.props.setCategoryInformation(category)}>
+                    <div id="category-cards" className="card">
+                      <CategoryCardComponent imagePath={images[index + i]} category={categories[index + i]} />
+                    </div>
+                  </div>)
+              }
               return (
                 <div key={category.id} className="row">
-                  <div className="col-sm" onClick={() => this.props.setCategoryInformation(category)}>
-                    <CategoryCardComponent imagePath={images[index]} category={categories[index]} />
-                  </div>
-                  <div className="col-sm" onClick={() => this.props.setCategoryInformation(category)}>
-                    <CategoryCardComponent imagePath={images[index + 1]} category={categories[index + 1]} />
-                  </div>
-                  <div className="col-sm" onClick={() => this.props.setCategoryInformation(category)}>
-                    <CategoryCardComponent imagePath={images[index + 2]} category={categories[index + 2]} />
-                  </div>
+                  {categoryCards}
                 </div>
               )
             }
