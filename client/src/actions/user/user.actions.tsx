@@ -1,7 +1,8 @@
 import { userTypes } from './user.types';
 import { environment } from '../../environment';
-export const fetchUserPlaylists = (id:number) => (dispatch: any) => {
-    fetch(`${environment.context}users/${id}`)
+export const fetchUserPlaylists = (id:number, page: number) => (dispatch: any) => {
+    const size = 30;
+    fetch(`${environment.context}users/1?page=${page}&size=${size}`)
         .then(resp => {
             if (resp.status === 200) {
                 return resp.json();
@@ -11,6 +12,7 @@ export const fetchUserPlaylists = (id:number) => (dispatch: any) => {
         }).then(resp => {
             dispatch({
                 payload: {
+                    doneLoading: resp && resp.constructor === Array && resp.length < size,
                     playlists: resp
                 },
                 type: userTypes.FETCH_USER_PLAYLISTS

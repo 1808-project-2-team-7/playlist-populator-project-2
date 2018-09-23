@@ -3,7 +3,7 @@ import { playlistTypes } from "../actions/playlist/playlist.types";
 import { Playlist } from "../models/Playlist";
 
 export const initialState: IPlaylistState = {
-    playlist: new Playlist
+    playlist: new Playlist()
 }
 
 export const playlistReducer = (state = initialState, action: any) => {

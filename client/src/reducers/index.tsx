@@ -36,7 +36,8 @@ export interface IHomeState {
   doneLoading: boolean
 }
 export interface IUserState {
-  userPlaylists: Playlist[]
+  userPlaylists: Playlist[],
+  doneLoading: boolean
 }
 
 export interface IPlaylistListState {
@@ -49,7 +50,7 @@ export interface IPlaylistListState {
 }
 
 export interface IPlaylistState {
-  playlist:Playlist,
+  playlist: Playlist
 }
 
 export interface IRegisterState {

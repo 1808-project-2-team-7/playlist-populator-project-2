@@ -2,6 +2,7 @@ import { userTypes } from "../actions/user/user.types";
 import { IUserState } from ".";
 
 export const initialState: IUserState = {
+    doneLoading: false,
     userPlaylists: []
 }
 
@@ -10,7 +11,8 @@ export const userReducer = (state = initialState, action: any) => {
         case userTypes.FETCH_USER_PLAYLISTS:
             return {
                 ...state,
-                userPlaylists: action.payload.playlists
+                doneLoading: action.payload.doneLoading,
+                userPlaylists: [...state.userPlaylists,, ...action.payload.userPlaylists]
             }
     }
     return state;

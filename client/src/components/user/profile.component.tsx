@@ -4,10 +4,13 @@ import PlaylistList from '../playlist/playlist-list.component';
 import { IState, IUserState } from '../../reducers';
 import { RouteComponentProps } from 'react-router';
 import * as userActions from '../../actions/user/user.actions'
+import { getCurrentUser } from "../../App";
+import history from '../../history';
+import { store } from '../../store';
 
 
-interface IProps extends IUserState, RouteComponentProps<{}> {
-    fetchUserPlaylists: () => void,
+interface IProps extends RouteComponentProps<{}>, IUserState {
+    fetchUserPlaylists: (id: number) => void,
 }
 
 class ProfileComponent extends React.Component<IProps, any> {
@@ -15,22 +18,27 @@ class ProfileComponent extends React.Component<IProps, any> {
         super(props);
         
     }
+    public componentWillMount = () => {
+        if (getCurrentUser() === null) {
+            return history.push('/home')
+        };
+    }
 
     public componentDidMount = () => {
-        this.props.fetchUserPlaylists();
+        this.props.fetchUserPlaylists(1);
     }
 
     public render() {
- //       const {playlist} = this.props;
+        const cUser = store.getState().currentUser;
         return (
             <div>
                 <div >
                     <img className="d-block mx-auto rounded-circle mx-auto"
                          src= "https://jooinn.com/images/fantasy-6.jpg" alt="revature" />
-                         <p className="text-center">Users name</p>
+                         <p className="text-center"></p>
 
                 </div>
-                <PlaylistList playlists={this.props.userPlaylists} />
+                <PlaylistList playlists={this.props.userPlaylists} loadMorePlaylists={this.props.fetchUserPlaylists} doneLoading={this.props.doneLoading} />
             </div>
         )
     }
