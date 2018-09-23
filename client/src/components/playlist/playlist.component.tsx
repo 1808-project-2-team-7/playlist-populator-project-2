@@ -32,14 +32,13 @@ class PlaylistComponent extends React.Component<IProps, {}> {
             <div className="container">
                 <Card>
                     <CardHeader className="text-white bg-dark">
-                        <span className="my-auto">Playlist Songs</span>
+                        <span className="my-auto">{playlist.name}</span>
                     </CardHeader>
                 </Card>
                 <div className="table-responsive">
                     <table className="table table-striped">
                         <thead className="thead-light">
                             <tr>
-                                <th scope="col">ID</th>
                                 <th scope="col">Title</th>
                                 <th scope="col">Artist</th>
                             </tr>
