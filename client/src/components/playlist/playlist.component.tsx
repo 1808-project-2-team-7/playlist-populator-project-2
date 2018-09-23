@@ -8,7 +8,7 @@ import { IState, IPlaylistState } from '../../reducers';
 import { SongComponent } from '../song/song.component';
 import * as playlistActions from '../../actions/playlist/playlist.actions';
 
-interface IProps extends RouteComponentProps<{ id: number }>, IPlaylistState {
+interface IProps extends RouteComponentProps<{ id: string | undefined }>, IPlaylistState {
     fetchSongs: (playlistId: number) => void
 }
 
@@ -19,7 +19,10 @@ class PlaylistComponent extends React.Component<IProps, {}> {
     }
 
     public componentDidMount = () => {
-        this.props.fetchSongs(this.props.match.params.id);
+        const id = this.props.match.params.id;
+        if (id && parseInt(id, 10) && parseInt(id, 10) > 0) {
+            this.props.fetchSongs(parseInt(id, 10));
+        }
     }
 
     public render() {

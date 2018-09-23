@@ -54,6 +54,7 @@ export interface IPlaylistState {
 }
 
 export interface IRegisterState {
+  bucketKey: string,
   username: string,
   password: string,
   firstName: string,
@@ -89,7 +90,7 @@ const reducer = combineReducers<IState>({
 
 export const state = (newState: any, action: any) => {
   if (action.type === currentUserTypes.LOGOUT) {
-    newState = undefined
+    newState = { categories: newState.categories }
   }
 
   return reducer(newState, action)

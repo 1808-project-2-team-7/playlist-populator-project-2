@@ -2,6 +2,7 @@ import { registerTypes } from "../actions/register/register.types";
 import { IRegisterState } from ".";
 
 export const initialState: IRegisterState = {
+  bucketKey:'',
   email: '',
   errorMessage: '',
   firstName: '',
@@ -12,6 +13,11 @@ export const initialState: IRegisterState = {
 
 export const registerReducer = (state = initialState, action: any) => {
   switch (action.type) {
+    case registerTypes.UPDATE_BUCKETKEY:
+      return{
+        ...state,
+        bucketKey: action.payload.bucketKey
+      }
     case registerTypes.UPDATE_USERNAME:
       return {
         ...state,

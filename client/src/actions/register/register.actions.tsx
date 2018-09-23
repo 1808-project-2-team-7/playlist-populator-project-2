@@ -2,6 +2,36 @@ import history from '../../history';
 import { registerTypes } from "./register.types";
 import { environment } from '../../environment';
 
+export const sendImageToDatabase = (file: any) => (dispatch: any) => {
+  const formData = new FormData();
+  formData.append('file', file);
+  fetch(`${environment.context}storage/uploadFile`, {
+    body: formData,
+    method: 'POST'
+  })
+    .then(resp => resp.text())
+    .then(bucketKey => {
+      dispatch({
+        payload: {
+          bucketKey
+        },
+        type: registerTypes.UPDATE_BUCKETKEY
+      })
+    })
+    .catch(error => {
+      console.log(error);
+    })
+}
+
+export const updateBucketKey = (url: string) => {
+  return {
+    payload: {
+      bucketKey: url
+    },
+    type: registerTypes.UPDATE_BUCKETKEY
+  }
+}
+
 export const updatePassword = (password: string) => {
   return {
     payload: {
@@ -50,6 +80,14 @@ export const updateLastName = (lastName: string) => {
 export const register = (e: React.FormEvent<HTMLFormElement>, userInfo: any) => {
   return (dispatch: any) => {
     e.preventDefault();
+    const defaultBucketKey = '***REMOVED******REMOVED***/1537665488116-default-user1.png';
+    if( userInfo.bucketKey === ""){
+      userInfo = {
+        ...userInfo,
+        bucketKey: defaultBucketKey
+      }
+
+    }
     return fetch(`${environment.context}users`, {
       body: JSON.stringify(userInfo),
       headers: {
