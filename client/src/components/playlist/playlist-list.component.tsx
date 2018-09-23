@@ -55,7 +55,7 @@ class PlaylistList extends React.Component<IProps, {}> {
                 </div>
                 <div className="playlist-list-buttons row justify-content-center">
                     <Button color={"primary"} onClick={() => this.props.filterPlaylists(playlists, getCategories(), nameFilter)}>Select all categories</Button>
-                    <Button color={"primary"} onClick={() => this.props.filterPlaylists(playlists, [], nameFilter)}>Deselect all categories</Button>
+                    <Button color={"secondary"} onClick={() => this.props.filterPlaylists(playlists, [], nameFilter)}>Deselect all categories</Button>
                 </div>
                 <div className="row justify-content-center">
                     <input
