@@ -41,7 +41,7 @@ class PlaylistList extends React.Component<IProps, {}> {
         const { playlists, filteredPlaylists, categoryFilter, nameFilter, doneLoading } = this.props;
         return (
             <div className="container-fluid" id="playlist-list-filters">
-                <div className="playlist-list-buttons row justify-content-center">
+                <div className="playlist-list-buttons row justify-content-center categories">
                     {getCategories().map((category: Category) => {
                         return (
                             <Button key={category.id} onClick={() => this.props.filterPlaylists(playlists, this.toggleFilter(categoryFilter, category), nameFilter)} active={categoryFilter.indexOf(category) >= 0}>
