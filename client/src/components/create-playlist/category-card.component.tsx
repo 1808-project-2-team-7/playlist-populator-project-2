@@ -9,13 +9,11 @@ interface IProps {
 }
 export const CategoryCardComponent: React.StatelessComponent<IProps> = (props) => {
   return (
-    <div id="category-cards" className="card">
-      <Card>
-        <CardImg id="cardImage" className="card-img-top" src={images.assetsObject[props.imagePath]} alt="Card image cap" />
-        <CardBody className="cardBody">
-          <CardText id="cardText" className="card-text">{props.category.categoryName}</CardText>
-        </CardBody>
-      </Card>
-    </div>
+    <Card>
+      <CardImg id="cardImage" className="card-img-top" src={images.assetsObject[props.imagePath]} alt="Card image cap" />
+      <CardBody className="cardBody">
+        <CardText id="cardText" className="card-text">{props.category.categoryName}</CardText>
+      </CardBody>
+    </Card>
   );
 }

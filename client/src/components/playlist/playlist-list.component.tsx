@@ -9,7 +9,7 @@ import { Category } from '../../models/Category';
 import { Playlist } from '../../models/Playlist';
 import { IPlaylistListState, IState } from '../../reducers';
 import { PlaylistCard } from './playlist-card.component';
-// import { CategoryCardComponent } from '../create-playlist/category-card.component';
+import { CategoryCardComponent } from '../create-playlist/category-card.component';
 
 interface IProps extends RouteComponentProps<{}>, IPlaylistListState {
     doneLoading: boolean
@@ -39,18 +39,17 @@ class PlaylistList extends React.Component<IProps, {}> {
 
     public render() {
         const { playlists, filteredPlaylists, categoryFilter, nameFilter, doneLoading } = this.props;
-        const buttonStyles = ['primary', 'secondary', 'success', 'info', 'warning', 'danger'];
         return (
             <div className="container-fluid" id="playlist-list-filters">
                 <div className="playlist-list-buttons row justify-content-center">
-                    {getCategories().map((category: Category, index: number) => {
+                    {/* {getCategories().map((category: Category, index: number) => {
                         return <Button outline color={buttonStyles[index % buttonStyles.length]} key={category.id} onClick={() => this.props.filterPlaylists(playlists, this.toggleFilter(categoryFilter, category), nameFilter)} active={categoryFilter.indexOf(category) >= 0}>{category.categoryName}</Button>
                     })
-                    }
-                    {/* {getCategories().map((category: Category) => {
-                        return <CategoryCardComponent key={category.id} imagePath={category.imagePath} category={category} />
-                    })
                     } */}
+                    {getCategories().map((category: Category, index: number) => {
+                        return <Button key={category.id} onClick={() => this.props.filterPlaylists(playlists, this.toggleFilter(categoryFilter, category), nameFilter)} active={categoryFilter.indexOf(category) >= 0}><CategoryCardComponent key={category.id} imagePath={category.imagePath} category={category} /></Button>
+                    })
+                    }
                 </div>
                 <div className="playlist-list-buttons row justify-content-center">
                     <Button color={"primary"} onClick={() => this.props.filterPlaylists(playlists, getCategories(), nameFilter)}>Select all categories</Button>
