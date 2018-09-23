@@ -48,7 +48,7 @@ export class CreatePlaylistComponent extends React.Component<IProps, ICreatePlay
         <div className="container">
           <form onSubmit={this.savePlaylist}>
             <div className="form-group container">
-                <Button className="save-discard-button" type="submit"> Save Playlist </Button>
+                <Button color="success" className="save-discard-button" type="submit"> Save Playlist </Button>
             </div>
           </form>
         </div>
@@ -63,7 +63,7 @@ export class CreatePlaylistComponent extends React.Component<IProps, ICreatePlay
         <div className="container">
           <form onSubmit={this.discardPlaylist}>
             <div className="form-group container">
-                <Button className="save-discard-button" type="submit"> Discard Playlist </Button>
+                <Button color="danger" className="save-discard-button" type="submit"> Discard Playlist </Button>
             </div>
           </form>
         </div>
