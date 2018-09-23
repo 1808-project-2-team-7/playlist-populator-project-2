@@ -7,6 +7,7 @@ import * as registerActions from '../../actions/register/register.actions';
 import { IRegisterState, IState } from '../../reducers';
 
 interface IProps extends RouteComponentProps<{}>, IRegisterState {
+    updateBucketKey: (url: string) => void
     updateEmail: (email: string) => void
     updateError: (message: string) => void
     updateFirstName: (firstName: string) => void
@@ -14,6 +15,7 @@ interface IProps extends RouteComponentProps<{}>, IRegisterState {
     updatePassword: (password: string) => void
     updateUsername: (username: string) => void
     register: (e: React.FormEvent<HTMLFormElement>, credentials: any) => void
+    sendImageToDatabase: (file: any) => void
 }
 
 class RegisterComponent extends React.Component<IProps, {}> {
@@ -21,6 +23,12 @@ class RegisterComponent extends React.Component<IProps, {}> {
     constructor(props: any) {
         super(props);
     }
+
+    public uploadImage = (e: any) => {
+        const file = e.target && e.target.files[0];
+        this.props.sendImageToDatabase(file);     
+    }
+
     public render() {
         const { errorMessage } = this.props;
         return (
@@ -102,25 +110,41 @@ class RegisterComponent extends React.Component<IProps, {}> {
                                             />
                                         </FormGroup>
                                     </Col>
-                                    <Button color="primary" className="btn btn-lg btn-block" type="submit">Register</Button>
+                                    <Col>
+                                    <div className="container">
+                                        <label> Upload Profile Image: </label>
+                                        <input
+                                            onChange={this.uploadImage}
+                                            type="file"
+                                            id="inputPlaylistImage"
+                                            className="form-control"
+                                            placeholder="Upload Profile Image" />
+                                        <div className="container">
+                                            <img id="imagePreview2" src={this.props.bucketKey} />
+                                        </div>
+                                    </div>
+                                    </Col>
+                                        <Button color="primary" className="btn btn-lg btn-block" type="submit">Register</Button>
                                 </Form>
                             </CardBody>
                         </Card>
                     </div>
+                    </div>
                 </div>
-            </div>
-        );
-    }
-}
+                );
+            }
+        }
 
-const mapStateToProps = (state: IState) => (state.register);
+        const mapStateToProps = (state: IState) => (state.register);
 const mapDispatchToProps = {
-    register: registerActions.register,
-    updateEmail: registerActions.updateEmail,
-    updateFirstName: registerActions.updateFirstName,
-    updateLastName: registerActions.updateLastName,
-    updatePassword: registerActions.updatePassword,
-    updateUsername: registerActions.updateUsername
-}
-
+            register: registerActions.register,
+            sendImageToDatabase: registerActions.sendImageToDatabase,
+            updateBucketKey: registerActions.updateBucketKey,
+            updateEmail: registerActions.updateEmail,
+            updateFirstName: registerActions.updateFirstName,
+            updateLastName: registerActions.updateLastName,
+            updatePassword: registerActions.updatePassword,
+            updateUsername: registerActions.updateUsername,
+        }
+        
 export default connect(mapStateToProps, mapDispatchToProps)(RegisterComponent);

@@ -35,7 +35,7 @@ public class AmazonClient {
     @PostConstruct
     private void initializeAmazon() {
        AWSCredentials credentials = new BasicAWSCredentials(this.accessKey, this.secretKey);
-       this.s3client = AmazonS3ClientBuilder.standard().withRegion("us-east-1").withCredentials(new AWSStaticCredentialsProvider(credentials)).build();
+       this.s3client = AmazonS3ClientBuilder.standard().withRegion("us-east-2").withCredentials(new AWSStaticCredentialsProvider(credentials)).build();
 	}
     
     
@@ -66,6 +66,7 @@ public class AmazonClient {
             uploadFileTos3bucket(fileName, file);
             file.delete();
         } catch (Exception e) {
+        	fileUrl = e.toString();
            e.printStackTrace();
         }
         return fileUrl;
