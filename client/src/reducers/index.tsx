@@ -16,10 +16,11 @@ import { userReducer } from './user.reducer'
 
 export interface ICreatePlaylistState {
   accessToken: string,
-  errorMessage: string,
+  message: string,
   songInput: string,
   artistInput: string,
   playlist: Playlist,
+  populated: boolean,
   suggestedSongs: Song[]
 }
 

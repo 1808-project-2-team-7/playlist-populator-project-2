@@ -7,7 +7,7 @@ import { User } from "../models/User";
 const initialState: ICreatePlaylistState= {
     accessToken: '',
     artistInput: '',
-    errorMessage: '',
+    message: '',
     playlist: {
         bucketKey: '',
         category: new Category(),
@@ -16,6 +16,7 @@ const initialState: ICreatePlaylistState= {
         owner: new User(),
         songs: []
     },
+    populated: false,
     songInput: '',
     suggestedSongs: []
 }
@@ -31,13 +32,18 @@ export const createPlaylistReducer= (state= initialState, action: any) => {
                     songs: [...state.playlist.songs, action.payload.song]
                 }
             }
-        case createPlaylistTypes.CLEAR_PLAYLIST:
+        case createPlaylistTypes.CLEAR_CATEGORY:
             return {
                 ...state,
                 playlist: {
                     ...state.playlist,
-                    songs: action.payload
-                },
+                    category: action.payload.category
+                }
+            }
+        case createPlaylistTypes.CLEAR_PLAYLIST:
+            return {
+                ...state,
+                playlist: action.payload,
                 suggestedSongs: action.payload
             }
         case createPlaylistTypes.CLEAR_SONG_FROM_SUGGESTED_SONGS:
@@ -119,10 +125,23 @@ export const createPlaylistReducer= (state= initialState, action: any) => {
                 ...state,
                 artistInput: action.payload.artistInput
             }
-        case createPlaylistTypes.UPDATE_ERROR_MESSAGE:
+        case createPlaylistTypes.UPDATE_MESSAGE:
             return {
                 ...state,
-                errorMessage: action.payload.message
+                message: action.payload.message
+            }
+        case createPlaylistTypes.UPDATE_PLAYLIST_ID:
+            return {
+                ...state,
+                playlist: {
+                    ...state.playlist,
+                    id: action.payload.playlistId
+                }
+            }
+        case createPlaylistTypes.UPDATE_POPULATED:
+            return {
+                ...state,
+                populated: action.payload.populated
             }
         case createPlaylistTypes.UPDATE_SONG_INPUT:
             return {
