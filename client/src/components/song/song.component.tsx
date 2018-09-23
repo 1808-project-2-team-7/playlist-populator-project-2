@@ -8,8 +8,7 @@ interface IProps {
 export const SongComponent: React.StatelessComponent<IProps> = (props) => {
     const { song } = props;
     return (
-        <tr className="reimbursement-table-row">
-            <th scope="row">{song.id}</th>
+        <tr>
             <td>{song.trackName}</td>
             <td>{song.artistName}</td>
         </tr>
