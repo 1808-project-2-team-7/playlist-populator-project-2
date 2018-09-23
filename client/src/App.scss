@@ -47,9 +47,8 @@
 
 .playlist-list-buttons{
   flex-wrap: wrap;
-  .btn:hover{
-      background-color: inherit;
-      color: inherit;
+  .btn.active{
+    color: black!important;
   }
 }
 
@@ -77,28 +76,19 @@ html, body, #root{
 /******************
   CATEGORY CARDS
 ******************/
-#category-cards {
-  .card {
-    margin-right: 25px;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0, 1);
-    background-color: #fff;
-    width: 100%;
-    height: 100%;
-    position: relative;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0px 13px 10px -7px rgba(0, 0, 0, 0.1); }
-
+.choose-category-cards {
   .card:hover {
     box-shadow: 0px 30px 18px -8px rgba(0, 0, 0, 0.1);
     transform: scale(1.1, 1.1); 
     cursor: pointer; }
 
-  #cardImage {
+  .cardImage {
     height: 70%;
   }
+}
 
-  #cardText {
+#playlist-list-filters .categories, .choose-category-cards{
+  .cardText {
     text-align: center;
     font-size: 1.5em;
     font-style: italic;
@@ -112,6 +102,37 @@ html, body, #root{
     font-size: 2em;
     font-style: italic;
     text-align: center;
+  }
+
+  .card {
+    margin-right: 25px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0, 1);
+    background-color: #fff;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0px 13px 10px -7px rgba(0, 0, 0, 0.1); }
+}
+
+#playlist-list-filters .categories{
+  .category-col{
+    flex-grow: inherit;
+    padding-right: 7px;
+    padding-left: 7px;
+  }
+  .cardBody, .btn {
+    padding: 0;
+  }
+
+  .card-img{
+    width: inherit;
+  }
+
+  .card-img-top{
+    width: inherit;
+    height: 3em;
   }
 }
 

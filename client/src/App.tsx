@@ -29,7 +29,8 @@ export const getCategories = () => {
 }
 
 class App extends React.Component {
-  public componentDidMount() {
+  public constructor(props: any) {
+    super(props);
     fetchCategories(store.dispatch);
   }
 

@@ -28,7 +28,8 @@ CREATE TABLE song
 CREATE TABLE category
 (
     category_id SERIAL PRIMARY KEY,
-    category_name VARCHAR(30) NOT NULL
+    category_name VARCHAR(30) NOT NULL UNIQUE,
+    image_path VARCHAR(30) NOT NULL UNIQUE
 );
 
 CREATE TABLE playlist
