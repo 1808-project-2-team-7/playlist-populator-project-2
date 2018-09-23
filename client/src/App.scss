@@ -112,6 +112,9 @@ html, body, #root{
 }
 
 #playlist-list-filters .categories{
+  .category-col{
+    flex-grow: inherit;
+  }
   .cardBody, .btn {
     padding: 0;
   }
