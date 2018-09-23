@@ -110,7 +110,7 @@ class RegisterComponent extends React.Component<IProps, {}> {
                                             />
                                         </FormGroup>
                                     </Col>
-
+                                    <Col>
                                     <div className="container">
                                         <label> Upload Profile Image: </label>
                                         <input
@@ -123,6 +123,7 @@ class RegisterComponent extends React.Component<IProps, {}> {
                                             <img id="imagePreview" src={this.props.bucketKey} />
                                         </div>
                                     </div>
+                                    </Col>
                                         <Button color="primary" className="btn btn-lg btn-block" type="submit">Register</Button>
                                 </Form>
                             </CardBody>
