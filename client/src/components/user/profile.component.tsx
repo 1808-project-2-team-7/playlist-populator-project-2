@@ -6,8 +6,7 @@ import { RouteComponentProps } from 'react-router';
 import * as userActions from '../../actions/user/user.actions'
 import { getCurrentUser } from "../../App";
 import history from '../../history';
-import { store } from '../../store';
-
+import { User } from '../../models/User';
 
 interface IProps extends RouteComponentProps<{}>, IUserState {
     fetchUserPlaylists: (id: number) => void,
@@ -16,7 +15,9 @@ interface IProps extends RouteComponentProps<{}>, IUserState {
 class ProfileComponent extends React.Component<IProps, any> {
     constructor(props: any) {
         super(props);
-        
+        this.state = {
+            currentUser:{}
+        }
     }
     public componentWillMount = () => {
         if (getCurrentUser() === null) {
@@ -25,17 +26,23 @@ class ProfileComponent extends React.Component<IProps, any> {
     }
 
     public componentDidMount = () => {
-        this.props.fetchUserPlaylists(1);
+        const currentUser1 = getCurrentUser();
+        if (!(currentUser1 instanceof User)){
+            this.props.history.push('home');
+        }
+        else{
+            this.setState({currentUser:currentUser1});
+            this.props.fetchUserPlaylists(this.state.currentUser.userId);
+        }
     }
-
     public render() {
-        const cUser = store.getState().currentUser;
+    
         return (
             <div>
                 <div >
                     <img className="d-block mx-auto rounded-circle mx-auto"
-                         src= "https://jooinn.com/images/fantasy-6.jpg" alt="revature" />
-                         <p className="text-center"></p>
+                         src= {this.state.currentUser.bucketKey} alt="revature" />
+                         <p className="text-center">{this.state.currentUser.username}</p>
 
                 </div>
                 <PlaylistList playlists={this.props.userPlaylists} loadMorePlaylists={this.props.fetchUserPlaylists} doneLoading={this.props.doneLoading} />
