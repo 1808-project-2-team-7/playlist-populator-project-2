@@ -32,7 +32,7 @@ class PlaylistComponent extends React.Component<IProps, {}> {
             <div className="container">
                 <Card>
                     <CardHeader className="text-white bg-dark">
-                        <span className="my-auto">{playlist.name}</span>
+                        <span className="my-auto">{`${playlist.name} (${playlist.category.categoryName})`}</span>
                     </CardHeader>
                 </Card>
                 <div className="table-responsive">
