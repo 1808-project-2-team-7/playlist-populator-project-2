@@ -10,9 +10,9 @@ interface IProps {
 export const CategoryCardComponent: React.StatelessComponent<IProps> = (props) => {
   return (
     <Card>
-      <CardImg id="cardImage" className="card-img-top" src={images.assetsObject[props.imagePath]} alt="Card image cap" />
+      <CardImg className="cardImage card-img-top" src={images.assetsObject[props.imagePath]} alt="Card image cap" />
       <CardBody className="cardBody">
-        <CardText id="cardText" className="card-text">{props.category.categoryName}</CardText>
+        <CardText className="card-text cardText">{props.category.categoryName}</CardText>
       </CardBody>
     </Card>
   );
