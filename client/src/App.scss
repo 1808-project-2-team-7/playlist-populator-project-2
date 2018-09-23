@@ -47,9 +47,8 @@
 
 .playlist-list-buttons{
   flex-wrap: wrap;
-  .btn:hover{
-      background-color: inherit;
-      color: inherit;
+  .btn.active{
+    color: black!important;
   }
 }
 
