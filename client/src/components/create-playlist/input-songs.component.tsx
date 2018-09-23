@@ -21,26 +21,26 @@ interface IProps extends ICreatePlaylistState {
 
 export class InputSongsComponent extends React.Component<IProps, IState> {
 
-  public constructor(props: any){
+  public constructor(props: any) {
     super(props);
   }
 
-  public updateArtist= (e: any) => {
-      this.props.updateArtistInput(e.target.value);
+  public updateArtist = (e: any) => {
+    this.props.updateArtistInput(e.target.value);
   }
 
-  public updateSong= (e: any) => {
-      this.props.updateSongInput(e.target.value);
+  public updateSong = (e: any) => {
+    this.props.updateSongInput(e.target.value);
   }
 
-  public addToPlaylist= async (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      const song= await this.props.addInputToPlaylist(this.props.songInput, this.props.artistInput, this.props.accessToken);
-      this.props.clearSuggestedSongs();
-      song && this.props.getSuggestedSongs(song, this.props.accessToken);
+  public addToPlaylist = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const song = await this.props.addInputToPlaylist(this.props.songInput, this.props.artistInput, this.props.accessToken);
+    this.props.clearSuggestedSongs();
+    song && this.props.getSuggestedSongs(song, this.props.accessToken);
   }
 
-  public populate= async (e: React.FormEvent<HTMLFormElement>) => {
+  public populate = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if(this.props.playlist.songs.length <= 5){
       const spotifyApiSongs=await this.props.getSongsFromSpotifyApi(this.props.playlist.songs, this.props.accessToken);
@@ -49,13 +49,13 @@ export class InputSongsComponent extends React.Component<IProps, IState> {
     }
   }
 
-  public showPopulateButton= () => {
-    if(this.props.playlist.songs.length >= 3){
+  public showPopulateButton = () => {
+    if (this.props.playlist.songs.length >= 3) {
       return (
         <form onSubmit={this.populate}>
-            <div>
-                <Button className="submit-button" type="submit"> Populate </Button>
-            </div>
+          <div>
+            <Button className="submit-button" type="submit"> Populate </Button>
+          </div>
         </form>
       )
     }
@@ -70,15 +70,15 @@ export class InputSongsComponent extends React.Component<IProps, IState> {
   public render() {
     return (
       <div id="create-playlist" className="container">
-          <form onSubmit={this.addToPlaylist}>
-            <div className="form-group">
-                <label>Enter Song Title: </label>
-                <input onChange={this.updateSong} type="text" className="form-control" id="formGroupExampleInput" placeholder="Song Title" />
-                <label>Enter Artist: </label>
-                <input onChange={this.updateArtist} type="text" className="form-control" id="formGroupExampleInput" placeholder="Artist Name" />
-                <br />
-                <Button className="submit-button" type="submit"> Submit </Button>
-            </div>
+        <form onSubmit={this.addToPlaylist}>
+          <div className="form-group">
+            <label>Enter Song Title: </label>
+            <input onChange={this.updateSong} type="text" className="form-control" id="formGroupExampleInput" placeholder="Song Title" autoFocus />
+            <label>Enter Artist: </label>
+            <input onChange={this.updateArtist} type="text" className="form-control" id="formGroupExampleInput" placeholder="Artist Name" />
+            <br />
+            <Button className="submit-button" type="submit"> Submit </Button>
+          </div>
         </form>
         {this.showPopulateButton()}
         <br />
