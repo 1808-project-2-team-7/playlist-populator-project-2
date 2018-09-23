@@ -48,9 +48,19 @@ export const addSuggestedSongToPlaylist= (song: Song) => {
     }
 }
 
+export const clearCategory= () => {
+    const category=new Category();
+    return {
+        payload: {
+            category
+        },
+        type: createPlaylistTypes.CLEAR_CATEGORY
+    }
+}
+
 export const clearPlaylist= () => {
     return {
-        payload: [],
+        payload: new Playlist(),
         type: createPlaylistTypes.CLEAR_PLAYLIST
     }
 }
@@ -100,9 +110,16 @@ export const getSongsFromDatabase= (playlist: Playlist, spotifyApiSongs: Song[])
         method: 'POST'
     })
     .then(songsWithIds => songsWithIds.json())
-    .then(songsWithIds => {
-        console.log(songsWithIds);
-        return Promise.all(songsWithIds.songs.map((song: Song) => {
+    .then(playlistWithIds => {
+        const playlistId=playlistWithIds.id;
+        console.log(playlistWithIds);
+        dispatch({
+            payload: {
+                playlistId
+            },
+            type: createPlaylistTypes.UPDATE_PLAYLIST_ID
+        })
+        return Promise.all(playlistWithIds.songs.map((song: Song) => {
             return fetch(`${environment.context}songs/${song.id}/popular`)
             .then(databaseSuggestions => databaseSuggestions.json())
             .then(databaseSuggestions => {
@@ -273,20 +290,27 @@ export const removeSongFromPlaylist= (song: Song, songs: Song[]) => {
 }
 
 export const savePlaylistToDatabase= (playlist: Playlist) => (dispatch: any) => {
-    fetch(`${environment.context}playlists`, {
+    fetch(`${environment.context}playlists/${playlist.id}/update`, {
         body: JSON.stringify(playlist),
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        method: 'POST'
+        method: 'PUT'
     })
-    .then(resp => resp.json())
+    .then(resp => {
+        if(resp.status===200){
+            return resp.json();
+        }
+        return;
+    })
     .then(savedPlaylist => {
-        dispatch({
-            payload: savedPlaylist,
-            type: createPlaylistTypes.SAVE_PLAYLIST_TO_DATABASE
-        })
+        if(savedPlaylist){
+            dispatch({
+                payload: { savedPlaylist },
+                type: createPlaylistTypes.SAVE_PLAYLIST_TO_DATABASE
+            })
+        }
     })
     .catch(error => {
         console.log(error);
@@ -342,12 +366,21 @@ export const updateArtistInput= (artistInput: string) => {
     }
 }
 
-export const updateErrorMessage= (message: string) => {
+export const updateMessage= (message: string) => {
     return {
         payload: {
             message
         },
-        type: createPlaylistTypes.UPDATE_ERROR_MESSAGE
+        type: createPlaylistTypes.UPDATE_MESSAGE
+    }
+}
+
+export const updatePopulated= (populated: boolean) => {
+    return {
+        payload: {
+            populated
+        },
+        type: createPlaylistTypes.UPDATE_POPULATED
     }
 }
 

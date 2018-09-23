@@ -4,9 +4,12 @@ import { connect } from "react-redux";
 import ChooseCategoryComponent from "./choose-category.component";
 import CreatePlaylistComponent from "./create-playlist.component";
 import * as createPlaylistActions from "../../actions/create-playlist/create-playlist.actions";
+import { getCurrentUser } from "../../App";
+import { User } from "../../models/User";
 
 interface IProps extends ICreatePlaylistState {
     clearPlaylist: () => any;
+    setPlaylistOwner: (owner: User | null) => any;
 }
 
 export class MainCreatePlaylistComponent extends React.Component<IProps, {}> {
@@ -32,6 +35,10 @@ export class MainCreatePlaylistComponent extends React.Component<IProps, {}> {
     this.props.clearPlaylist();
   }
 
+  public componentDidMount(){
+    this.props.setPlaylistOwner(getCurrentUser());
+  }
+
   public render() {
     return (
         <div>
@@ -43,6 +50,7 @@ export class MainCreatePlaylistComponent extends React.Component<IProps, {}> {
 
 const mapStateToProps = (state: IState) => (state.createPlaylist);
 const mapDispatchToProps = {
-    clearPlaylist: createPlaylistActions.clearPlaylist
+    clearPlaylist: createPlaylistActions.clearPlaylist,
+    setPlaylistOwner: createPlaylistActions.setPlaylistOwner
 }
 export default connect(mapStateToProps, mapDispatchToProps)(MainCreatePlaylistComponent);
