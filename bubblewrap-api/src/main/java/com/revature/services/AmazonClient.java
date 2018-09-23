@@ -66,6 +66,7 @@ public class AmazonClient {
             uploadFileTos3bucket(fileName, file);
             file.delete();
         } catch (Exception e) {
+        	fileUrl = e.toString();
            e.printStackTrace();
         }
         return fileUrl;
