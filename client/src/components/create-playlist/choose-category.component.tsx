@@ -39,7 +39,7 @@ export class ChooseCategoryComponent extends React.Component<IProps, ICategorySt
               for (let i = 0; i < 3; i++) {
                 categoryCards.push(
                   <div className="col-sm" onClick={() => this.props.setCategoryInformation(category)}>
-                    <div id="category-cards" className="card">
+                    <div className="card choose-category-cards">
                       <CategoryCardComponent imagePath={images[index + i]} category={categories[index + i]} />
                     </div>
                   </div>)
