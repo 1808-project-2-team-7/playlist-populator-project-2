@@ -89,11 +89,11 @@ export const createPlaylistReducer= (state= initialState, action: any) => {
                 ...state,
                 suggestedSongs: [...state.suggestedSongs, ...action.payload.suggestedSongs]
             }
-        case createPlaylistTypes.SAVE_PLAYLIST_TO_DATABASE:
-            return {
-                ...state,
-                playlist: action.payload.savedPlaylist
-            }
+        // case createPlaylistTypes.SAVE_PLAYLIST_TO_DATABASE:
+        //     return {
+        //         ...state,
+        //         playlist: action.payload.savedPlaylist
+        //     }
             
         case createPlaylistTypes.SEND_IMAGE_TO_DATABASE:
             return {

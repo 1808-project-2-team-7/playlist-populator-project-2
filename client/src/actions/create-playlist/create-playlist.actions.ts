@@ -328,9 +328,21 @@ export const savePlaylistToDatabase= (playlist: Playlist) => (dispatch: any) => 
         },
         method: 'PUT'
     })
+    .then(resp=>{
+        return resp.json();
+    })
+    .then((returnedPlaylist)=>{
+        dispatch({
+            payload: {
+                savedPlaylist: returnedPlaylist
+            },
+            type: createPlaylistTypes.SAVE_PLAYLIST_TO_DATABASE
+        })
+    })
     .catch(error => {
         console.log(error);
     })
+
 
 }
 
