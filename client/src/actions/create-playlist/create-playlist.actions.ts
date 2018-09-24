@@ -320,6 +320,10 @@ export const removeSongFromPlaylist = (song: Song, songs: Song[]) => {
 }
 
 export const savePlaylistToDatabase = (playlist: Playlist) => (dispatch: any) => {
+    dispatch({
+        payload: {},
+        type: createPlaylistTypes.SAVE_PLAYLIST_TO_DATABASE
+    })
     fetch(`${environment.context}playlists/${playlist.id}/update`, {
         body: JSON.stringify(playlist),
         headers: {
@@ -328,19 +332,6 @@ export const savePlaylistToDatabase = (playlist: Playlist) => (dispatch: any) =>
         },
         method: 'PUT'
     })
-        .then(resp => {
-            return resp.json();
-        })
-        .then((returnedPlaylist: Playlist) => {
-            console.log('hello from th einside ');
-            console.log('returnedPlaylist');
-            dispatch({
-                payload: {
-                    savedPlaylist: returnedPlaylist
-                },
-                type: createPlaylistTypes.SAVE_PLAYLIST_TO_DATABASE
-            })
-        })
         .catch(error => {
             console.log(error);
         })
