@@ -331,7 +331,9 @@ export const savePlaylistToDatabase= (playlist: Playlist) => (dispatch: any) => 
     .then(resp=>{
         return resp.json();
     })
-    .then((returnedPlaylist)=>{
+    .then((returnedPlaylist:Playlist)=>{
+        console.log('hello from th einside ');
+        console.log('returnedPlaylist');
         dispatch({
             payload: {
                 savedPlaylist: returnedPlaylist
