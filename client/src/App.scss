@@ -4,6 +4,7 @@ html, #root {
   width: 100%;
   height: 100%;
   background: #000;
+  color: white;
 }
   
   @keyframes App-logo-spin {
@@ -80,6 +81,7 @@ html, body, #root{
   .cardImage {
     height: 70%;
   }
+  color: black;
 }
 
 #playlist-list-filters .categories, .choose-category-cards{
