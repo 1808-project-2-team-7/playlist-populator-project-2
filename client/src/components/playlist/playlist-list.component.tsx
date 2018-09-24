@@ -26,11 +26,11 @@ class PlaylistList extends React.Component<IProps, {}> {
         super(props);
     }
 
+    public componentDidMount() {
+        this.props.filterPlaylists(this.props.playlists, this.props.categoryFilter, this.props.nameFilter);
+    }
+
     public componentDidUpdate(prevProps: IProps) {
-        this.props.updateLoading(true);
-        if (this.props.playlists.length > prevProps.playlists.length) {
-            this.props.updateLoading(false);
-        }
         if (this.props.isLoading && !prevProps.isLoading) {
             if (this.props.userId) {
                 this.props.loadMorePlaylists(this.props.page, this.props.userId);
@@ -42,6 +42,9 @@ class PlaylistList extends React.Component<IProps, {}> {
         }
         if (this.props.categoriesFetched && !prevProps.categoriesFetched || this.props.playlists !== prevProps.playlists) {
             this.props.filterPlaylists(this.props.playlists, this.props.categoryFilter, this.props.nameFilter);
+        }
+        if (this.props.playlists.length > prevProps.playlists.length || this.props.playlists !== prevProps.playlists) {
+            this.props.updateLoading(false);
         }
     }
 
