@@ -10,6 +10,7 @@ import { User } from "../../models/User";
 interface IProps extends ICreatePlaylistState {
     clearPlaylist: () => any;
     setPlaylistOwner: (owner: User | null) => any;
+    updatePopulated: (populated: boolean) => any;
 }
 
 export class MainCreatePlaylistComponent extends React.Component<IProps, {}> {
@@ -36,6 +37,7 @@ export class MainCreatePlaylistComponent extends React.Component<IProps, {}> {
   }
 
   public componentDidMount(){
+    this.props.updatePopulated(false);
     this.props.setPlaylistOwner(getCurrentUser());
   }
 
@@ -51,6 +53,7 @@ export class MainCreatePlaylistComponent extends React.Component<IProps, {}> {
 const mapStateToProps = (state: IState) => (state.createPlaylist);
 const mapDispatchToProps = {
     clearPlaylist: createPlaylistActions.clearPlaylist,
-    setPlaylistOwner: createPlaylistActions.setPlaylistOwner
+    setPlaylistOwner: createPlaylistActions.setPlaylistOwner,
+    updatePopulated: createPlaylistActions.updatePopulated
 }
 export default connect(mapStateToProps, mapDispatchToProps)(MainCreatePlaylistComponent);
