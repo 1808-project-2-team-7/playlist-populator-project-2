@@ -35,8 +35,8 @@ class ProfileComponent extends React.Component<IProps, any> {
                 <div>
                     <div >
                         <img className="d-block mx-auto rounded-circle mx-auto profile-picture"
-                            src={currentUser.bucketKey} alt="revature" />
-                        <p className="text-center">{currentUser.username}</p>
+                            src={currentUser.bucketKey? currentUser.bucketKey :'https://s3.us-east-2.amazonaws.com/bubblewrap-images/1537665488116-default-user1.png' } alt="revature" />
+                        <h2 className="text-center">{currentUser.username}</h2>
 
                     </div>
                     <PlaylistList page={this.props.page} playlists={this.props.userPlaylists} loadMorePlaylists={this.props.fetchUserPlaylists} doneLoading={this.props.doneLoading} userId={currentUser.id} />
