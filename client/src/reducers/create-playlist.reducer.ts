@@ -4,7 +4,7 @@ import { Category } from "../models/Category";
 import { User } from "../models/User";
 
 
-const initialState: ICreatePlaylistState= {
+const initialState: ICreatePlaylistState = {
     accessToken: '',
     artistInput: '',
     message: '',
@@ -21,9 +21,9 @@ const initialState: ICreatePlaylistState= {
     suggestedSongs: []
 }
 
-export const createPlaylistReducer= (state= initialState, action: any) => {
+export const createPlaylistReducer = (state = initialState, action: any) => {
 
-    switch(action.type){
+    switch (action.type) {
         case createPlaylistTypes.ADD_INPUT_TO_PLAYLIST:
             return {
                 ...state,
@@ -95,7 +95,7 @@ export const createPlaylistReducer= (state= initialState, action: any) => {
         //         ...state,
         //         playlist: action.payload.savedPlaylist
         //     }
-            
+
         case createPlaylistTypes.SEND_IMAGE_TO_DATABASE:
             return {
                 ...state,
