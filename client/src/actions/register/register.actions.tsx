@@ -81,7 +81,7 @@ export const register = (e: React.FormEvent<HTMLFormElement>, userInfo: any) => 
   return (dispatch: any) => {
     e.preventDefault();
     const defaultBucketKey = 'https://s3.us-east-2.amazonaws.com/bubblewrap-images/1537665488116-default-user1.png';
-    if( userInfo.bucketKey === ""){
+    if (userInfo.bucketKey === "") {
       userInfo = {
         ...userInfo,
         bucketKey: defaultBucketKey
@@ -103,7 +103,7 @@ export const register = (e: React.FormEvent<HTMLFormElement>, userInfo: any) => 
           case 201:
             dispatch({
               payload: {
-                currentUser: resp.body.user,
+                currentUser: JSON.parse(resp.body.user),
                 errorMessage: ''
               },
               type: registerTypes.REGISTER

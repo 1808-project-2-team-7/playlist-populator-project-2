@@ -34,8 +34,10 @@ class ProfileComponent extends React.Component<IProps, any> {
             return (
                 <div>
                     <div >
-                        <img className="d-block mx-auto rounded-circle mx-auto profile-picture"
-                            src={currentUser.bucketKey? currentUser.bucketKey :'https://s3.us-east-2.amazonaws.com/bubblewrap-images/1537665488116-default-user1.png' } alt="revature" />
+                        {currentUser.bucketKey &&
+                            <img className="d-block mx-auto rounded-circle mx-auto profile-picture"
+                                src={currentUser.bucketKey} alt="revature" />
+                        }
                         <h2 className="text-center">{currentUser.username}</h2>
 
                     </div>
@@ -45,7 +47,7 @@ class ProfileComponent extends React.Component<IProps, any> {
         }
         return null;
     }
-    
+
 }
 
 const mapStateToProps = (state: IState) => state.user;

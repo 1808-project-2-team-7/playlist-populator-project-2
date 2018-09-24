@@ -6,13 +6,14 @@ import InputSongsComponent from "./input-songs.component";
 import PlaylistTableComponent from "./playlist-table.component";
 import SuggestedSongsTableComponent from "./suggested-songs-table.component";
 import { Playlist } from "../../models/Playlist";
-import { Button, Col, Row, Container } from "reactstrap";
+import { Button, Col, Row, Container, FormGroup, Label, Input } from "reactstrap";
 import { getCurrentUser } from "../../App";
 import { User } from "../../models/User";
 import history from '../../history';
 
 interface IProps extends ICreatePlaylistState {
   clearPlaylist: () => any;
+  clearCategory: () => any;
   deletePlaylist: (id: number) => any;
   getAccessToken: () => any;
   savePlaylistToDatabase: (playlist: Playlist) => any;
@@ -28,31 +29,33 @@ interface ICreatePlaylistComponentState {
 
 export class CreatePlaylistComponent extends React.Component<IProps, ICreatePlaylistComponentState> {
 
-  public constructor(props: any){
+  public constructor(props: any) {
     super(props);
-    this.state={
+    this.state = {
       playlistImageSrc: ''
     }
   }
 
-  public savePlaylist= (e: React.FormEvent<HTMLFormElement>) => {
+  public savePlaylist = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     this.props.savePlaylistToDatabase(this.props.playlist);
     history.push('/profile');
   }
 
-  public discardPlaylist= (e: React.FormEvent<HTMLFormElement>) => {
+  public discardPlaylist = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     this.props.deletePlaylist(this.props.playlist.id);
   }
 
-  public showSave= () => {
-    if(this.props.playlist.songs.length >= 1){
+  public showSave = () => {
+    const numberOfSongs = this.props.playlist.songs.length;
+    if (numberOfSongs >= 1) {
       return (
         <div className="container">
           <form onSubmit={this.savePlaylist}>
             <div className="form-group container">
-                <Button color="success" className="save-discard-button" type="submit"> Save Playlist </Button>
+              {numberOfSongs >= 3 && this.props.populated ? <Button color="success" className="save-discard-button" type="submit"> Save Playlist </Button> :
+                <Button color="success" className="save-discard-button" type="submit" disabled> Save Playlist </Button>}
             </div>
           </form>
         </div>
@@ -61,13 +64,13 @@ export class CreatePlaylistComponent extends React.Component<IProps, ICreatePlay
     return;
   }
 
-  public showDiscard= () => {
-    if(this.props.playlist.songs.length >= 1){
+  public showDiscard = () => {
+    if (this.props.playlist.songs.length >= 1) {
       return (
         <div className="container">
           <form onSubmit={this.discardPlaylist}>
             <div className="form-group container">
-                <Button color="danger" className="save-discard-button" type="submit"> Discard Playlist </Button>
+              <Button color="danger" className="save-discard-button" type="submit"> Discard Playlist </Button>
             </div>
           </form>
         </div>
@@ -76,8 +79,8 @@ export class CreatePlaylistComponent extends React.Component<IProps, ICreatePlay
     return;
   }
 
-  public playlistTable= () => {
-    if(this.props.playlist.songs.length){
+  public playlistTable = () => {
+    if (this.props.playlist.songs.length) {
       return (
         <PlaylistTableComponent />
       )
@@ -85,19 +88,19 @@ export class CreatePlaylistComponent extends React.Component<IProps, ICreatePlay
     return;
   }
 
-  public showMessage= () => {
-    if(this.props.playlist.songs.length > 5 && !this.props.populated){
+  public showMessage = () => {
+    if (this.props.playlist.songs.length > 5 && !this.props.populated) {
       return (
         <div id="create-playlist" className="alert alert-danger container message" role="alert">
-            <span id="message">{this.props.message}</span>
+          <span id="message">{this.props.message}</span>
         </div>
       )
     }
     return;
   }
 
-  public suggestedSongsTable= () => {
-    if(this.props.suggestedSongs.length){
+  public suggestedSongsTable = () => {
+    if (this.props.suggestedSongs.length) {
       return (
         <SuggestedSongsTableComponent />
       )
@@ -105,14 +108,14 @@ export class CreatePlaylistComponent extends React.Component<IProps, ICreatePlay
     return;
   }
 
-  public uploadImage= (e: any) => {
-    const file=e.target && e.target.files[0];
+  public uploadImage = (e: any) => {
+    const file = e.target && e.target.files[0];
     this.props.sendImageToDatabase(file);
-    const fReader  = new FileReader();
+    const fReader = new FileReader();
     fReader.readAsDataURL(file);
-    fReader.onload= (loadedFile: any) => {
-      const readFile=loadedFile && loadedFile.target.result;
-      if(readFile){
+    fReader.onload = (loadedFile: any) => {
+      const readFile = loadedFile && loadedFile.target.result;
+      if (readFile) {
         this.setState({
           ...this.state,
           playlistImageSrc: readFile
@@ -121,72 +124,80 @@ export class CreatePlaylistComponent extends React.Component<IProps, ICreatePlay
     }
   }
 
-  public updateName= (e: any) => {
+  public updateName = (e: any) => {
     this.props.updatePlaylistName(e.target.value);
   }
 
-  public componentDidUpdate(){
-    if(this.props.playlist.songs.length > 5 && !this.props.populated){
+  public componentDidUpdate() {
+    if (this.props.playlist.songs.length > 5 && !this.props.populated) {
       this.props.updateMessage('Enter no more than 5 songs');
     }
   }
 
-  public componentDidMount(){
+  public componentDidMount() {
     this.props.getAccessToken();
     this.props.setPlaylistOwner(getCurrentUser());
   }
 
-  public componentWillUnmount(){
+  public componentWillUnmount() {
     this.props.clearPlaylist();
+  }
+
+  public changeCategory = () => {
+    this.props.clearCategory();
   }
 
   public render() {
     return (
       <div id="create-playlist" className="container">
         <Container>
-        <Row>
-          <Col>
-            <div className="container">
-              <label> Enter Playlist Name: </label>
-              <input onChange={this.updateName} type="text" className="form-control" id="formGroupExampleInput" placeholder="Playlist Name" />
-            </div>
-          </Col>
-          <Col>
-          </Col>
-        </Row>
-        <Row>
-          <Col><InputSongsComponent /></Col>
-          <Col>
-            <div className="container">
-              <label> Upload Playlist Image: </label>
-              <input
-                onChange={this.uploadImage}
-                type="file"
-                id="inputPlaylistImage"
-                className="form-control"
-                placeholder="Upload Playlist Image" />
-                <div className="container">
-                  <img id="imagePreview" src={this.state.playlistImageSrc}/>
-                </div>
-            </div>
-          </Col>
-        </Row>
-        <Row>
-          {this.showMessage()}
-        </Row>
-        <Row>
-          <Col>{this.playlistTable()}</Col>
-          <Col>{this.suggestedSongsTable()}</Col>
-        </Row>
-        <Row>
-          <Col>
-            <Row>
-              <Col>{this.showSave()}</Col>
-              <Col>{this.showDiscard()}</Col>
-            </Row>
-          </Col>
-          <Col></Col>
-        </Row>
+          <Row>
+            <Col><InputSongsComponent /></Col>
+            <Col>
+              <FormGroup>
+                <label> Playlist Name </label>
+                <input onChange={this.updateName} type="text" className="form-control" id="formGroupExampleInput" maxLength={60} />
+              </FormGroup>
+              <FormGroup>
+                <Label>Playlist Category </Label>
+                <Row>
+                  <Col>
+                    <Input value={this.props.playlist.category.categoryName} disabled />
+                  </Col>
+                  <Col>
+                    <Button onClick={this.changeCategory} type="submit"> Change Category </Button>
+                  </Col>
+                </Row>
+              </FormGroup>
+              <FormGroup>
+                <label> Upload Playlist Image </label>
+                <input
+                  onChange={this.uploadImage}
+                  type="file"
+                  id="inputPlaylistImage"
+                  className="form-control" />
+                {/* <div className="container">
+                  <img id="imagePreview" src={this.state.playlistImageSrc} />
+                </div> */}
+              </FormGroup>
+            </Col>
+          </Row>
+          <Row>
+            {this.showMessage()}
+          </Row>
+          <Row>
+            <Col>{this.playlistTable()}</Col>
+            <Col>{this.suggestedSongsTable()}</Col>
+          </Row>
+          <Row>
+            <Col>
+              <Row>
+                <Col>{this.showSave()}</Col>
+                <Col>{this.showDiscard()}</Col>
+              </Row>
+            </Col>
+            <Col></Col>
+          </Row>
         </Container>
       </div>
     );
@@ -195,6 +206,7 @@ export class CreatePlaylistComponent extends React.Component<IProps, ICreatePlay
 
 const mapStateToProps = (state: IState) => (state.createPlaylist);
 const mapDispatchToProps = {
+  clearCategory: createPlaylistActions.clearCategory,
   clearPlaylist: createPlaylistActions.clearPlaylist,
   deletePlaylist: createPlaylistActions.deletePlaylist,
   getAccessToken: createPlaylistActions.getAccessToken,

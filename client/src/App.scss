@@ -4,6 +4,7 @@ html, #root {
   width: 100%;
   height: 100%;
   background: #000;
+  color: white;
 }
   
   @keyframes App-logo-spin {
@@ -68,6 +69,10 @@ html, body, #root{
   height: 100%;
 }
 
+.song-row, #register{
+  color: black;
+}
+
 /******************
   CATEGORY CARDS
 ******************/
@@ -80,6 +85,7 @@ html, body, #root{
   .cardImage {
     height: 70%;
   }
+  color: black;
 }
 
 #playlist-list-filters .categories, .choose-category-cards{
@@ -141,6 +147,8 @@ html, body, #root{
 #register {
   #imagePreview{
     max-width: 10rem;
+    display: block;
+    margin: auto;
   }
 }
 #create-playlist{
@@ -180,11 +188,6 @@ html, body, #root{
     margin-right: 5%;
   }
 
-  #imagePreview {
-    width: 80%;
-    margin-left: 10%;
-    margin-right: 10%;
-  }
   #playlist-name-input {
     width: 60%;
     margin-left: 20%;

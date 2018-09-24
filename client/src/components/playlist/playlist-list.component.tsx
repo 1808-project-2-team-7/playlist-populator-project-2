@@ -29,6 +29,7 @@ class PlaylistList extends React.Component<IProps, {}> {
 
     public componentDidMount() {
         this.props.filterPlaylists(this.props.playlists, this.props.categoryFilter, this.props.nameFilter);
+        this.props.updateLoading(false);
     }
 
     public componentDidUpdate(prevProps: IProps) {

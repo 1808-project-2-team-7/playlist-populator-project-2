@@ -16,6 +16,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionSystemException;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.models.Playlist;
 import com.revature.models.User;
 import com.revature.repos.PlaylistRepo;
@@ -29,6 +31,9 @@ public class UserService {
 
 	@Autowired
 	private PlaylistRepo pr;
+
+	@Autowired
+	ObjectMapper mapper;
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -51,7 +56,8 @@ public class UserService {
 			String hashedPassword = passwordEncoder.encode(u.getPassword());
 			u.setPassword(hashedPassword);
 			JSONObject user = new JSONObject();
-			user.put("user", ur.saveAndFlush(u));
+			String userString = mapper.writeValueAsString(ur.saveAndFlush(u));
+			user.put("user", userString);
 			return user;
 		} catch (ConstraintViolationException t) {
 			return getConstraintErrors(t);
@@ -80,6 +86,8 @@ public class UserService {
 				}
 				return errors;
 			}
+			return null;
+		} catch (JsonProcessingException e) {
 			return null;
 		}
 	}

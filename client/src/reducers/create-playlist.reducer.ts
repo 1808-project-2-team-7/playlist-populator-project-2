@@ -4,7 +4,7 @@ import { Category } from "../models/Category";
 import { User } from "../models/User";
 
 
-const initialState: ICreatePlaylistState= {
+const initialState: ICreatePlaylistState = {
     accessToken: '',
     artistInput: '',
     message: '',
@@ -21,9 +21,9 @@ const initialState: ICreatePlaylistState= {
     suggestedSongs: []
 }
 
-export const createPlaylistReducer= (state= initialState, action: any) => {
+export const createPlaylistReducer = (state = initialState, action: any) => {
 
-    switch(action.type){
+    switch (action.type) {
         case createPlaylistTypes.ADD_INPUT_TO_PLAYLIST:
             return {
                 ...state,
@@ -41,15 +41,16 @@ export const createPlaylistReducer= (state= initialState, action: any) => {
                 }
             }
         case createPlaylistTypes.CLEAR_PLAYLIST:
+            const newPlaylist = action.payload.playlist;
             return {
                 ...state,
                 playlist: {
                     ...state.playlist,
-                    bucketKey: action.payload.bucketKey,
-                    category: action.payload.category,
-                    id: action.payload.id,
-                    name: action.payload.name,
-                    songs: action.payload.songs
+                    bucketKey: newPlaylist.bucketKey,
+                    category: newPlaylist.category,
+                    id: newPlaylist.id,
+                    name: newPlaylist.name,
+                    songs: newPlaylist.songs
                 },
                 suggestedSongs: []
             }
@@ -94,7 +95,7 @@ export const createPlaylistReducer= (state= initialState, action: any) => {
         //         ...state,
         //         playlist: action.payload.savedPlaylist
         //     }
-            
+
         case createPlaylistTypes.SEND_IMAGE_TO_DATABASE:
             return {
                 ...state,

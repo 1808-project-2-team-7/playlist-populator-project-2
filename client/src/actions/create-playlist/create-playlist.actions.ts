@@ -66,11 +66,13 @@ export const clearPlaylist = () => {
     const songs: Song[] = [];
     return {
         payload: {
-            bucketKey,
-            category,
-            id,
-            name,
-            songs
+            playlist: {
+                bucketKey,
+                category,
+                id,
+                name,
+                songs
+            }
         },
         type: createPlaylistTypes.CLEAR_PLAYLIST
     }
@@ -105,7 +107,7 @@ export const deletePlaylist = (id: number) => (dispatch: any) => {
     })
         .then(resp => {
             dispatch({
-                payload: new Playlist(),
+                payload: { oldPlaylistId: id, playlist: new Playlist() },
                 type: createPlaylistTypes.CLEAR_PLAYLIST
             })
         })

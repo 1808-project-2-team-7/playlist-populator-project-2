@@ -120,7 +120,7 @@ class RegisterComponent extends React.Component<IProps, {}> {
                                             className="form-control"
                                             placeholder="Upload Profile Image" />
                                         <div className="container">
-                                                <img id="imagePreview" className="img-responsive center-block"  src={this.props.bucketKey} />
+                                                <img id="imagePreview" src={this.props.bucketKey} />
                                         </div>
                                         </FormGroup>
                                     </Col>
