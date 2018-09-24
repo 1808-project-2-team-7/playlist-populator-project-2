@@ -103,7 +103,7 @@ export const register = (e: React.FormEvent<HTMLFormElement>, userInfo: any) => 
           case 201:
             dispatch({
               payload: {
-                currentUser: resp.body.user,
+                currentUser: resp.body,
                 errorMessage: ''
               },
               type: registerTypes.REGISTER
