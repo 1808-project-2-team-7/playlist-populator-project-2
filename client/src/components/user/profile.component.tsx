@@ -34,7 +34,7 @@ class ProfileComponent extends React.Component<IProps, any> {
             return (
                 <div>
                     <div >
-                        <img className="d-block mx-auto rounded-circle mx-auto"
+                        <img className="d-block mx-auto rounded-circle mx-auto profile-picture"
                             src={currentUser.bucketKey} alt="revature" />
                         <p className="text-center">{currentUser.username}</p>
 
