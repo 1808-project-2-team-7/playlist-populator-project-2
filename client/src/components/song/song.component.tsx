@@ -9,8 +9,8 @@ export const SongComponent: React.StatelessComponent<IProps> = (props) => {
     const { song } = props;
     return (
         <tr>
-            <td>{song.trackName}</td>
-            <td>{song.artistName}</td>
+            <td className="song-row">{song.trackName}</td>
+            <td className="song-row">{song.artistName}</td>
         </tr>
     );
 }
