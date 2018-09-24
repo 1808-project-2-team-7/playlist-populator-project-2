@@ -12,7 +12,7 @@ export const userReducer = (state = initialState, action: any) => {
             return {
                 ...state,
                 doneLoading: action.payload.doneLoading,
-                userPlaylists: [...state.userPlaylists,, ...action.payload.userPlaylists]
+                userPlaylists: [...state.userPlaylists, ...action.payload.userPlaylists]
             }
     }
     return state;
