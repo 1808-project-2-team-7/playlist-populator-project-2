@@ -147,6 +147,8 @@ html, body, #root{
 #register {
   #imagePreview{
     max-width: 10rem;
+    display: block;
+    margin: auto;
   }
 }
 #create-playlist{
@@ -186,11 +188,6 @@ html, body, #root{
     margin-right: 5%;
   }
 
-  #imagePreview {
-    width: 80%;
-    margin-left: 10%;
-    margin-right: 10%;
-  }
   #playlist-name-input {
     width: 60%;
     margin-left: 20%;
