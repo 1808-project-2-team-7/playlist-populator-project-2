@@ -60,16 +60,23 @@ describe('register actions', () => {
 
     it("should create an action to register user successfully", async () => {
         const dispatch = jest.fn();
-        const response = '{"user":"User [id=16, username=user123, password=pass, firstName=John, lastName=Smith, email=user123@gmail.com, bucketKey=null]"}';
+        const response = {"user":"{\"id\":44,\"username\":\"user12\",\"firstName\":\"John\",\"lastName\":\"Smith\",\"email\":\"user12@gmail.com\",\"bucketKey\":null}"}
         window.fetch = jest.fn().mockImplementation(() =>
             Promise.resolve(mockResponse(201, "Created", response)));
         const event: any = { preventDefault: () => null };
-        const userInfo: any = { password: 'pass', username: 'user123', firstName: 'John', lastName: 'Smith', email: 'user123@gmail.com' }
+        const userInfo: any = { password: 'pass', username: 'user12', firstName: 'John', lastName: 'Smith', email: 'user12@gmail.com' }
         await registerActions.register(event, userInfo)(dispatch);
         expect(dispatch).toBeCalledWith(
             {
                 payload: {
-                    currentUser: JSON.parse(response).user,
+                    currentUser: {
+                        bucketKey: null,
+                        email: 'user12@gmail.com',
+                        firstName: 'John',
+                        id: 44,
+                        lastName: 'Smith',
+                        username: 12                
+                    },
                     errorMessage: ''
                 },
                 type: registerTypes.REGISTER
