@@ -27,15 +27,16 @@ class PlaylistComponent extends React.Component<IProps, {}> {
 
     public render() {
         const { playlist } = this.props;
+        console.log(playlist);
         const songs = playlist.songs;
         return (
             <div className="container">
                 <Card>
                     <CardHeader className="text-white bg-dark">
-                        <span className="my-auto">{`${playlist.name} (${playlist.category.categoryName})`}</span>
+                        <span className="my-auto">{`${playlist.name} (${playlist.category})`}</span>
                     </CardHeader>
                 </Card>
-                <div className="table-responsive">
+                <div className="table-responsive bg-light">
                     <table className="table table-striped">
                         <thead className="thead-light">
                             <tr>

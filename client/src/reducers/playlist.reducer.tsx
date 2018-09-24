@@ -13,6 +13,8 @@ export const playlistReducer = (state = initialState, action: any) => {
                 ...state,
                 playlist: {
                     ...state.playlist,
+                    category: action.payload.categoryName,
+                    name: action.payload.name,
                     songs: action.payload.songs
                 }
             }

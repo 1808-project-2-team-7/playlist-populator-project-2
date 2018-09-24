@@ -12,8 +12,11 @@ export const fetchSongs = (playlistId: number) => (dispatch: any) => {
                 throw new Error('Failed to fetch playlist songs');
             }
         }).then(resp => {
+            console.log(resp);
             dispatch({
                 payload: {
+                    categoryName: resp.category.categoryName,
+                    name: resp.name,
                     songs: resp.songs
                 },
                 type: playlistTypes.FETCH_SONGS
