@@ -60,7 +60,7 @@ describe('register actions', () => {
 
     it("should create an action to register user successfully", async () => {
         const dispatch = jest.fn();
-        const response = {"user":"{\"id\":44,\"username\":\"user12\",\"firstName\":\"John\",\"lastName\":\"Smith\",\"email\":\"user12@gmail.com\",\"bucketKey\":null}"}
+        const response = '{"user":"{\"id\":44,\"username\":\"user12\",\"firstName\":\"John\",\"lastName\":\"Smith\",\"email\":\"user12@gmail.com\",\"bucketKey\":null}"}'
         window.fetch = jest.fn().mockImplementation(() =>
             Promise.resolve(mockResponse(201, "Created", response)));
         const event: any = { preventDefault: () => null };
