@@ -54,7 +54,7 @@ export class CreatePlaylistComponent extends React.Component<IProps, ICreatePlay
         <div className="container">
           <form onSubmit={this.savePlaylist}>
             <div className="form-group container">
-              {numberOfSongs >= 3 ? <Button color="success" className="save-discard-button" type="submit"> Save Playlist </Button> :
+              {numberOfSongs >= 3 && this.props.populated ? <Button color="success" className="save-discard-button" type="submit"> Save Playlist </Button> :
                 <Button color="success" className="save-discard-button" type="submit" disabled> Save Playlist </Button>}
             </div>
           </form>

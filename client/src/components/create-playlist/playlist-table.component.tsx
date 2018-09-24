@@ -20,9 +20,6 @@ export class PlaylistTableComponent extends React.Component<IProps, {}> {
 
   
   public render() {
-    const songs = this.props.playlist.songs;
-    const songIds = songs.map(song => song.id);
-    const uniqueSongs = songs.filter((song, index) => songIds.indexOf(song.id) === index); 
     return (
       <div id="create-playlist" className="container">
         <label> Your Playlist: </label>
@@ -36,7 +33,7 @@ export class PlaylistTableComponent extends React.Component<IProps, {}> {
             </thead>
               <tbody className="table-body">
               {
-                  uniqueSongs.map((song: Song) => (
+                  this.props.playlist.songs.map((song: Song) => (
                   <tr className="table-row" key={song.spotifyTrackId}>
                       <td>{song && song.trackName}</td>
                       <td>{song && song.artistName}</td>
