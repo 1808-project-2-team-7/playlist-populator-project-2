@@ -174,9 +174,9 @@ export class CreatePlaylistComponent extends React.Component<IProps, ICreatePlay
                   type="file"
                   id="inputPlaylistImage"
                   className="form-control" />
-                <div className="container">
+                {/* <div className="container">
                   <img id="imagePreview" src={this.state.playlistImageSrc} />
-                </div>
+                </div> */}
               </FormGroup>
             </Col>
           </Row>
