@@ -34,10 +34,12 @@ export interface ISignInState {
 
 export interface IHomeState {
   playlists: Playlist[],
+  page: number
   doneLoading: boolean
 }
 export interface IUserState {
   userPlaylists: Playlist[],
+  page: number
   doneLoading: boolean
 }
 
@@ -46,7 +48,6 @@ export interface IPlaylistListState {
   categoryFilter: Category[],
   categoriesFetched: boolean,
   isLoading: boolean,
-  page: number,
   nameFilter: string
 }
 

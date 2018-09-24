@@ -17,7 +17,7 @@ class HomeComponent extends React.Component<IProps, any> {
 
     public render() {
         return (
-            <PlaylistList playlists={this.props.playlists} loadMorePlaylists={this.props.fetchPlaylists} doneLoading={this.props.doneLoading} />
+            <PlaylistList page={this.props.page} playlists={this.props.playlists} loadMorePlaylists={this.props.fetchPlaylists} doneLoading={this.props.doneLoading} />
         )
     }
 }

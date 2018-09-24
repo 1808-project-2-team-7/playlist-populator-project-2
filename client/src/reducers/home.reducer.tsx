@@ -3,6 +3,7 @@ import { homeTypes } from "../actions/home/home.types";
 
 export const initialState: IHomeState = {
     doneLoading: false,
+    page: 0,
     playlists: []
 }
 
@@ -12,6 +13,7 @@ export const homeReducer = (state = initialState, action: any) => {
             return {
                 ...state,
                 doneLoading: action.payload.doneLoading,
+                page: state.page + 1,
                 playlists: [...state.playlists, ...action.payload.playlists]
             }
     }

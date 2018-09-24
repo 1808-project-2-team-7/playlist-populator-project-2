@@ -8,8 +8,7 @@ export const initialState: IPlaylistListState = {
     categoryFilter: [],
     filteredPlaylists: [],
     isLoading: false,
-    nameFilter: '',
-    page: 0
+    nameFilter: ''
 }
 
 export const playlistListReducer = (state = initialState, action: any) => {
@@ -25,8 +24,7 @@ export const playlistListReducer = (state = initialState, action: any) => {
             const isLoading = action.payload.isLoading;
             return {
                 ...state,
-                isLoading,
-                page: isLoading ? state.page : state.page + 1
+                isLoading
             }
         case categoryTypes.FETCH_CATEGORIES:
         case currentUserTypes.LOGOUT:

@@ -39,7 +39,7 @@ class ProfileComponent extends React.Component<IProps, any> {
                         <p className="text-center">{currentUser.username}</p>
 
                     </div>
-                    <PlaylistList playlists={this.props.userPlaylists} loadMorePlaylists={this.props.fetchUserPlaylists} doneLoading={this.props.doneLoading} userId={currentUser.id} />
+                    <PlaylistList page={this.props.page} playlists={this.props.userPlaylists} loadMorePlaylists={this.props.fetchUserPlaylists} doneLoading={this.props.doneLoading} userId={currentUser.id} />
                 </div>
             )
         }

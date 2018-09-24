@@ -15,6 +15,7 @@ interface IProps extends RouteComponentProps<{}>, IPlaylistListState {
     doneLoading: boolean
     filterPlaylists: (playlists: Playlist[], categoryFilter: Category[], nameFilter: string) => void
     loadMorePlaylists: (page: number, userId?: number) => void
+    page: number
     playlists: Playlist[]
     updateLoading: (isLoading: boolean) => void
     userId: number

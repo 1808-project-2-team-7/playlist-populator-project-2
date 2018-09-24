@@ -3,6 +3,7 @@ import { IUserState } from ".";
 
 export const initialState: IUserState = {
     doneLoading: false,
+    page: 0,
     userPlaylists: []
 }
 
@@ -12,6 +13,7 @@ export const userReducer = (state = initialState, action: any) => {
             return {
                 ...state,
                 doneLoading: action.payload.doneLoading,
+                page: state.page + 1,
                 userPlaylists: [...state.userPlaylists, ...action.payload.userPlaylists]
             }
     }
