@@ -43,8 +43,15 @@ export const createPlaylistReducer= (state= initialState, action: any) => {
         case createPlaylistTypes.CLEAR_PLAYLIST:
             return {
                 ...state,
-                playlist: action.payload,
-                suggestedSongs: action.payload
+                playlist: {
+                    ...state.playlist,
+                    bucketKey: action.payload.bucketKey,
+                    category: action.payload.category,
+                    id: action.payload.id,
+                    name: action.payload.name,
+                    songs: action.payload.songs
+                },
+                suggestedSongs: []
             }
         case createPlaylistTypes.CLEAR_SONG_FROM_SUGGESTED_SONGS:
             return {
@@ -136,6 +143,14 @@ export const createPlaylistReducer= (state= initialState, action: any) => {
                 playlist: {
                     ...state.playlist,
                     id: action.payload.playlistId
+                }
+            }
+        case createPlaylistTypes.UPDATE_PLAYLIST_NAME:
+            return {
+                ...state,
+                playlist: {
+                    ...state.playlist,
+                    name: action.payload.name
                 }
             }
         case createPlaylistTypes.UPDATE_POPULATED:
