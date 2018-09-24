@@ -53,6 +53,16 @@ export class PlaylistTableComponent extends React.Component<IProps, {}> {
                   </td>
                 </tr> : null
             }
+            {
+              this.props.playlist.songs.length >= 3 && !this.props.populated ?
+                <tr className="table-row">
+                  <td colSpan={3}>
+                    <div className="alert alert-warning" role="alert">
+                      You must push POPulate before saving.
+                    </div>
+                  </td>
+                </tr> : null
+            }
           </tbody>
         </Table>
       </div>
