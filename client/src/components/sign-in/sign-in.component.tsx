@@ -25,7 +25,7 @@ class SignInComponent extends React.Component<IProps, {}> {
                 <div className="row h-100">
                     <div className="mx-auto my-auto">
                         <Card>
-                            <CardHeader className="text-white bg-dark">Sign in</CardHeader>
+                            <CardHeader className="text-white site-color">Sign in</CardHeader>
                             <CardBody className="bg-light">
                                 {errorMessage &&
                                     <div className="alert alert-danger" role="alert">

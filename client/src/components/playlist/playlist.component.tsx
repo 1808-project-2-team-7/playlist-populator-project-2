@@ -32,7 +32,7 @@ class PlaylistComponent extends React.Component<IProps, {}> {
         return (
             <div className="container">
                 <Card>
-                    <CardHeader className="text-white bg-dark">
+                    <CardHeader className="text-white site-color" >
                         <span className="my-auto">{`${playlist.name} (${playlist.category})`}</span>
                     </CardHeader>
                 </Card>
