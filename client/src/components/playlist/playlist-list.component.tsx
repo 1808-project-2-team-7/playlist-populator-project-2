@@ -17,6 +17,7 @@ interface IProps extends RouteComponentProps<{}>, IPlaylistListState {
     loadMorePlaylists: (page: number, userId?: number) => void
     playlists: Playlist[]
     updateLoading: (isLoading: boolean) => void
+    userId: number
 }
 
 class PlaylistList extends React.Component<IProps, {}> {
@@ -26,11 +27,18 @@ class PlaylistList extends React.Component<IProps, {}> {
     }
 
     public componentDidUpdate(prevProps: IProps) {
+        this.props.updateLoading(true);
         if (this.props.playlists.length > prevProps.playlists.length) {
             this.props.updateLoading(false);
         }
         if (this.props.isLoading && !prevProps.isLoading) {
-            this.props.loadMorePlaylists(this.props.page);
+            if (this.props.userId) {
+                this.props.loadMorePlaylists(this.props.page, this.props.userId);
+            }
+            else {
+                this.props.loadMorePlaylists(this.props.page);
+            }
+
         }
         if (this.props.categoriesFetched && !prevProps.categoriesFetched || this.props.playlists !== prevProps.playlists) {
             this.props.filterPlaylists(this.props.playlists, this.props.categoryFilter, this.props.nameFilter);

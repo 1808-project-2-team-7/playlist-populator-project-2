@@ -47,7 +47,7 @@ export const login = (e: React.FormEvent<HTMLFormElement>, credentials: any) => 
               },
               type: signInTypes.LOGIN
             });
-            history.push('/home');
+            history.push('/profile');
             break;
           case 401:
             dispatch({

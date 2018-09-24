@@ -1,8 +1,9 @@
 import { userTypes } from './user.types';
 import { environment } from '../../environment';
-export const fetchUserPlaylists = (id:number, page: number) => (dispatch: any) => {
+import { Playlist } from '../../models/Playlist';
+export const fetchUserPlaylists = (page: number, id: number) => (dispatch: any) => {
     const size = 30;
-    fetch(`${environment.context}users/1?page=${page}&size=${size}`)
+    fetch(`${environment.context}playlists/user/${id}?page=${page}&size=${size}`)
         .then(resp => {
             if (resp.status === 200) {
                 return resp.json();
@@ -10,10 +11,11 @@ export const fetchUserPlaylists = (id:number, page: number) => (dispatch: any) =
                 throw new Error('Failed to fetch playlists');
             }
         }).then(resp => {
+            const playlists: Playlist[] = resp;
             dispatch({
                 payload: {
                     doneLoading: resp && resp.constructor === Array && resp.length < size,
-                    playlists: resp
+                    userPlaylists: playlists
                 },
                 type: userTypes.FETCH_USER_PLAYLISTS
             })

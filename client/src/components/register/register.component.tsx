@@ -32,7 +32,7 @@ class RegisterComponent extends React.Component<IProps, {}> {
     public render() {
         const { errorMessage } = this.props;
         return (
-            <div className="container h-100">
+            <div className="container h-100" id="register">
                 <div className="row h-100">
                     <div className="mx-auto my-auto">
                         <Card>
@@ -111,7 +111,7 @@ class RegisterComponent extends React.Component<IProps, {}> {
                                         </FormGroup>
                                     </Col>
                                     <Col>
-                                    <div className="container">
+                                        <FormGroup>
                                         <label> Upload Profile Image: </label>
                                         <input
                                             onChange={this.uploadImage}
@@ -120,9 +120,9 @@ class RegisterComponent extends React.Component<IProps, {}> {
                                             className="form-control"
                                             placeholder="Upload Profile Image" />
                                         <div className="container">
-                                            <img id="imagePreview2" src={this.props.bucketKey} />
+                                                <img id="imagePreview" className="img-responsive center-block"  src={this.props.bucketKey} />
                                         </div>
-                                    </div>
+                                        </FormGroup>
                                     </Col>
                                         <Button color="primary" className="btn btn-lg btn-block" type="submit">Register</Button>
                                 </Form>
