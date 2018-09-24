@@ -50,16 +50,16 @@ export class InputSongsComponent extends React.Component<IProps, IState> {
   }
 
   public showPopulateButton = () => {
-    if (this.props.playlist.songs.length >= 3) {
-      return (
-        <form onSubmit={this.populate}>
-          <div>
-            <Button className="submit-button" type="submit"> POPulate </Button>
-          </div>
-        </form>
-      )
-    }
-    return;
+    return (
+      <form onSubmit={this.populate}>
+        <div>
+          {this.props.playlist.songs.length >= 3 && this.props.playlist.songs.length <= 5 ?
+            <Button className="submit-button" type="submit"> POPulate </Button> :
+            <Button className="submit-button" type="submit" disabled> POPulate </Button>
+          }
+        </div>
+      </form>
+    )
   }
 
   public render() {
