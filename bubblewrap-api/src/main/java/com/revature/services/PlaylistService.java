@@ -1,7 +1,9 @@
 package com.revature.services;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -32,7 +34,7 @@ public class PlaylistService {
 
 	public Playlist save(Playlist p) {
 		List<Song> songs = p.getSongs();
-		List<Song> dbSongs = new ArrayList<>();
+		Set<Song> dbSongs = new HashSet<>();
 		Song currentSong;
 		for (Song song : songs) {
 			if (ss.findByNameAndArtist(song.getTrackName(), song.getArtistName()).size() != 0) {
@@ -45,7 +47,8 @@ public class PlaylistService {
 				}
 			}
 		}
-		p.setSongs(dbSongs);
+		List<Song> dbSongList = new ArrayList<>(dbSongs);
+		p.setSongs(dbSongList);
 		return pr.saveAndFlush(p);
 	}
 
