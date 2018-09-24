@@ -41,15 +41,16 @@ export const createPlaylistReducer= (state= initialState, action: any) => {
                 }
             }
         case createPlaylistTypes.CLEAR_PLAYLIST:
+            const newPlaylist = action.payload.playlist;
             return {
                 ...state,
                 playlist: {
                     ...state.playlist,
-                    bucketKey: action.payload.bucketKey,
-                    category: action.payload.category,
-                    id: action.payload.id,
-                    name: action.payload.name,
-                    songs: action.payload.songs
+                    bucketKey: newPlaylist.bucketKey,
+                    category: newPlaylist.category,
+                    id: newPlaylist.id,
+                    name: newPlaylist.name,
+                    songs: newPlaylist.songs
                 },
                 suggestedSongs: []
             }

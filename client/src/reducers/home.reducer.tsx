@@ -26,6 +26,21 @@ export const homeReducer = (state = initialState, action: any) => {
                 doneLoading: false,
                 page: 0
             }
+        case createPlaylistTypes.GET_SONGS_FROM_DATABASE:
+            return {
+                ...state,
+                doneLoading: false,
+                page: 0
+            }
+        case createPlaylistTypes.CLEAR_PLAYLIST:
+            const playlistId = action.payload.oldPlaylistId
+            if (playlistId) {
+                const userPlaylists = state.playlists.filter((playlist: Playlist) => playlistId !== playlist.id);
+                return {
+                    ...state,
+                    userPlaylists
+                }
+            }
     }
     return state;
 }
