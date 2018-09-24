@@ -9,14 +9,17 @@ import { Playlist } from "../../models/Playlist";
 import { Button, Col, Row, Container } from "reactstrap";
 import { getCurrentUser } from "../../App";
 import { User } from "../../models/User";
+import history from '../../history';
 
 interface IProps extends ICreatePlaylistState {
   clearPlaylist: () => any;
+  deletePlaylist: (id: number) => any;
   getAccessToken: () => any;
   savePlaylistToDatabase: (playlist: Playlist) => any;
   sendImageToDatabase: (file: any) => any;
   setPlaylistOwner: (owner: User | null) => any;
   updateMessage: (message: string) => any;
+  updatePlaylistName: (name: string) => any;
 }
 
 interface ICreatePlaylistComponentState {
@@ -35,11 +38,12 @@ export class CreatePlaylistComponent extends React.Component<IProps, ICreatePlay
   public savePlaylist= (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     this.props.savePlaylistToDatabase(this.props.playlist);
+    history.push('/profile');
   }
 
   public discardPlaylist= (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    this.props.clearPlaylist();
+    this.props.deletePlaylist(this.props.playlist.id);
   }
 
   public showSave= () => {
@@ -117,6 +121,10 @@ export class CreatePlaylistComponent extends React.Component<IProps, ICreatePlay
     }
   }
 
+  public updateName= (e: any) => {
+    this.props.updatePlaylistName(e.target.value);
+  }
+
   public componentDidUpdate(){
     if(this.props.playlist.songs.length > 5 && !this.props.populated){
       this.props.updateMessage('Enter no more than 5 songs');
@@ -136,6 +144,16 @@ export class CreatePlaylistComponent extends React.Component<IProps, ICreatePlay
     return (
       <div id="create-playlist" className="container">
         <Container>
+        <Row>
+          <Col>
+            <div className="container">
+              <label> Enter Playlist Name: </label>
+              <input onChange={this.updateName} type="text" className="form-control" id="formGroupExampleInput" placeholder="Playlist Name" />
+            </div>
+          </Col>
+          <Col>
+          </Col>
+        </Row>
         <Row>
           <Col><InputSongsComponent /></Col>
           <Col>
@@ -178,10 +196,12 @@ export class CreatePlaylistComponent extends React.Component<IProps, ICreatePlay
 const mapStateToProps = (state: IState) => (state.createPlaylist);
 const mapDispatchToProps = {
   clearPlaylist: createPlaylistActions.clearPlaylist,
+  deletePlaylist: createPlaylistActions.deletePlaylist,
   getAccessToken: createPlaylistActions.getAccessToken,
   savePlaylistToDatabase: createPlaylistActions.savePlaylistToDatabase,
   sendImageToDatabase: createPlaylistActions.sendImageToDatabase,
   setPlaylistOwner: createPlaylistActions.setPlaylistOwner,
-  updateMessage: createPlaylistActions.updateMessage
+  updateMessage: createPlaylistActions.updateMessage,
+  updatePlaylistName: createPlaylistActions.updatePlaylistName
 }
 export default connect(mapStateToProps, mapDispatchToProps)(CreatePlaylistComponent);

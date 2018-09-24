@@ -59,8 +59,19 @@ export const clearCategory= () => {
 }
 
 export const clearPlaylist= () => {
+    const id=0;
+    const name='';
+    const bucketKey='';
+    const category:Category=new Category();
+    const songs: Song[]=[];
     return {
-        payload: new Playlist(),
+        payload: {
+            bucketKey,
+            category,
+            id,
+            name,
+            songs
+        },
         type: createPlaylistTypes.CLEAR_PLAYLIST
     }
 }
@@ -82,6 +93,25 @@ export const clearSuggestedSongs= () => {
         payload: [],
         type: createPlaylistTypes.CLEAR_SUGGESTED_SONGS
     }
+}
+
+export const deletePlaylist= (id: number) => (dispatch: any) => {
+    fetch(`${environment.context}playlists/delete/${id}`, {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        method: 'DELETE'
+    })
+    .then(resp => {
+        dispatch({
+            payload: new Playlist(),
+            type: createPlaylistTypes.CLEAR_PLAYLIST
+        })
+    })
+    .catch(error => {
+        console.log(error);
+    })
 }
 
 export const getAccessToken= () => (dispatch: any) => {
@@ -298,20 +328,6 @@ export const savePlaylistToDatabase= (playlist: Playlist) => (dispatch: any) => 
         },
         method: 'PUT'
     })
-    .then(resp => {
-        if(resp.status===200){
-            return resp.json();
-        }
-        return;
-    })
-    .then(savedPlaylist => {
-        if(savedPlaylist){
-            dispatch({
-                payload: { savedPlaylist },
-                type: createPlaylistTypes.SAVE_PLAYLIST_TO_DATABASE
-            })
-        }
-    })
     .catch(error => {
         console.log(error);
     })
@@ -372,6 +388,15 @@ export const updateMessage= (message: string) => {
             message
         },
         type: createPlaylistTypes.UPDATE_MESSAGE
+    }
+}
+
+export const updatePlaylistName= (name: string) => {
+    return {
+        payload: {
+            name
+        },
+        type: createPlaylistTypes.UPDATE_PLAYLIST_NAME
     }
 }
 
